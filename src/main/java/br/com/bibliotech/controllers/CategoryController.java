@@ -24,13 +24,13 @@ public class CategoryController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<List<CategoryDTO>> findAll(){
-        List<CategoryDTO> categoryDTOS = categoryService.findAll();
+        List<CategoryDTO> categoryDTOS = categoryService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(categoryDTOS);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
-        CategoryDTO categoryDTO = categoryService.findById(id);
+        CategoryDTO categoryDTO = categoryService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
     }
 

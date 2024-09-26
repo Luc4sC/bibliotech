@@ -19,6 +19,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
     @Transactional
     public void save(CategoryDTO categoryDTO){
         Category category = new Category(categoryDTO);
@@ -26,7 +27,12 @@ public class CategoryService {
         log.info("Category saved: " + category);
     }
 
-    public List<CategoryDTO> findAll(){
+
+    public CategoryDTO getById(Long id) {
+        return new CategoryDTO(findById(id));
+    }
+
+    public List<CategoryDTO> getAll(){
         List<Category> categories = categoryRepository.findAll();
         List<CategoryDTO> categoryDTOS = new ArrayList<>();
 
@@ -38,33 +44,26 @@ public class CategoryService {
         return categoryDTOS;
     }
 
-    public CategoryDTO findById(Long id){
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-
-        if (optionalCategory.isEmpty())
-            throw new RuntimeException();
-
-        return new CategoryDTO(optionalCategory.get());
-    }
 
     @Transactional
     public void update(CategoryDTO categoryDTO, Long id){
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isEmpty())
-            throw new RuntimeException();
-
-        Category category = optionalCategory.get();
+        Category category = findById(id);
         category.setName(categoryDTO.name());
         log.info("Category updated: " + category);
     }
 
     @Transactional
     public void delete(Long id){
+        Category category = findById(id);
+        categoryRepository.delete(category);
+        log.info("Category deleted: " + findById(id));
+    }
+
+    private Category findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalCategory.isEmpty())
             throw new RuntimeException();
 
-        categoryRepository.deleteById(id);
-        log.info("Category deleted: " + optionalCategory.get());
+        return optionalCategory.get();
     }
 }
