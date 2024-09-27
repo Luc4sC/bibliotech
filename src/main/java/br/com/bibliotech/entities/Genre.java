@@ -4,12 +4,13 @@ import br.com.bibliotech.dtos.GenreDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Table(name = "genres")
 @Entity(name = "Genre")
-@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@Getter
 public class Genre {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,15 @@ public class Genre {
     @Setter
     private String name;
 
+    @Setter
+    private boolean deleted;
+
+    @OneToMany(mappedBy = "book")
+    private List<Book> books;
+
     public Genre(GenreDTO genreDTO){
         this.name = genreDTO.name();
+        this.deleted = false;
     }
 
     @Override
