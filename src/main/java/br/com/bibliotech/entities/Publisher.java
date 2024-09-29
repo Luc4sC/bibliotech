@@ -1,6 +1,6 @@
 package br.com.bibliotech.entities;
 
-import br.com.bibliotech.dtos.PublishingCompanyDTO;
+import br.com.bibliotech.dtos.PublisherDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,12 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "publish_companies")
-@Entity(name = "PublishCompany")
+@Table(name = "publishers")
+@Entity(name = "Publisher")
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Getter
-public class PublishCompany {
+public class Publisher {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,11 +40,11 @@ public class PublishCompany {
     @OneToMany(mappedBy = "publishCompany")
     private List<Book> books;
 
-    public PublishCompany(PublishingCompanyDTO publishingCompanyDTO){
-        this.tradeName = publishingCompanyDTO.tradeName();
-        this.name = publishingCompanyDTO.name();
-        this.foundationDate = publishingCompanyDTO.foundationDate();
-        this.address = new Address(publishingCompanyDTO.addressDTO());
+    public Publisher(PublisherDTO publisherDTO){
+        this.tradeName = publisherDTO.tradeName();
+        this.name = publisherDTO.name();
+        this.foundationDate = publisherDTO.foundationDate();
+        this.address = new Address(publisherDTO.addressDTO());
         this.deleted = false;
     }
 }

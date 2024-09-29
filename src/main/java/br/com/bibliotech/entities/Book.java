@@ -60,9 +60,9 @@ public class Book {
     @Column(nullable = false)
     @Setter
     @ManyToOne
-    private PublishCompany publishCompany;
+    private Publisher publisher;
 
-    public Book(BookDTO bookDTO, Author author, Category category, Genre genre, PublishCompany publishCompany){
+    public Book(BookDTO bookDTO, Author author, Category category, Genre genre, Publisher publisher){
         this.title = bookDTO.title();
         this.subtitle = bookDTO.subtitle();
         this.synopsis = bookDTO.synopsis();
@@ -72,6 +72,6 @@ public class Book {
         this.author = author;
         this.category = category;
         this.genre = genre;
-        this.publishCompany = publishCompany;
+        this.publisher = publisher;
     }
 }
