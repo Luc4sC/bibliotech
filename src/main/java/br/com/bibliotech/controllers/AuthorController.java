@@ -1,6 +1,7 @@
 package br.com.bibliotech.controllers;
 
 import br.com.bibliotech.dtos.AuthorDTO;
+import br.com.bibliotech.responses.AuthorResponse;
 import br.com.bibliotech.services.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +19,31 @@ public class AuthorController {
     private AuthorService authorService;
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorDTO> save(@RequestBody @Valid AuthorDTO authorDTO){
-        authorService.save(authorDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(authorDTO);
+    public ResponseEntity<AuthorResponse> save(@RequestBody @Valid AuthorDTO authorDTO){
+        AuthorResponse authorResponse = authorService.save(authorDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorResponse);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<AuthorDTO>> findAll(){
-        List<AuthorDTO> authorDTOS = authorService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(authorDTOS);
+    public ResponseEntity<List<AuthorResponse>> findAll(){
+        List<AuthorResponse> authorResponses = authorService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(authorResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorDTO> findById(@PathVariable Long id){
-        AuthorDTO authorDTO = authorService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(authorDTO);
+    public ResponseEntity<AuthorResponse> findById(@PathVariable Long id){
+        AuthorResponse authorResponse = authorService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(authorResponse);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorDTO> update(@RequestBody @Valid AuthorDTO authorDTO, @PathVariable Long id){
-        authorService.update(authorDTO, id);
-        return ResponseEntity.status(HttpStatus.OK).body(authorDTO);
+    public ResponseEntity<AuthorResponse> update(@RequestBody @Valid AuthorDTO authorDTO, @PathVariable Long id){
+        AuthorResponse authorResponse = authorService.update(authorDTO, id);
+        return ResponseEntity.status(HttpStatus.OK).body(authorResponse);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorDTO> delete(@PathVariable Long id){
+    public ResponseEntity<AuthorResponse> delete(@PathVariable Long id){
         authorService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

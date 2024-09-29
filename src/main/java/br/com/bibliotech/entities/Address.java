@@ -38,4 +38,16 @@ public class Address {
         this.state = addressDTO.state();
         this.cep = addressDTO.cep();
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", number=" + number +
+                ", neighborhood='" + neighborhood + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", cep='" + cep + '\'' +
+                '}';
+    }
 }

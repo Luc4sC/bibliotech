@@ -20,8 +20,8 @@ public class BookController {
 
     @PostMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<BookResponse> save(@RequestBody @Valid BookDTO bookDTO){
-        BookResponse save = bookService.save(bookDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(save);
+        BookResponse bookResponse = bookService.save(bookDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookResponse);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
@@ -38,8 +38,8 @@ public class BookController {
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     public ResponseEntity<BookResponse> update(@RequestBody @Valid BookDTO bookDTO, @PathVariable Long id){
-        BookResponse update = bookService.update(bookDTO, id);
-        return ResponseEntity.status(HttpStatus.OK).body(update);
+        BookResponse bookResponse = bookService.update(bookDTO, id);
+        return ResponseEntity.status(HttpStatus.OK).body(bookResponse);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

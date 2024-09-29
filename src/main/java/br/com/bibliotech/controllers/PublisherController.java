@@ -1,6 +1,7 @@
 package br.com.bibliotech.controllers;
 
 import br.com.bibliotech.dtos.PublisherDTO;
+import br.com.bibliotech.responses.PublisherResponse;
 import br.com.bibliotech.services.PublisherService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +19,31 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherDTO> save(@RequestBody @Valid PublisherDTO publisherDTO){
-        publisherService.save(publisherDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(publisherDTO);
+    public ResponseEntity<PublisherResponse> save(@RequestBody @Valid PublisherDTO publisherDTO){
+        PublisherResponse publisherResponse = publisherService.save(publisherDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(publisherResponse);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<PublisherDTO>> findAll(){
-        List<PublisherDTO> publisherDTOS = publisherService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(publisherDTOS);
+    public ResponseEntity<List<PublisherResponse>> findAll(){
+        List<PublisherResponse> publisherResponses = publisherService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(publisherResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherDTO> findById(@PathVariable Long id){
-        PublisherDTO publisherDTO = publisherService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(publisherDTO);
+    public ResponseEntity<PublisherResponse> findById(@PathVariable Long id){
+        PublisherResponse publisherResponse = publisherService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(publisherResponse);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherDTO> update(@RequestBody @Valid PublisherDTO publisherDTO, @PathVariable Long id){
-        publisherService.update(publisherDTO, id);
-        return ResponseEntity.status(HttpStatus.OK).body(publisherDTO);
+    public ResponseEntity<PublisherResponse> update(@RequestBody @Valid PublisherDTO publisherDTO, @PathVariable Long id){
+        PublisherResponse publisherResponse = publisherService.update(publisherDTO, id);
+        return ResponseEntity.status(HttpStatus.OK).body(publisherResponse);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherDTO> delete(@PathVariable Long id){
+    public ResponseEntity<PublisherResponse> delete(@PathVariable Long id){
         publisherService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

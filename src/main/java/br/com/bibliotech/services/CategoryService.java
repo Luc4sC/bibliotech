@@ -1,8 +1,10 @@
 package br.com.bibliotech.services;
 
+import br.com.bibliotech.convertes.CategoryResponseConverter;
 import br.com.bibliotech.dtos.CategoryDTO;
 import br.com.bibliotech.entities.Category;
 import br.com.bibliotech.repositories.CategoryRepository;
+import br.com.bibliotech.responses.CategoryResponse;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,49 +22,53 @@ public class CategoryService {
 
 
     @Transactional
-    public void save(CategoryDTO categoryDTO){
+    public CategoryResponse save(CategoryDTO categoryDTO){
         Category category = new Category(categoryDTO);
         categoryRepository.save(category);
         log.info("Category saved: " + category);
+
+        return CategoryResponseConverter.convert(category);
     }
 
 
-    public CategoryDTO getById(Long id) {
-        return new CategoryDTO(findById(id));
+    public CategoryResponse getById(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow();
+        return CategoryResponseConverter.convert(category);
     }
 
-    public List<CategoryDTO> getAll(){
+    public List<CategoryResponse> getAll(){
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryDTO> categoryDTOS = new ArrayList<>();
 
-        categories.forEach(category -> {
-            CategoryDTO categoryDTO = new CategoryDTO(category);
-            categoryDTOS.add(categoryDTO);
-        });
-
-        return categoryDTOS;
+        return convertEach(categories);
     }
 
 
     @Transactional
-    public void update(CategoryDTO categoryDTO, Long id){
-        Category category = findById(id);
+    public CategoryResponse update(CategoryDTO categoryDTO, Long id){
+        Category category = categoryRepository.findById(id).orElseThrow();
         category.setName(categoryDTO.name());
+
         log.info("Category updated: " + category);
+        return CategoryResponseConverter.convert(category);
     }
 
     @Transactional
     public void delete(Long id){
-        Category category = findById(id);
-        categoryRepository.delete(category);
-        log.info("Category deleted: " + findById(id));
+        Category category = categoryRepository.findById(id).orElseThrow();
+        category.setDeleted(true);
+
+        log.info("Category deleted: " + category);
     }
 
-    private Category findById(Long id) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isEmpty())
-            throw new RuntimeException();
+    private List<CategoryResponse> convertEach(List<Category> categories){
+        List<CategoryResponse> categoryResponses = new ArrayList<>();
 
-        return optionalCategory.get();
+        categories.forEach(category -> {
+            CategoryResponse categoryResponse = CategoryResponseConverter.convert(category);
+            categoryResponses.add(categoryResponse);
+        });
+
+        return categoryResponses;
     }
+
 }

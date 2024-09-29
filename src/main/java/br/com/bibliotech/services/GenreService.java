@@ -1,8 +1,10 @@
 package br.com.bibliotech.services;
 
+import br.com.bibliotech.convertes.GenreResponseConverter;
 import br.com.bibliotech.dtos.GenreDTO;
 import br.com.bibliotech.entities.Genre;
 import br.com.bibliotech.repositories.GenreRepository;
+import br.com.bibliotech.responses.GenreResponse;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,47 +21,48 @@ public class GenreService {
     private GenreRepository genreRepository;
 
     @Transactional
-    public void save(GenreDTO genreDTO) {
+    public GenreResponse save(GenreDTO genreDTO) {
         Genre genre = new Genre(genreDTO);
         genreRepository.save(genre);
+
         log.info("Genre created: " + genre);
+        return GenreResponseConverter.convert(genre);
     }
 
-    public GenreDTO getById(Long id){
-        return new GenreDTO(findById(id));
+    public GenreResponse getById(Long id){
+        Genre genre = genreRepository.findById(id).orElseThrow();
+        return GenreResponseConverter.convert(genre);
     }
 
-    public List<GenreDTO> getAll() {
+    public List<GenreResponse> getAll() {
         List<Genre> genres = genreRepository.findAll();
-        List<GenreDTO> genreDTOS = new ArrayList<>();
-
-        genres.forEach(genre -> {
-            GenreDTO genreDTO = new GenreDTO(genre);
-            genreDTOS.add(genreDTO);
-        });
-
-        return genreDTOS;
+        return convertEach(genres);
     }
 
     @Transactional
-    public void update(GenreDTO genreDTO, Long id) {
-        Genre genre = findById(id);
+    public GenreResponse update(GenreDTO genreDTO, Long id) {
+        Genre genre = genreRepository.findById(id).orElseThrow();
         genre.setName(genreDTO.name());
+
         log.info("Genre updated: " + genre);
+        return GenreResponseConverter.convert(genre);
     }
 
     @Transactional
     public void delete(Long id) {
-        Genre genre = findById(id);
-        genreRepository.delete(genre);
+        Genre genre = genreRepository.findById(id).orElseThrow();
+        genre.setDeleted(true);
         log.info("Genre deleted: " + genre);
     }
 
-    private Genre findById(Long id) {
-        Optional<Genre> optionalGenre = genreRepository.findById(id);
-        if (optionalGenre.isEmpty())
-            throw new RuntimeException();
+    private List<GenreResponse> convertEach(List<Genre> genres){
+        List<GenreResponse> genreResponses = new ArrayList<>();
 
-        return optionalGenre.get();
+        genres.forEach(genre -> {
+            GenreResponse genreResponse = GenreResponseConverter.convert(genre);
+            genreResponses.add(genreResponse);
+        });
+
+        return genreResponses;
     }
 }

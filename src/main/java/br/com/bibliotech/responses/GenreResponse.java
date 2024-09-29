@@ -1,11 +1,6 @@
 package br.com.bibliotech.responses;
 
-import br.com.bibliotech.entities.Genre;
+import java.util.List;
 
-public record GenreResponse(String name) {
-
-    public static GenreResponse converter(Genre genre){
-        return new GenreResponse(genre.getName());
-    }
-
+public record GenreResponse(String name, List<BookResponse> books) {
 }

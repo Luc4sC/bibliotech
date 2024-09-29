@@ -47,4 +47,17 @@ public class Publisher {
         this.address = new Address(publisherDTO.addressDTO());
         this.deleted = false;
     }
+
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "id=" + id +
+                ", tradeName='" + tradeName + '\'' +
+                ", name='" + name + '\'' +
+                ", foundationDate=" + foundationDate +
+                ", deleted=" + deleted +
+                ", address=" + address +
+                ", books=" + books +
+                '}';
+    }
 }

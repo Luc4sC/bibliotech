@@ -1,6 +1,7 @@
 package br.com.bibliotech.controllers;
 
 import br.com.bibliotech.dtos.CategoryDTO;
+import br.com.bibliotech.responses.CategoryResponse;
 import br.com.bibliotech.services.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +18,31 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryDTO> save(@RequestBody @Valid CategoryDTO categoryDTO){
-        categoryService.save(categoryDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryDTO);
+    public ResponseEntity<CategoryResponse> save(@RequestBody @Valid CategoryDTO categoryDTO){
+        CategoryResponse categoryResponse = categoryService.save(categoryDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryResponse);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<CategoryDTO>> findAll(){
-        List<CategoryDTO> categoryDTOS = categoryService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(categoryDTOS);
+    public ResponseEntity<List<CategoryResponse>> findAll(){
+        List<CategoryResponse> categoryResponses = categoryService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(categoryResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
-        CategoryDTO categoryDTO = categoryService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+    public ResponseEntity<CategoryResponse> findById(@PathVariable Long id){
+        CategoryResponse categoryResponse = categoryService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryResponse);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryDTO> update(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable Long id){
-        categoryService.update(categoryDTO, id);
-        return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
+    public ResponseEntity<CategoryResponse> update(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable Long id){
+        CategoryResponse categoryResponse = categoryService.update(categoryDTO, id);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryResponse);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryDTO> delete(@PathVariable Long id){
+    public ResponseEntity<CategoryResponse> delete(@PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

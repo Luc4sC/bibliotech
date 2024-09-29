@@ -1,9 +1,11 @@
 package br.com.bibliotech.services;
 
+import br.com.bibliotech.convertes.BookResponseConverter;
 import br.com.bibliotech.dtos.BookDTO;
 import br.com.bibliotech.entities.*;
 import br.com.bibliotech.repositories.*;
 import br.com.bibliotech.responses.BookResponse;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class BookService {
     @Autowired
     private PublisherRepository publisherRepository;
 
+    @Transactional
     public BookResponse save(BookDTO bookDTO){
         Author author = authorRepository.findById(bookDTO.authorId()).orElseThrow();
         Category category = categoryRepository.findById(bookDTO.categoryId()).orElseThrow();
@@ -41,7 +44,7 @@ public class BookService {
 
         log.info("Book Created: " + book);
 
-        return BookResponse.converter(book);
+        return BookResponseConverter.convert(book);
     }
 
     public List<BookResponse> getAll(){
@@ -53,9 +56,10 @@ public class BookService {
     public BookResponse getById(Long id){
         Book book = bookRepository.findById(id).orElseThrow();
 
-        return BookResponse.converter(book);
+        return BookResponseConverter.convert(book);
     }
 
+    @Transactional
     public BookResponse update(BookDTO bookDTO, Long id){
         Book book = bookRepository.findById(id).orElseThrow();
 
@@ -76,9 +80,10 @@ public class BookService {
 
         log.info("Book updated: " + book);
 
-        return BookResponse.converter(book);
+        return BookResponseConverter.convert(book);
     }
 
+    @Transactional
     public void delete(Long id){
         Book book = bookRepository.findById(id).orElseThrow();
         book.setDeleted(true);
@@ -90,7 +95,7 @@ public class BookService {
         List<BookResponse> bookResponses = new ArrayList<>();
 
         books.forEach(book -> {
-            BookResponse bookResponse = BookResponse.converter(book);
+            BookResponse bookResponse = BookResponseConverter.convert(book);
             bookResponses.add(bookResponse);
         });
 

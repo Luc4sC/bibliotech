@@ -1,11 +1,6 @@
 package br.com.bibliotech.responses;
 
-import br.com.bibliotech.entities.Category;
+import java.util.List;
 
-public record CategoryResponse(String name) {
-
-    public static CategoryResponse converter(Category category){
-        return new CategoryResponse(category.getName());
-    }
-
+public record CategoryResponse(String name, List<BookResponse> books) {
 }

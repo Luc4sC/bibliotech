@@ -1,6 +1,7 @@
 package br.com.bibliotech.controllers;
 
 import br.com.bibliotech.dtos.GenreDTO;
+import br.com.bibliotech.responses.GenreResponse;
 import br.com.bibliotech.services.GenreService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +19,31 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreDTO> save(@RequestBody @Valid GenreDTO genreDTO){
-        genreService.save(genreDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(genreDTO);
+    public ResponseEntity<GenreResponse> save(@RequestBody @Valid GenreDTO genreDTO){
+        GenreResponse genreResponse = genreService.save(genreDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(genreResponse);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<GenreDTO>> findAll(){
-        List<GenreDTO> genreDTOS = genreService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(genreDTOS);
+    public ResponseEntity<List<GenreResponse>> findAll(){
+        List<GenreResponse> genreResponses = genreService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreDTO> findById(@PathVariable Long id){
-        GenreDTO genreDTO = genreService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(genreDTO);
+    public ResponseEntity<GenreResponse> findById(@PathVariable Long id){
+        GenreResponse genreResponse = genreService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreDTO> update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id){
-        genreService.update(genreDTO, id);
-        return ResponseEntity.status(HttpStatus.OK).body(genreDTO);
+    public ResponseEntity<GenreResponse> update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id){
+        GenreResponse genreResponse = genreService.update(genreDTO, id);
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreDTO> delete(@PathVariable Long id){
+    public ResponseEntity<GenreResponse> delete(@PathVariable Long id){
         genreService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

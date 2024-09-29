@@ -1,13 +1,7 @@
 package br.com.bibliotech.responses;
 
-import br.com.bibliotech.entities.Author;
-
 import java.time.LocalDate;
+import java.util.List;
 
-public record AuthorResponse(String fullName, String stageName, LocalDate birthdate) {
-
-    public static AuthorResponse converter(Author author){
-        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate());
-    }
-
+public record AuthorResponse(String fullName, String stageName, LocalDate birthdate, List<BookResponse> books) {
 }
