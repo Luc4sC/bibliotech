@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +31,7 @@ public class PublisherService {
     public List<PublisherResponse> getAll(){
         List<Publisher> publishingCompanies = publisherRepository.findAll();
 
-        return convertEach(publishingCompanies);
+        return PublisherResponseConverter.convertList(publishingCompanies);
     }
 
     public PublisherResponse getById(Long id){
@@ -58,14 +57,4 @@ public class PublisherService {
         log.info("Publisher deleted: " + publisher);
     }
 
-    private List<PublisherResponse> convertEach(List<br.com.bibliotech.entities.Publisher> publishCompanies){
-        List<PublisherResponse> publisherResponses = new ArrayList<>();
-
-        publishCompanies.forEach(publisher -> {
-            PublisherResponse publisherResponse = PublisherResponseConverter.convert(publisher);
-            publisherResponses.add(publisherResponse);
-        });
-
-        return publisherResponses;
-    }
 }

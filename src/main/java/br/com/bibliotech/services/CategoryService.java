@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,7 +38,7 @@ public class CategoryService {
     public List<CategoryResponse> getAll(){
         List<Category> categories = categoryRepository.findAll();
 
-        return convertEach(categories);
+        return CategoryResponseConverter.convertList(categories);
     }
 
 
@@ -58,17 +57,6 @@ public class CategoryService {
         category.setDeleted(true);
 
         log.info("Category deleted: " + category);
-    }
-
-    private List<CategoryResponse> convertEach(List<Category> categories){
-        List<CategoryResponse> categoryResponses = new ArrayList<>();
-
-        categories.forEach(category -> {
-            CategoryResponse categoryResponse = CategoryResponseConverter.convert(category);
-            categoryResponses.add(categoryResponse);
-        });
-
-        return categoryResponses;
     }
 
 }

@@ -36,7 +36,7 @@ public class GenreService {
 
     public List<GenreResponse> getAll() {
         List<Genre> genres = genreRepository.findAll();
-        return convertEach(genres);
+        return GenreResponseConverter.convertList(genres);
     }
 
     @Transactional
@@ -53,16 +53,5 @@ public class GenreService {
         Genre genre = genreRepository.findById(id).orElseThrow();
         genre.setDeleted(true);
         log.info("Genre deleted: " + genre);
-    }
-
-    private List<GenreResponse> convertEach(List<Genre> genres){
-        List<GenreResponse> genreResponses = new ArrayList<>();
-
-        genres.forEach(genre -> {
-            GenreResponse genreResponse = GenreResponseConverter.convert(genre);
-            genreResponses.add(genreResponse);
-        });
-
-        return genreResponses;
     }
 }

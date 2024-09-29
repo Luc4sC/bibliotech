@@ -50,7 +50,7 @@ public class BookService {
     public List<BookResponse> getAll(){
         List<Book> books = bookRepository.findAll();
 
-        return convertEach(books);
+        return BookResponseConverter.convertList(books);
     }
 
     public BookResponse getById(Long id){
@@ -91,14 +91,4 @@ public class BookService {
         log.info("Book deleted: " + book);
     }
 
-    private List<BookResponse> convertEach(List<Book> books){
-        List<BookResponse> bookResponses = new ArrayList<>();
-
-        books.forEach(book -> {
-            BookResponse bookResponse = BookResponseConverter.convert(book);
-            bookResponses.add(bookResponse);
-        });
-
-        return bookResponses;
-    }
 }

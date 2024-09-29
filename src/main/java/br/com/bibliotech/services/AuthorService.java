@@ -36,7 +36,7 @@ public class AuthorService {
     public List<AuthorResponse> getAll(){
         List<Author> authors = authorRepository.findAll();
 
-        return convertEach(authors);
+        return AuthorResponseConverter.convertList(authors);
     }
 
     public AuthorResponse update(AuthorDTO authorDTO, Long id){
@@ -56,17 +56,6 @@ public class AuthorService {
         author.setDeleted(true);
 
         log.info("Author deleted: " + author);
-    }
-
-    private List<AuthorResponse> convertEach(List<Author> authors){
-        List<AuthorResponse> authorResponses = new ArrayList<>();
-
-        authors.forEach(author -> {
-            AuthorResponse authorResponse = AuthorResponseConverter.convert(author);
-            authorResponses.add(authorResponse);
-        });
-
-        return authorResponses;
     }
 
 }
