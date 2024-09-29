@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -17,9 +16,11 @@ import java.time.LocalDate;
 @Getter
 public class Book {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Setter
     private String title;
 
@@ -29,30 +30,36 @@ public class Book {
     @Setter
     private String synopsis;
 
+    @Column(nullable = false)
     @Setter
     private LocalDate publishDate;
 
+    @Column(nullable = false)
     @Setter
     private String isbn;
 
+    @Column(nullable = false)
     @Setter
     private boolean deleted;
 
+    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Author author;
 
+    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Category category;
 
+    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Genre genre;
 
+    @Column(nullable = false)
     @Setter
     @ManyToOne
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private PublishCompany publishCompany;
 
     public Book(BookDTO bookDTO, Author author, Category category, Genre genre, PublishCompany publishCompany){

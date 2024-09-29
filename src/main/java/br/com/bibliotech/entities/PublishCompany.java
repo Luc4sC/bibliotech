@@ -37,7 +37,7 @@ public class PublishCompany {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "publishCompany")
     private List<Book> books;
 
     public PublishCompany(PublishingCompanyDTO publishingCompanyDTO){

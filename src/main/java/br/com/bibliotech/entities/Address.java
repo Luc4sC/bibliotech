@@ -1,25 +1,33 @@
 package br.com.bibliotech.entities;
 
 import br.com.bibliotech.dtos.AddressDTO;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Embeddable
 @NoArgsConstructor
 @Setter
+@Getter
 public class Address {
 
+    @Column(nullable = false)
     private String street;
 
+    @Column(nullable = false)
     private int number;
 
+    @Column(nullable = false)
     private String neighborhood;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String state;
 
+    @Column(nullable = false)
     private String cep;
 
     public Address (AddressDTO addressDTO){

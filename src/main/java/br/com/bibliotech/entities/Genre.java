@@ -22,7 +22,7 @@ public class Genre {
     @Setter
     private boolean deleted;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "genre")
     private List<Book> books;
 
     public Genre(GenreDTO genreDTO){

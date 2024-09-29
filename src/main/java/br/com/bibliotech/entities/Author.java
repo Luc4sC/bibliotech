@@ -15,23 +15,28 @@ import java.util.List;
 @Getter
 public class Author {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Setter
     private String fullName;
 
+    @Column(nullable = false)
     @Setter
     private String stageName;
 
+    @Column(nullable = false)
     @Setter
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdate;
 
+    @Column(nullable = false)
     @Setter
     private boolean deleted;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "author")
     private List<Book> books;
 
     public Author(AuthorDTO authorDTO){
