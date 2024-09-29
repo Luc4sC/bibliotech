@@ -14,7 +14,8 @@ public record PublisherDTO(@NotEmpty @Size(min = 5, max = 50) String tradeName,
                            @NotNull AddressDTO addressDTO) {
 
     public PublisherDTO(Publisher publisher){
-        this(publisher.getTradeName(), publisher.getName(), publisher.getFoundationDate(), AddressDTO.converter(publisher.getAddress()));
+        this(publisher.getTradeName(), publisher.getName(), publisher.getFoundationDate(),
+                AddressDTO.converter(publisher.getAddress()));
     }
 
     public static PublisherDTO converter(Publisher publisher){

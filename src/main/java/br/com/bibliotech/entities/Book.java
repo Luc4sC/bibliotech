@@ -74,4 +74,21 @@ public class Book {
         this.genre = genre;
         this.publisher = publisher;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", publishDate=" + publishDate +
+                ", isbn='" + isbn + '\'' +
+                ", deleted=" + deleted +
+                ", author=" + author +
+                ", category=" + category +
+                ", genre=" + genre +
+                ", publisher=" + publisher +
+                '}';
+    }
 }
