@@ -19,25 +19,25 @@ public class LoanController {
     private LoanService loanService;
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<LoanResponse>> findAll(){
+    public ResponseEntity<List<LoanResponse>> getAll(){
         List<LoanResponse> loanResponses = loanService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(loanResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<LoanResponse> findById(@PathVariable Long id){
+    public ResponseEntity<LoanResponse> getById(@PathVariable Long id){
         LoanResponse loanResponse = loanService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(loanResponse);
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<LoanResponse> save(@RequestBody @Valid LoanDTO loanDTO){
+    public ResponseEntity<LoanResponse> start(@RequestBody @Valid LoanDTO loanDTO){
         LoanResponse loanResponse = loanService.start(loanDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(loanResponse);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<LoanResponse> update(@PathVariable Long id){
+    public ResponseEntity<LoanResponse> finish(@PathVariable Long id){
         LoanResponse loanResponse = loanService.finish(id);
         return ResponseEntity.status(HttpStatus.OK).body(loanResponse);
     }

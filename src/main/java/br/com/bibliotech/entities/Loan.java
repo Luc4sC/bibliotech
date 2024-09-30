@@ -29,6 +29,7 @@ public class Loan {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
 
+    @Setter
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate finishedDate;
 

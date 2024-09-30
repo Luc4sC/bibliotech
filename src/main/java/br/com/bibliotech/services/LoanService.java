@@ -54,6 +54,7 @@ public class LoanService {
     public LoanResponse finish(Long id){
         Loan loan = loanRepository.findById(id).orElseThrow();
         loan.setFinished(true);
+        loan.setFinishedDate(LocalDate.now());
 
         log.info("Loan finished: " + loan);
         return loanResponseConverter.convert(loan);
