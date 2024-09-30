@@ -28,6 +28,10 @@ public class Copy {
     @Setter
     private boolean available;
 
+    @Column(nullable = false)
+    @Setter
+    private String isbn;
+
     @ManyToOne
     private Book book;
 
@@ -39,9 +43,8 @@ public class Copy {
         return "Copy{" +
                 "id=" + id +
                 ", numeration=" + numeration +
-                ", deleted=" + deleted +
                 ", available=" + available +
+                ", isbn='" + isbn + '\'' +
                 '}';
     }
-
 }

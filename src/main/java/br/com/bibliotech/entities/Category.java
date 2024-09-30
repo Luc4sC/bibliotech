@@ -13,12 +13,15 @@ import java.util.List;
 @Getter
 public class Category {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Setter
     private String name;
 
+    @Column(nullable = false)
     @Setter
     private boolean deleted;
 

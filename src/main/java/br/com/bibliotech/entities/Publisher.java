@@ -18,19 +18,24 @@ import java.util.List;
 @Getter
 public class Publisher {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Setter
     private String tradeName;
 
+    @Column(nullable = false)
     @Setter
     private String name;
 
+    @Column(nullable = false)
     @Setter
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate foundationDate;
 
+    @Column(nullable = false)
     @Setter
     private boolean deleted;
 
@@ -54,11 +59,6 @@ public class Publisher {
         return "Publisher{" +
                 "id=" + id +
                 ", tradeName='" + tradeName + '\'' +
-                ", name='" + name + '\'' +
-                ", foundationDate=" + foundationDate +
-                ", deleted=" + deleted +
-                ", address=" + address +
-                ", books=" + books +
                 '}';
     }
 }

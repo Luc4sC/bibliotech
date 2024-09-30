@@ -22,16 +22,28 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String rm;
 
+    @Column(nullable = false)
     @Setter
     private String fullName;
 
+    @Column(nullable = false)
     @Setter
     private String cellPhone;
 
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdate;
+
+    @Column(nullable = false)
+    @Setter
+    private boolean blocked;
+
+    @Column(nullable = false)
+    @Setter
+    private boolean deleted;
 
     @Setter
     @Embedded
@@ -39,12 +51,6 @@ public class Student {
 
     @OneToMany(mappedBy = "borrower")
     private List<Loan> loans;
-
-    @Setter
-    private boolean blocked;
-
-    @Setter
-    private boolean deleted;
 
     public Student(StudentDTO studentDTO){
         this.rm = studentDTO.rm();
@@ -61,9 +67,6 @@ public class Student {
                 "id=" + id +
                 ", rm='" + rm + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", cellPhone='" + cellPhone + '\'' +
-                ", address=" + address +
                 '}';
     }
-
 }

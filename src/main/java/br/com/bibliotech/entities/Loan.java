@@ -21,12 +21,19 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
 
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
 
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate finishedDate;
+
+    @Column(nullable = false)
     @Setter
     private boolean finished;
 
@@ -40,9 +47,6 @@ public class Loan {
     public String toString() {
         return "Loan{" +
                 "id=" + id +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", finished=" + finished +
                 ", borrower=" + borrower +
                 '}';
     }

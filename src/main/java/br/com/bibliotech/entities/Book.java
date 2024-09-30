@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "books")
 @Entity(name = "Book")
 @NoArgsConstructor
-@EqualsAndHashCode(of = "isbn")
+@EqualsAndHashCode(of = "id")
 @Getter
 public class Book {
 
@@ -40,10 +40,6 @@ public class Book {
     @Setter
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate publishDate;
-
-    @Column(nullable = false)
-    @Setter
-    private String isbn;
 
     @Column(nullable = false)
     @Setter
@@ -75,10 +71,9 @@ public class Book {
     public Book(BookDTO bookDTO, Author author, Category category, Genre genre, Publisher publisher){
         this.title = bookDTO.title();
         this.subtitle = bookDTO.subtitle();
-        this.synopsis = bookDTO.synopsis();
         this.pages = bookDTO.pages();
+        this.synopsis = bookDTO.synopsis();
         this.publishDate = bookDTO.publishDate();
-        this.isbn = bookDTO.isbn();
         this.deleted = false;
         this.author = author;
         this.category = category;
@@ -91,7 +86,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", isbn='" + isbn + '\'' +
+                ", subtitle='" + subtitle + '\'' +
                 '}';
     }
 }

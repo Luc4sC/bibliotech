@@ -33,7 +33,7 @@ public class BookResponseConverter implements Converter<BookResponse, Book>{
         List<CopyResponse> copyResponses = copyResponseConverter.convertEach(book.getCopies());
 
         return new BookResponse(book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(), book.getPublishDate(),
-                book.getIsbn(), authorResponse, categoryResponse, genreResponse, publisherResponse, copyResponses);
+                authorResponse, categoryResponse, genreResponse, publisherResponse, copyResponses);
     }
 
     @Override
