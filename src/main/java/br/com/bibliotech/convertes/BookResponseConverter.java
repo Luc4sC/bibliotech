@@ -14,7 +14,7 @@ public class BookResponseConverter {
         GenreResponse genreResponse = GenreResponseConverter.convert(book.getGenre());
         PublisherResponse publisherResponse = PublisherResponseConverter.convert(book.getPublisher());
 
-        return new BookResponse(book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPublishDate(),
+        return new BookResponse(book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(), book.getPublishDate(),
                 book.getIsbn(), authorResponse, categoryResponse, genreResponse, publisherResponse);
     }
 

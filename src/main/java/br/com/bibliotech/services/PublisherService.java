@@ -2,6 +2,7 @@ package br.com.bibliotech.services;
 
 import br.com.bibliotech.convertes.PublisherResponseConverter;
 import br.com.bibliotech.dtos.PublisherDTO;
+import br.com.bibliotech.entities.Address;
 import br.com.bibliotech.entities.Publisher;
 import br.com.bibliotech.repositories.PublisherRepository;
 import br.com.bibliotech.responses.PublisherResponse;
@@ -46,6 +47,7 @@ public class PublisherService {
         publisher.setName(publisherDTO.name());
         publisher.setTradeName(publisherDTO.tradeName());
         publisher.setFoundationDate(publisherDTO.foundationDate());
+        publisher.setAddress(new Address(publisherDTO.addressDTO()));
 
         return PublisherResponseConverter.convert(publisher);
     }

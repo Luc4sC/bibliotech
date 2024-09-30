@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,6 +71,7 @@ public class BookService {
         book.setSubtitle(bookDTO.subtitle());
         book.setIsbn(bookDTO.isbn());
         book.setSynopsis(bookDTO.synopsis());
+        book.setPages(bookDTO.pages());
         book.setPublishDate(bookDTO.publishDate());
         book.setAuthor(author);
         book.setCategory(category);

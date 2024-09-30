@@ -1,14 +1,13 @@
 package br.com.bibliotech.entities;
 
 import br.com.bibliotech.dtos.AddressDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Embeddable
 @NoArgsConstructor
-@Setter
 @Getter
 public class Address {
 

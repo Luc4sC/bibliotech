@@ -35,6 +35,7 @@ public class Publisher {
     private boolean deleted;
 
     @Embedded
+    @Setter
     private Address address;
 
     @OneToMany(mappedBy = "publishCompany")

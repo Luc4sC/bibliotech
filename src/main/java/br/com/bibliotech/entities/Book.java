@@ -6,8 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "books")
 @Entity(name = "Book")
@@ -32,6 +34,11 @@ public class Book {
 
     @Column(nullable = false)
     @Setter
+    private int pages;
+
+    @Column(nullable = false)
+    @Setter
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate publishDate;
 
     @Column(nullable = false)
@@ -62,10 +69,14 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+    @OneToMany(mappedBy = "book")
+    private List<Copy> copies;
+
     public Book(BookDTO bookDTO, Author author, Category category, Genre genre, Publisher publisher){
         this.title = bookDTO.title();
         this.subtitle = bookDTO.subtitle();
         this.synopsis = bookDTO.synopsis();
+        this.pages = bookDTO.pages();
         this.publishDate = bookDTO.publishDate();
         this.isbn = bookDTO.isbn();
         this.deleted = false;
@@ -80,15 +91,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", synopsis='" + synopsis + '\'' +
-                ", publishDate=" + publishDate +
                 ", isbn='" + isbn + '\'' +
-                ", deleted=" + deleted +
-                ", author=" + author +
-                ", category=" + category +
-                ", genre=" + genre +
-                ", publisher=" + publisher +
                 '}';
     }
 }
