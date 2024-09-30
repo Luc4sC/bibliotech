@@ -49,7 +49,7 @@ public class BookService {
     public List<BookResponse> getAll(){
         List<Book> books = bookRepository.findAll();
 
-        return BookResponseConverter.convertList(books);
+        return BookResponseConverter.convertEach(books);
     }
 
     public BookResponse getById(Long id){

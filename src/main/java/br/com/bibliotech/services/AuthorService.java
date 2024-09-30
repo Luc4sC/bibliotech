@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,7 +35,7 @@ public class AuthorService {
     public List<AuthorResponse> getAll(){
         List<Author> authors = authorRepository.findAll();
 
-        return AuthorResponseConverter.convertList(authors);
+        return AuthorResponseConverter.convertEach(authors);
     }
 
     public AuthorResponse update(AuthorDTO authorDTO, Long id){

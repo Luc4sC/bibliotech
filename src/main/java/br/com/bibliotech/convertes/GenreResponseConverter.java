@@ -3,18 +3,24 @@ package br.com.bibliotech.convertes;
 import br.com.bibliotech.entities.Genre;
 import br.com.bibliotech.responses.BookResponse;
 import br.com.bibliotech.responses.GenreResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreResponseConverter {
+public class GenreResponseConverter implements Converter<GenreResponse, Genre> {
 
-    public static GenreResponse convert(Genre genre){
-        List<BookResponse> bookResponses = BookResponseConverter.convertList(genre.getBooks());
+    @Autowired
+    private BookResponseConverter bookResponseConverter;
+
+    @Override
+    public GenreResponse convert(Genre genre){
+        List<BookResponse> bookResponses = bookResponseConverter.convertEach(genre.getBooks());
         return new GenreResponse(genre.getName(), bookResponses);
     }
 
-    public static List<GenreResponse> convertList(List<Genre> genres){
+    @Override
+    public List<GenreResponse> convertEach(List<Genre> genres){
         List<GenreResponse> genreResponses = new ArrayList<>();
 
         genres.forEach(category -> {

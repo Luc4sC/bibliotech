@@ -38,7 +38,7 @@ public class CategoryService {
     public List<CategoryResponse> getAll(){
         List<Category> categories = categoryRepository.findAll();
 
-        return CategoryResponseConverter.convertList(categories);
+        return CategoryResponseConverter.convertEach(categories);
     }
 
 

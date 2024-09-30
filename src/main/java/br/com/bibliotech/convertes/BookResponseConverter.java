@@ -2,23 +2,42 @@ package br.com.bibliotech.convertes;
 
 import br.com.bibliotech.entities.Book;
 import br.com.bibliotech.responses.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookResponseConverter {
+public class BookResponseConverter implements Converter<BookResponse, Book>{
 
-    public static BookResponse convert(Book book){
-        AuthorResponse authorResponse = AuthorResponseConverter.convert(book.getAuthor());
-        CategoryResponse categoryResponse = CategoryResponseConverter.convert(book.getCategory());
-        GenreResponse genreResponse = GenreResponseConverter.convert(book.getGenre());
-        PublisherResponse publisherResponse = PublisherResponseConverter.convert(book.getPublisher());
+    @Autowired
+    private AuthorResponseConverter authorResponseConverter;
+
+    @Autowired
+    private CategoryResponseConverter categoryResponseConverter;
+
+    @Autowired
+    private GenreResponseConverter genreResponseConverter;
+
+    @Autowired
+    private PublisherResponseConverter publisherResponseConverter;
+
+    @Autowired
+    private CopyResponseConverter copyResponseConverter;
+
+    @Override
+    public BookResponse convert(Book book){
+        AuthorResponse authorResponse = authorResponseConverter.convert(book.getAuthor());
+        CategoryResponse categoryResponse = categoryResponseConverter.convert(book.getCategory());
+        GenreResponse genreResponse = genreResponseConverter.convert(book.getGenre());
+        PublisherResponse publisherResponse = publisherResponseConverter.convert(book.getPublisher());
+        List<CopyResponse> copyResponses = copyResponseConverter.convertEach(book.getCopies());
 
         return new BookResponse(book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(), book.getPublishDate(),
-                book.getIsbn(), authorResponse, categoryResponse, genreResponse, publisherResponse);
+                book.getIsbn(), authorResponse, categoryResponse, genreResponse, publisherResponse, copyResponses);
     }
 
-    public static List<BookResponse> convertList(List<Book> books){
+    @Override
+    public List<BookResponse> convertEach(List<Book> books){
         List<BookResponse> bookResponses = new ArrayList<>();
 
         books.forEach(book -> {
