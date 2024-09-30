@@ -36,11 +36,18 @@ public class Loan {
     @Setter
     private boolean finished;
 
+    @Column(nullable = false)
     @ManyToOne
     private Student borrower;
 
     @OneToMany(mappedBy = "loan")
     private List<Item> items;
+
+    public Loan(LocalDate startDate,LocalDate endDate, Student borrower){
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.borrower = borrower;
+    }
 
     @Override
     public String toString() {

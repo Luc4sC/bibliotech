@@ -1,6 +1,7 @@
 package br.com.bibliotech.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "items")
 @Entity(name = "Item")
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"loan", "copy"})
 @Getter
 public class Item {
@@ -17,5 +19,13 @@ public class Item {
 
     @ManyToOne
     private Copy copy;
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "loan=" + loan +
+                ", copy=" + copy +
+                '}';
+    }
 
 }
