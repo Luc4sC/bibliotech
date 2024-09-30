@@ -1,5 +1,6 @@
 package br.com.bibliotech.entities;
 
+import br.com.bibliotech.dtos.CopyDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,24 +20,34 @@ public class Copy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     @Setter
     private int numeration;
 
+    @Column(nullable = false)
     @Setter
-    private boolean deleted;
+    private String isbn;
 
+    @Column(nullable = false)
     @Setter
     private boolean available;
 
     @Column(nullable = false)
     @Setter
-    private String isbn;
+    private boolean deleted;
 
     @ManyToOne
     private Book book;
 
     @OneToMany(mappedBy = "copy")
     private List<Item> items;
+
+    public Copy(CopyDTO copyDTO){
+        this.numeration = copyDTO.numeration();
+        this.isbn = copyDTO.isbn();
+        this.available = true;
+        this.deleted = false;
+    }
 
     @Override
     public String toString() {

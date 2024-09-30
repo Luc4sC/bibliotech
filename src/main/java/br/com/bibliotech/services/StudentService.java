@@ -57,6 +57,7 @@ public class StudentService {
     public void delete(Long id){
         Student student = studentRepository.findById(id).orElseThrow();
         student.setDeleted(true);
+        student.setBlocked(true);
     }
 
     @Transactional
