@@ -19,6 +19,8 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private CategoryResponseConverter categoryResponseConverter;
 
     @Transactional
     public CategoryResponse save(CategoryDTO categoryDTO){
@@ -26,19 +28,19 @@ public class CategoryService {
         categoryRepository.save(category);
         log.info("Category saved: " + category);
 
-        return CategoryResponseConverter.convert(category);
+        return categoryResponseConverter.convert(category);
     }
 
 
     public CategoryResponse getById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow();
-        return CategoryResponseConverter.convert(category);
+        return categoryResponseConverter.convert(category);
     }
 
     public List<CategoryResponse> getAll(){
         List<Category> categories = categoryRepository.findAll();
 
-        return CategoryResponseConverter.convertEach(categories);
+        return categoryResponseConverter.convertEach(categories);
     }
 
 
@@ -48,7 +50,7 @@ public class CategoryService {
         category.setName(categoryDTO.name());
 
         log.info("Category updated: " + category);
-        return CategoryResponseConverter.convert(category);
+        return categoryResponseConverter.convert(category);
     }
 
     @Transactional

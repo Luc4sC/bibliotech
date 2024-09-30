@@ -31,6 +31,9 @@ public class BookService {
     @Autowired
     private PublisherRepository publisherRepository;
 
+    @Autowired
+    private BookResponseConverter bookResponseConverter;
+
     @Transactional
     public BookResponse save(BookDTO bookDTO){
         Author author = authorRepository.findById(bookDTO.authorId()).orElseThrow();
@@ -43,19 +46,19 @@ public class BookService {
 
         log.info("Book Created: " + book);
 
-        return BookResponseConverter.convert(book);
+        return bookResponseConverter.convert(book);
     }
 
     public List<BookResponse> getAll(){
         List<Book> books = bookRepository.findAll();
 
-        return BookResponseConverter.convertEach(books);
+        return bookResponseConverter.convertEach(books);
     }
 
     public BookResponse getById(Long id){
         Book book = bookRepository.findById(id).orElseThrow();
 
-        return BookResponseConverter.convert(book);
+        return bookResponseConverter.convert(book);
     }
 
     @Transactional
@@ -69,7 +72,6 @@ public class BookService {
 
         book.setTitle(bookDTO.title());
         book.setSubtitle(bookDTO.subtitle());
-        book.setIsbn(bookDTO.isbn());
         book.setSynopsis(bookDTO.synopsis());
         book.setPages(bookDTO.pages());
         book.setPublishDate(bookDTO.publishDate());
@@ -80,7 +82,7 @@ public class BookService {
 
         log.info("Book updated: " + book);
 
-        return BookResponseConverter.convert(book);
+        return bookResponseConverter.convert(book);
     }
 
     @Transactional

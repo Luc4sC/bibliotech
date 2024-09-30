@@ -19,23 +19,26 @@ public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
+    @Autowired
+    private GenreResponseConverter genreResponseConverter;
+
     @Transactional
     public GenreResponse save(GenreDTO genreDTO) {
         Genre genre = new Genre(genreDTO);
         genreRepository.save(genre);
 
         log.info("Genre created: " + genre);
-        return GenreResponseConverter.convert(genre);
+        return genreResponseConverter.convert(genre);
     }
 
     public GenreResponse getById(Long id){
         Genre genre = genreRepository.findById(id).orElseThrow();
-        return GenreResponseConverter.convert(genre);
+        return genreResponseConverter.convert(genre);
     }
 
     public List<GenreResponse> getAll() {
         List<Genre> genres = genreRepository.findAll();
-        return GenreResponseConverter.convertEach(genres);
+        return genreResponseConverter.convertEach(genres);
     }
 
     @Transactional
@@ -44,7 +47,7 @@ public class GenreService {
         genre.setName(genreDTO.name());
 
         log.info("Genre updated: " + genre);
-        return GenreResponseConverter.convert(genre);
+        return genreResponseConverter.convert(genre);
     }
 
     @Transactional

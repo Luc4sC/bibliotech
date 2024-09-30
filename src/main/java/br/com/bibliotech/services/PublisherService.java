@@ -20,24 +20,27 @@ public class PublisherService {
     @Autowired
     private PublisherRepository publisherRepository;
 
+    @Autowired
+    private PublisherResponseConverter publisherResponseConverter;
+
     @Transactional
     public PublisherResponse save(PublisherDTO publisherDTO){
         br.com.bibliotech.entities.Publisher publisher = new br.com.bibliotech.entities.Publisher(publisherDTO);
         publisherRepository.save(publisher);
 
         log.info("Publish Company created: " + publisher);
-        return PublisherResponseConverter.convert(publisher);
+        return publisherResponseConverter.convert(publisher);
     }
 
     public List<PublisherResponse> getAll(){
         List<Publisher> publishingCompanies = publisherRepository.findAll();
 
-        return PublisherResponseConverter.convertList(publishingCompanies);
+        return publisherResponseConverter.convertEach(publishingCompanies);
     }
 
     public PublisherResponse getById(Long id){
         Publisher publisher = publisherRepository.findById(id).orElseThrow();
-        return PublisherResponseConverter.convert(publisher);
+        return publisherResponseConverter.convert(publisher);
     }
 
     @Transactional
@@ -49,7 +52,7 @@ public class PublisherService {
         publisher.setFoundationDate(publisherDTO.foundationDate());
         publisher.setAddress(new Address(publisherDTO.addressDTO()));
 
-        return PublisherResponseConverter.convert(publisher);
+        return publisherResponseConverter.convert(publisher);
     }
 
     @Transactional

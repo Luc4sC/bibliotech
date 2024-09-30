@@ -18,24 +18,27 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    private AuthorResponseConverter authorResponseConverter;
+
     public AuthorResponse save(AuthorDTO authorDTO){
         Author author = new Author(authorDTO);
 
         authorRepository.save(author);
         log.info("Author Created: " + author);
 
-        return AuthorResponseConverter.convert(author);
+        return authorResponseConverter.convert(author);
     }
 
     public AuthorResponse getById(Long id){
         Author author = authorRepository.findById(id).orElseThrow();
-        return AuthorResponseConverter.convert(author);
+        return authorResponseConverter.convert(author);
     }
 
     public List<AuthorResponse> getAll(){
         List<Author> authors = authorRepository.findAll();
 
-        return AuthorResponseConverter.convertEach(authors);
+        return authorResponseConverter.convertEach(authors);
     }
 
     public AuthorResponse update(AuthorDTO authorDTO, Long id){
@@ -47,7 +50,7 @@ public class AuthorService {
 
         log.info("Author updated: " + author);
 
-        return AuthorResponseConverter.convert(author);
+        return authorResponseConverter.convert(author);
     }
 
     public void delete(Long id){
