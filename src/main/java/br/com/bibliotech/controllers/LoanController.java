@@ -9,12 +9,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("bibliotech/loan")
 public class LoanController {
 
     @Autowired
     private LoanService loanService;
+
+    @GetMapping(produces = "application/json; charset=utf-8")
+    public ResponseEntity<List<LoanResponse>> findAll(){
+        List<LoanResponse> loanResponses = loanService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(loanResponses);
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
+    public ResponseEntity<LoanResponse> findById(@PathVariable Long id){
+        LoanResponse loanResponse = loanService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(loanResponse);
+    }
 
     @PostMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<LoanResponse> save(@RequestBody @Valid LoanDTO loanDTO){

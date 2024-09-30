@@ -50,12 +50,23 @@ public class LoanService {
         return loanResponseConverter.convert(loan);
     }
 
+    @Transactional
     public LoanResponse finish(Long id){
         Loan loan = loanRepository.findById(id).orElseThrow();
         loan.setFinished(true);
 
         log.info("Loan finished: " + loan);
         return loanResponseConverter.convert(loan);
+    }
+
+    public LoanResponse getById(Long id){
+        Loan loan = loanRepository.findById(id).orElseThrow();
+        return loanResponseConverter.convert(loan);
+    }
+
+    public List<LoanResponse> getAll(){
+        List<Loan> loans = loanRepository.findAll();
+        return loanResponseConverter.convertEach(loans);
     }
 
     private Loan createLoan(LoanDTO loanDTO){
