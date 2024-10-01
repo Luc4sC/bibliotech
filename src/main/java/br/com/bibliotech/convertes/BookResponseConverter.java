@@ -2,38 +2,30 @@ package br.com.bibliotech.convertes;
 
 import br.com.bibliotech.entities.Book;
 import br.com.bibliotech.responses.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public class BookResponseConverter implements Converter<BookResponse, Book>{
-
-    @Autowired
-    private AuthorResponseConverter authorResponseConverter;
-
-    @Autowired
-    private CategoryResponseConverter categoryResponseConverter;
-
-    @Autowired
-    private GenreResponseConverter genreResponseConverter;
-
-    @Autowired
-    private PublisherResponseConverter publisherResponseConverter;
-
-    @Autowired
-    private CopyResponseConverter copyResponseConverter;
 
     @Override
     public BookResponse convert(Book book){
+        AuthorResponseConverter authorResponseConverter = new AuthorResponseConverter();
         AuthorResponse authorResponse = authorResponseConverter.convert(book.getAuthor());
+
+        CategoryResponseConverter categoryResponseConverter = new CategoryResponseConverter();
         CategoryResponse categoryResponse = categoryResponseConverter.convert(book.getCategory());
+
+        GenreResponseConverter genreResponseConverter = new GenreResponseConverter();
         GenreResponse genreResponse = genreResponseConverter.convert(book.getGenre());
+
+        PublisherResponseConverter publisherResponseConverter = new PublisherResponseConverter();
         PublisherResponse publisherResponse = publisherResponseConverter.convert(book.getPublisher());
-        List<CopyResponse> copyResponses = copyResponseConverter.convertEach(book.getCopies());
 
         return new BookResponse(book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(), book.getPublishDate(),
-                authorResponse, categoryResponse, genreResponse, publisherResponse, copyResponses);
+                authorResponse, categoryResponse, genreResponse, publisherResponse);
     }
 
     @Override

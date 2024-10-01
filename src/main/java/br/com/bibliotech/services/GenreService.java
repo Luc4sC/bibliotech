@@ -19,8 +19,7 @@ public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    @Autowired
-    private GenreResponseConverter genreResponseConverter;
+    private final GenreResponseConverter genreResponseConverter = new GenreResponseConverter();
 
     @Transactional
     public GenreResponse save(GenreDTO genreDTO) {

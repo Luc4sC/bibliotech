@@ -19,8 +19,7 @@ public class CopyService {
     @Autowired
     private CopyRepository copyRepository;
 
-    @Autowired
-    private CopyResponseConverter copyResponseConverter;
+    private final CopyResponseConverter copyResponseConverter = new CopyResponseConverter();
 
     @Transactional
     public CopyResponse save(CopyDTO copyDTO){

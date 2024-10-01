@@ -2,10 +2,7 @@ package br.com.bibliotech.services;
 
 import br.com.bibliotech.convertes.LoanResponseConverter;
 import br.com.bibliotech.dtos.LoanDTO;
-import br.com.bibliotech.entities.Copy;
-import br.com.bibliotech.entities.Item;
-import br.com.bibliotech.entities.Loan;
-import br.com.bibliotech.entities.Student;
+import br.com.bibliotech.entities.*;
 import br.com.bibliotech.repositories.CopyRepository;
 import br.com.bibliotech.repositories.ItemRepository;
 import br.com.bibliotech.repositories.LoanRepository;
@@ -27,8 +24,7 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
-    @Autowired
-    private LoanResponseConverter loanResponseConverter;
+    private final LoanResponseConverter loanResponseConverter = new LoanResponseConverter();
 
     @Autowired
     private ItemRepository itemRepository;
@@ -38,6 +34,7 @@ public class LoanService {
 
     @Autowired
     private CopyRepository copyRepository;
+
 
     @Transactional
     public LoanResponse start(LoanDTO loanDTO){
@@ -55,6 +52,7 @@ public class LoanService {
         Loan loan = loanRepository.findById(id).orElseThrow();
         loan.setFinished(true);
         loan.setFinishedDate(LocalDate.now());
+        ableCopies(loan.getItems());
 
         log.info("Loan finished: " + loan);
         return loanResponseConverter.convert(loan);
@@ -72,7 +70,7 @@ public class LoanService {
 
     private Loan createLoan(LoanDTO loanDTO){
         Student student = getStudentByRm(loanDTO.rm());
-        LocalDate startDate = generateStartDate();
+        LocalDate startDate = LocalDate.now();
         LocalDate endDate = generateEndDate(startDate);
 
         Loan loan = new Loan(startDate, endDate, student);
@@ -83,10 +81,6 @@ public class LoanService {
 
     private Student getStudentByRm(String rm){
         return studentRepository.findByRm(rm).orElseThrow();
-    }
-
-    private LocalDate generateStartDate(){
-        return LocalDate.now();
     }
 
     private LocalDate generateEndDate(LocalDate startDate){
@@ -110,7 +104,7 @@ public class LoanService {
 
     private void saveItems(Loan loan, List<Copy> copies){
         copies.forEach(copy -> {
-            Item item = new Item(loan, copy);
+            Item item = new Item(new ItemId(loan.getId(), copy.getId()), loan, copy);
             itemRepository.save(item);
             log.info("Item created: " + item);
         });
@@ -123,10 +117,10 @@ public class LoanService {
         });
     }
 
-    private void ableCopies(List<Copy> copies){
-        copies.forEach(copy -> {
-            copy.setAvailable(true);
-            log.info("Copy available: " + copy);
+    private void ableCopies(List<Item> items){
+        items.forEach(item -> {
+            item.getCopy().setAvailable(true);
+            log.info("Copy available: " + item.getCopy());
         });
     }
 

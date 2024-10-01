@@ -20,8 +20,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Autowired
-    private StudentResponseConverter studentResponseConverter;
+    private final StudentResponseConverter studentResponseConverter = new StudentResponseConverter();
 
     @Transactional
     public StudentResponse save(StudentDTO studentDTO){

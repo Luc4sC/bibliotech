@@ -31,8 +31,7 @@ public class BookService {
     @Autowired
     private PublisherRepository publisherRepository;
 
-    @Autowired
-    private BookResponseConverter bookResponseConverter;
+    private final BookResponseConverter bookResponseConverter = new BookResponseConverter();
 
     @Transactional
     public BookResponse save(BookDTO bookDTO){

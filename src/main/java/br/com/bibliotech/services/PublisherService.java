@@ -20,8 +20,7 @@ public class PublisherService {
     @Autowired
     private PublisherRepository publisherRepository;
 
-    @Autowired
-    private PublisherResponseConverter publisherResponseConverter;
+    private final PublisherResponseConverter publisherResponseConverter = new PublisherResponseConverter();
 
     @Transactional
     public PublisherResponse save(PublisherDTO publisherDTO){

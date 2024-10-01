@@ -3,20 +3,17 @@ package br.com.bibliotech.convertes;
 import br.com.bibliotech.entities.Genre;
 import br.com.bibliotech.responses.BookResponse;
 import br.com.bibliotech.responses.GenreResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public class GenreResponseConverter implements Converter<GenreResponse, Genre> {
-
-    @Autowired
-    private BookResponseConverter bookResponseConverter;
 
     @Override
     public GenreResponse convert(Genre genre){
-        List<BookResponse> bookResponses = bookResponseConverter.convertEach(genre.getBooks());
-        return new GenreResponse(genre.getName(), bookResponses);
+        return new GenreResponse(genre.getName());
     }
 
     @Override

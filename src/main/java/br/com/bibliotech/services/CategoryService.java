@@ -19,8 +19,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @Autowired
-    private CategoryResponseConverter categoryResponseConverter;
+    private final CategoryResponseConverter categoryResponseConverter = new CategoryResponseConverter();
 
     @Transactional
     public CategoryResponse save(CategoryDTO categoryDTO){

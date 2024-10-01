@@ -2,10 +2,12 @@ package br.com.bibliotech.convertes;
 
 import br.com.bibliotech.entities.Address;
 import br.com.bibliotech.responses.AddressResponse;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public class AddressResponseConverter implements Converter<AddressResponse, Address>{
 
     @Override

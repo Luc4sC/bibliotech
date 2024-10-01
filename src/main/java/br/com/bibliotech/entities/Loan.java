@@ -37,7 +37,6 @@ public class Loan {
     @Setter
     private boolean finished;
 
-    @Column(nullable = false)
     @ManyToOne
     private Student borrower;
 

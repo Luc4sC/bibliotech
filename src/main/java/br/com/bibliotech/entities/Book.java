@@ -45,22 +45,18 @@ public class Book {
     @Setter
     private boolean deleted;
 
-    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Author author;
 
-    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Category category;
 
-    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Genre genre;
 
-    @Column(nullable = false)
     @Setter
     @ManyToOne
     private Publisher publisher;

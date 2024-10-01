@@ -4,23 +4,22 @@ import br.com.bibliotech.entities.Item;
 import br.com.bibliotech.responses.CopyResponse;
 import br.com.bibliotech.responses.ItemResponse;
 import br.com.bibliotech.responses.LoanResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public class ItemResponseConverter implements Converter<ItemResponse, Item> {
-
-    @Autowired
-    private CopyResponseConverter copyResponseConverter;
-
-    @Autowired
-    private LoanResponseConverter loanResponseConverter;
 
     @Override
     public ItemResponse convert(Item item) {
+        CopyResponseConverter copyResponseConverter = new CopyResponseConverter();
         CopyResponse copyResponse = copyResponseConverter.convert(item.getCopy());
+
+        LoanResponseConverter loanResponseConverter = new LoanResponseConverter();
         LoanResponse loanResponse = loanResponseConverter.convert(item.getLoan());
+
         return new ItemResponse(loanResponse, copyResponse);
     }
 

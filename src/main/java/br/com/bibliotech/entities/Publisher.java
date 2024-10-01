@@ -43,7 +43,7 @@ public class Publisher {
     @Setter
     private Address address;
 
-    @OneToMany(mappedBy = "publishCompany")
+    @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
     public Publisher(PublisherDTO publisherDTO){

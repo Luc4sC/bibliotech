@@ -3,19 +3,16 @@ package br.com.bibliotech.convertes;
 import br.com.bibliotech.entities.Author;
 import br.com.bibliotech.responses.AuthorResponse;
 import br.com.bibliotech.responses.BookResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 public class AuthorResponseConverter implements Converter<AuthorResponse, Author>{
 
-    @Autowired
-    private BookResponseConverter bookResponseConverter;
-
     public AuthorResponse convert(Author author){
-        List<BookResponse> bookResponses = bookResponseConverter.convertEach(author.getBooks());
-        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate(), bookResponses);
+        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate());
     }
 
     public List<AuthorResponse> convertEach(List<Author> authors){

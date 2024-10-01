@@ -18,8 +18,7 @@ public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @Autowired
-    private AuthorResponseConverter authorResponseConverter;
+    private final AuthorResponseConverter authorResponseConverter = new AuthorResponseConverter();
 
     public AuthorResponse save(AuthorDTO authorDTO){
         Author author = new Author(authorDTO);

@@ -56,6 +56,7 @@ public class Student {
         this.rm = studentDTO.rm();
         this.fullName = studentDTO.fullName();
         this.cellPhone = studentDTO.cellPhone();
+        this.birthdate = studentDTO.birthdate();
         this.address = new Address(studentDTO.addressDTO());
         this.blocked = false;
         this.deleted = false;

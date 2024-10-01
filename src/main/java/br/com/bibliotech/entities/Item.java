@@ -14,10 +14,15 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Item {
 
+    @EmbeddedId
+    private ItemId id;
+
     @ManyToOne
+    @JoinColumn(name = "loanId", insertable = false, updatable = false)
     private Loan loan;
 
     @ManyToOne
+    @JoinColumn(name = "copyId", insertable = false, updatable = false)
     private Copy copy;
 
     @Override
