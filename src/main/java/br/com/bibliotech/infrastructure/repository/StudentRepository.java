@@ -1,0 +1,11 @@
+package br.com.bibliotech.infrastructure.repository;
+
+import br.com.bibliotech.domain.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    Optional<Student> findByRm(String rm);
+}
