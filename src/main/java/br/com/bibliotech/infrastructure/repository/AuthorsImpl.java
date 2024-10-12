@@ -50,7 +50,7 @@ class AuthorsImpl implements Authors {
         Optional<Author> authorOptional = authorRepository.findById(id);
 
         if(authorOptional.isEmpty())
-            throw new RuntimeException();
+            throw new NotFoundException("Author with id: " + id + " not found!");
 
         return authorOptional.get();
     }

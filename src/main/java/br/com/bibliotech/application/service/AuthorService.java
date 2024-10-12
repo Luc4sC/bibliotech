@@ -1,0 +1,57 @@
+package br.com.bibliotech.application.service;
+
+import br.com.bibliotech.application.converter.AuthorConverter;
+import br.com.bibliotech.application.dto.AuthorDTO;
+import br.com.bibliotech.domain.model.Author;
+import br.com.bibliotech.domain.service.AuthorDomainService;
+import br.com.bibliotech.presentation.response.AuthorResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@Slf4j
+public class AuthorService {
+
+    @Autowired
+    private AuthorDomainService authorDomainService;
+
+    private final AuthorConverter authorConverter = new AuthorConverter();
+
+    public AuthorResponse save(AuthorDTO authorDTO){
+        Author author = authorConverter.dtoToModel(authorDTO);
+        authorDomainService.save(author);
+        return authorConverter.modelToResponse(author);
+    }
+
+    public AuthorResponse update(AuthorDTO authorDTO, Long id){
+        Author author = authorDomainService.findById(id);
+
+        Author authorUpdate = authorConverter.dtoToModel(authorDTO);
+        authorDomainService.update(author, authorUpdate);
+
+        return authorConverter.modelToResponse(authorUpdate);
+    }
+
+    public void delete(Long id){
+        authorDomainService.delete(id);
+    }
+
+    public AuthorResponse findById(Long id){
+        Author author = authorDomainService.findById(id);
+        return authorConverter.modelToResponse(author);
+    }
+
+    public List<AuthorResponse> findAll(){
+        List<Author> authors = authorDomainService.findAll();
+        return authorConverter.modelListToResponseList(authors);
+    }
+
+    public AuthorResponse findByStageName(String stageName){
+        Author author = authorDomainService.findByStageName(stageName);
+        return authorConverter.modelToResponse(author);
+    }
+
+}
