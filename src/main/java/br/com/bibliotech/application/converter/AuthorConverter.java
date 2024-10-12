@@ -7,21 +7,24 @@ import br.com.bibliotech.presentation.response.AuthorResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorConverter {
+public class AuthorConverter implements GenericConverter<Author, AuthorDTO, AuthorResponse> {
 
-    public Author dtoToModel(AuthorDTO authorDTO){
+    @Override
+    public Author modelFromDTO(AuthorDTO authorDTO){
         return new Author(authorDTO.fullName(), authorDTO.stageName(), authorDTO.birthdate());
     }
 
-    public AuthorResponse modelToResponse(Author author){
+    @Override
+    public AuthorResponse responseFromModel(Author author){
         return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate());
     }
 
-    public List<AuthorResponse> modelListToResponseList(List<Author> authors){
+    @Override
+    public List<AuthorResponse> responseListFromModelList(List<Author> authors){
         List<AuthorResponse> authorResponses = new ArrayList<>();
 
         authors.forEach(author -> {
-            AuthorResponse authorResponse = modelToResponse(author);
+            AuthorResponse authorResponse = responseFromModel(author);
             authorResponses.add(authorResponse);
         });
 

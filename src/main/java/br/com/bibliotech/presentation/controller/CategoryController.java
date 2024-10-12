@@ -1,8 +1,8 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.application.dto.CategoryDTO;
+import br.com.bibliotech.application.service.CategoryService;
 import br.com.bibliotech.presentation.response.CategoryResponse;
-import br.com.bibliotech.domain.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +25,20 @@ public class CategoryController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<List<CategoryResponse>> findAll(){
-        List<CategoryResponse> categoryResponses = categoryService.getAll();
+        List<CategoryResponse> categoryResponses = categoryService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(categoryResponses);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     public ResponseEntity<CategoryResponse> findById(@PathVariable Long id){
-        CategoryResponse categoryResponse = categoryService.getById(id);
+        CategoryResponse categoryResponse = categoryService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryResponse);
+    }
+
+
+    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    public ResponseEntity<CategoryResponse> findByName(@RequestParam String name){
+        CategoryResponse categoryResponse = categoryService.findByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(categoryResponse);
     }
 

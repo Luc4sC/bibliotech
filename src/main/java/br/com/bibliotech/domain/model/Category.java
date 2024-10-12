@@ -1,8 +1,10 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.CategoryDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Book> books;
 
-    public Category(CategoryDTO categoryDTO){
-        this.name = categoryDTO.name();
+    public Category(String name){
+        this.name = name;
         this.deleted = false;
     }
 

@@ -33,10 +33,8 @@ public class AuthorDomainService {
         log.info("Author updated: " + author);
     }
 
-    public void delete(Long id){
-        Author author = authors.findById(id);
+    public void delete(Author author){
         authors.delete(author);
-
         log.info("Author deleted: " + author);
     }
 

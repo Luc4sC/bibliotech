@@ -21,37 +21,39 @@ public class AuthorService {
     private final AuthorConverter authorConverter = new AuthorConverter();
 
     public AuthorResponse save(AuthorDTO authorDTO){
-        Author author = authorConverter.dtoToModel(authorDTO);
+        Author author = authorConverter.modelFromDTO(authorDTO);
         authorDomainService.save(author);
-        return authorConverter.modelToResponse(author);
+
+        return authorConverter.responseFromModel(author);
     }
 
     public AuthorResponse update(AuthorDTO authorDTO, Long id){
         Author author = authorDomainService.findById(id);
+        Author authorUpdate = authorConverter.modelFromDTO(authorDTO);
 
-        Author authorUpdate = authorConverter.dtoToModel(authorDTO);
         authorDomainService.update(author, authorUpdate);
 
-        return authorConverter.modelToResponse(authorUpdate);
+        return authorConverter.responseFromModel(author);
     }
 
     public void delete(Long id){
-        authorDomainService.delete(id);
+        Author author = authorDomainService.findById(id);
+        authorDomainService.delete(author);
     }
 
     public AuthorResponse findById(Long id){
         Author author = authorDomainService.findById(id);
-        return authorConverter.modelToResponse(author);
+        return authorConverter.responseFromModel(author);
     }
 
     public List<AuthorResponse> findAll(){
         List<Author> authors = authorDomainService.findAll();
-        return authorConverter.modelListToResponseList(authors);
+        return authorConverter.responseListFromModelList(authors);
     }
 
     public AuthorResponse findByStageName(String stageName){
         Author author = authorDomainService.findByStageName(stageName);
-        return authorConverter.modelToResponse(author);
+        return authorConverter.responseFromModel(author);
     }
 
 }
