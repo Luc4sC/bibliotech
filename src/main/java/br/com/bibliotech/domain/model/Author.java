@@ -1,8 +1,10 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.AuthorDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -39,10 +41,10 @@ public class Author {
     @OneToMany(mappedBy = "author")
     private List<Book> books;
 
-    public Author(AuthorDTO authorDTO){
-        this.fullName = authorDTO.fullName();
-        this.stageName = authorDTO.stageName();
-        this.birthdate = authorDTO.birthdate();
+    public Author(String fullName, String stageName, LocalDate birthdate){
+        this.fullName = fullName;
+        this.stageName = stageName;
+        this.birthdate = birthdate;
         this.deleted = false;
     }
 

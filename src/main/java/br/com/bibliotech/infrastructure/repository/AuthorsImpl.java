@@ -1,9 +1,8 @@
 package br.com.bibliotech.infrastructure.repository;
 
-import br.com.bibliotech.application.dto.AuthorDTO;
 import br.com.bibliotech.domain.model.Author;
-import br.com.bibliotech.application.exception.NotFoundException;
 import br.com.bibliotech.domain.repository.Authors;
+import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,10 +33,10 @@ class AuthorsImpl implements Authors {
 
     @Override
     @Transactional
-    public void update(Author author, AuthorDTO authorDTO) {
-        author.setFullName(authorDTO.fullName());
-        author.setStageName(authorDTO.stageName());
-        author.setBirthdate(authorDTO.birthdate());
+    public void update(Author author, Author authorUpdate) {
+        author.setFullName(authorUpdate.getFullName());
+        author.setStageName(authorUpdate.getStageName());
+        author.setBirthdate(author.getBirthdate());
     }
 
     @Override

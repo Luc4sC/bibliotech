@@ -1,8 +1,8 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.application.dto.LoanDTO;
+import br.com.bibliotech.domain.service.AuthorDomainService;
 import br.com.bibliotech.presentation.response.LoanResponse;
-import br.com.bibliotech.application.service.LoanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 public class LoanController {
 
     @Autowired
-    private LoanService loanService;
+    private AuthorDomainService.LoanService loanService;
 
     @GetMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<List<LoanResponse>> getAll(){

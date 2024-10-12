@@ -1,6 +1,6 @@
 package br.com.bibliotech.presentation.handler;
 
-import br.com.bibliotech.application.exception.NotFoundException;
+import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import br.com.bibliotech.presentation.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

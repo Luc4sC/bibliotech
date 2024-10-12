@@ -1,8 +1,8 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.application.dto.AuthorDTO;
+import br.com.bibliotech.application.service.AuthorService;
 import br.com.bibliotech.presentation.response.AuthorResponse;
-import br.com.bibliotech.domain.service.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public class AuthorController {
         return ResponseEntity.status(HttpStatus.OK).body(authorResponse);
     }
 
-    @GetMapping(produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
     public ResponseEntity<AuthorResponse> findByStageName(@RequestParam String stageName){
         AuthorResponse authorResponse = authorService.findByStageName(stageName);
         return ResponseEntity.status(HttpStatus.OK).body(authorResponse);

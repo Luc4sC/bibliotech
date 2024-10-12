@@ -1,4 +1,4 @@
-package br.com.bibliotech.application.exception;
+package br.com.bibliotech.infrastructure.exception;
 
 public class NotFoundException extends RuntimeException {
 
