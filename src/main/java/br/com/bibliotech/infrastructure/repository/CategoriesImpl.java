@@ -3,6 +3,7 @@ package br.com.bibliotech.infrastructure.repository;
 import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.domain.repository.Categories;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,16 +26,19 @@ class CategoriesImpl implements Categories {
     }
 
     @Override
+    @Transactional
     public void save(Category category) {
         categoryRepository.save(category);
     }
 
     @Override
+    @Transactional
     public void delete(Category category) {
         category.setDeleted(true);
     }
 
     @Override
+    @Transactional
     public void update(Category category, Category categoryUpdate) {
         category.setName(categoryUpdate.getName());
     }
