@@ -47,7 +47,7 @@ public class StudentService {
 
         student.setFullName(studentDTO.fullName());
         student.setCellPhone(studentDTO.cellPhone());
-        student.setAddress(new Address(studentDTO.addressDTO()));
+        student.setAddress(new Address(null, 0, null, null, null, null));
 
         return studentResponseConverter.convert(student);
     }

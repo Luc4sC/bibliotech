@@ -57,7 +57,7 @@ public class Student {
         this.fullName = studentDTO.fullName();
         this.cellPhone = studentDTO.cellPhone();
         this.birthdate = studentDTO.birthdate();
-        this.address = new Address(studentDTO.addressDTO());
+        this.address = new Address(null, 0, null, null, null, null);
         this.blocked = false;
         this.deleted = false;
     }

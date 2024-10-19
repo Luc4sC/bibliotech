@@ -1,6 +1,5 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.AddressDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
@@ -29,13 +28,13 @@ public class Address {
     @Column(nullable = false)
     private String cep;
 
-    public Address (AddressDTO addressDTO){
-        this.street = addressDTO.street();
-        this.number = addressDTO.number();
-        this.neighborhood = addressDTO.neighborhood();
-        this.city = addressDTO.city();
-        this.state = addressDTO.state();
-        this.cep = addressDTO.cep();
+    public Address (String street, int number, String neighborhood, String city, String state, String cep){
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.cep = cep;
     }
 
     @Override

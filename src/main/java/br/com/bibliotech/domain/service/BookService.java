@@ -6,8 +6,8 @@ import br.com.bibliotech.domain.model.*;
 import br.com.bibliotech.domain.repository.Authors;
 import br.com.bibliotech.domain.repository.Categories;
 import br.com.bibliotech.domain.repository.Genres;
+import br.com.bibliotech.domain.repository.Publishers;
 import br.com.bibliotech.infrastructure.repository.BookRepository;
-import br.com.bibliotech.infrastructure.repository.PublisherRepository;
 import br.com.bibliotech.presentation.response.BookResponse;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class BookService {
     private Genres genreRepository;
 
     @Autowired
-    private PublisherRepository publisherRepository;
+    private Publishers publisherRepository;
 
     private final BookResponseConverter bookResponseConverter = new BookResponseConverter();
 
@@ -42,7 +42,7 @@ public class BookService {
         Author author = authors.findById(bookDTO.authorId());
         Category category = categories.findById(bookDTO.categoryId());
         Genre genre = genreRepository.findById(bookDTO.genreId());
-        Publisher publisher = publisherRepository.findById(bookDTO.publishCompanyId()).orElseThrow();
+        Publisher publisher = publisherRepository.findById(bookDTO.publishCompanyId());
 
         Book book = new Book(bookDTO, author, category, genre, publisher);
         bookRepository.save(book);
@@ -71,7 +71,7 @@ public class BookService {
         Author author = authors.findById(bookDTO.authorId());
         Category category = categories.findById(bookDTO.categoryId());
         Genre genre = genreRepository.findById(bookDTO.genreId());
-        Publisher publisher = publisherRepository.findById(bookDTO.publishCompanyId()).orElseThrow();
+        Publisher publisher = publisherRepository.findById(bookDTO.publishCompanyId());
 
         book.setTitle(bookDTO.title());
         book.setSubtitle(bookDTO.subtitle());

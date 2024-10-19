@@ -1,6 +1,5 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.PublisherDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,11 +45,11 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
-    public Publisher(PublisherDTO publisherDTO){
-        this.tradeName = publisherDTO.tradeName();
-        this.name = publisherDTO.name();
-        this.foundationDate = publisherDTO.foundationDate();
-        this.address = new Address(publisherDTO.addressDTO());
+    public Publisher(String tradeName, String name, LocalDate foundationDate, Address address){
+        this.tradeName = tradeName;
+        this.name = name;
+        this.foundationDate = foundationDate;
+        this.address = address;
         this.deleted = false;
     }
 
