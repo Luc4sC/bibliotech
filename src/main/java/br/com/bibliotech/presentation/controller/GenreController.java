@@ -1,8 +1,8 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.application.dto.GenreDTO;
+import br.com.bibliotech.application.service.GenreService;
 import br.com.bibliotech.presentation.response.GenreResponse;
-import br.com.bibliotech.domain.service.GenreService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,18 +24,6 @@ public class GenreController {
         return ResponseEntity.status(HttpStatus.CREATED).body(genreResponse);
     }
 
-    @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<GenreResponse>> findAll(){
-        List<GenreResponse> genreResponses = genreService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(genreResponses);
-    }
-
-    @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> findById(@PathVariable Long id){
-        GenreResponse genreResponse = genreService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
-    }
-
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     public ResponseEntity<GenreResponse> update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id){
         GenreResponse genreResponse = genreService.update(genreDTO, id);
@@ -47,4 +35,23 @@ public class GenreController {
         genreService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
+    @GetMapping(produces = "application/json; charset=utf-8")
+    public ResponseEntity<List<GenreResponse>> findAll(){
+        List<GenreResponse> genreResponses = genreService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponses);
+    }
+
+    @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
+    public ResponseEntity<GenreResponse> findById(@PathVariable Long id){
+        GenreResponse genreResponse = genreService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
+    }
+
+    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    public ResponseEntity<GenreResponse> findByName(@RequestParam String name){
+        GenreResponse genreResponse = genreService.findByName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(genreResponse);
+    }
+
 }

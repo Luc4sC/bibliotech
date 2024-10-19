@@ -1,8 +1,10 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.GenreDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class Genre {
     @OneToMany(mappedBy = "genre")
     private List<Book> books;
 
-    public Genre(GenreDTO genreDTO){
-        this.name = genreDTO.name();
+    public Genre(String name){
+        this.name = name;
         this.deleted = false;
     }
 

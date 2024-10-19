@@ -1,7 +1,5 @@
 package br.com.bibliotech.domain.repository;
 
-import jakarta.transaction.Transactional;
-
 import java.util.List;
 
 interface Generics<T> {

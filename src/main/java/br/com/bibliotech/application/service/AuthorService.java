@@ -5,14 +5,12 @@ import br.com.bibliotech.application.dto.AuthorDTO;
 import br.com.bibliotech.domain.model.Author;
 import br.com.bibliotech.domain.service.AuthorDomainService;
 import br.com.bibliotech.presentation.response.AuthorResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Slf4j
 public class AuthorService {
 
     @Autowired
