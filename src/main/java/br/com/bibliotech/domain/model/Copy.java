@@ -1,18 +1,15 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.CopyDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Table(name = "copies")
 @Entity(name = "Copy")
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"numeration", "book"})
+@EqualsAndHashCode(of = "id")
 @Getter
 public class Copy {
 
@@ -39,16 +36,6 @@ public class Copy {
     @ManyToOne
     private Book book;
 
-    @OneToMany(mappedBy = "copy")
-    private List<Item> items;
-
-    public Copy(CopyDTO copyDTO){
-        this.numeration = copyDTO.numeration();
-        this.isbn = copyDTO.isbn();
-        this.available = true;
-        this.deleted = false;
-    }
-
     @Override
     public String toString() {
         return "Copy{" +
@@ -58,4 +45,5 @@ public class Copy {
                 ", isbn='" + isbn + '\'' +
                 '}';
     }
+
 }

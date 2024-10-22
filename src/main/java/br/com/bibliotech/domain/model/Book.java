@@ -1,6 +1,5 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.application.dto.BookDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -64,19 +63,6 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Copy> copies;
 
-    public Book(BookDTO bookDTO, Author author, Category category, Genre genre, Publisher publisher){
-        this.title = bookDTO.title();
-        this.subtitle = bookDTO.subtitle();
-        this.pages = bookDTO.pages();
-        this.synopsis = bookDTO.synopsis();
-        this.publishDate = bookDTO.publishDate();
-        this.deleted = false;
-        this.author = author;
-        this.category = category;
-        this.genre = genre;
-        this.publisher = publisher;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -85,4 +71,5 @@ public class Book {
                 ", subtitle='" + subtitle + '\'' +
                 '}';
     }
+
 }

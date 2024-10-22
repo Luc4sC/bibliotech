@@ -55,4 +55,5 @@ public class Author {
                 ", stageName='" + stageName + '\'' +
                 '}';
     }
+
 }

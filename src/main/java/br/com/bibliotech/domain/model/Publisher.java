@@ -60,4 +60,5 @@ public class Publisher {
                 ", tradeName='" + tradeName + '\'' +
                 '}';
     }
+
 }
