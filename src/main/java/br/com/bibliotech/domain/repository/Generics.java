@@ -7,7 +7,7 @@ interface Generics<T> {
     void save(T model);
     void update(T model, T update);
     void delete(T model);
-    T findById(T model);
+    T findById(Long id);
     List<T> findAll();
 
 }

@@ -16,5 +16,4 @@ public abstract class GenericException extends RuntimeException {
         this.timestamp = timestamp;
     }
 
-
 }
