@@ -6,7 +6,7 @@ import java.util.List;
 interface GenericConverter<M, D, R> {
 
     M fromDto(D dto);
-    R fromModel(M response);
+    R fromModel(M model);
     List<R> fromModelList(List<M> models);
 
 }

@@ -64,4 +64,11 @@ public class AuthorController {
         return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModelList(authors));
     }
 
+    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    public ResponseEntity<AuthorResponse> findByStageName(@RequestParam String stageName) {
+        Author author = authorService.findByStageName(stageName);
+
+        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModel(author));
+    }
+
 }
