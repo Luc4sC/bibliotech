@@ -2,12 +2,10 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
-@Getter
 public class Address {
 
     @Column(nullable = false)
@@ -39,14 +37,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "street='" + street + '\'' +
-                ", number=" + number +
-                ", neighborhood='" + neighborhood + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", cep='" + cep + '\'' +
-                '}';
+        return String.format("%s, %s, %s, %s, %s %s", street, number, neighborhood, city, state, cep);
     }
 
 }

@@ -3,6 +3,7 @@ package br.com.bibliotech.infrastructure.repository;
 import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.domain.repository.Genres;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,16 +22,19 @@ class GenresImpl implements Genres {
 
 
     @Override
+    @Transactional
     public void save(Genre model) {
         genreRepository.save(model);
     }
 
     @Override
+    @Transactional
     public void update(Genre model, Genre update) {
         model.setName(update.getName());
     }
 
     @Override
+    @Transactional
     public void delete(Genre model) {
         model.setDeleted(true);
     }
