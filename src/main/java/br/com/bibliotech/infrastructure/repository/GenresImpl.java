@@ -23,20 +23,20 @@ class GenresImpl implements Genres {
 
     @Override
     @Transactional
-    public void save(Genre model) {
-        genreRepository.save(model);
+    public void save(Genre genre) {
+        genreRepository.save(genre);
     }
 
     @Override
     @Transactional
-    public void update(Genre model, Genre update) {
-        model.setName(update.getName());
+    public void update(Genre genre, Genre genreUpdate) {
+        genre.update(genreUpdate);
     }
 
     @Override
     @Transactional
-    public void delete(Genre model) {
-        model.setDeleted(true);
+    public void delete(Genre genre) {
+        genre.delete();
     }
 
     @Override

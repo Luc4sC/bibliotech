@@ -22,23 +22,20 @@ class PublishersImpl implements Publishers {
 
     @Override
     @Transactional
-    public void save(Publisher model) {
-        publisherRepository.save(model);
+    public void save(Publisher publisher) {
+        publisherRepository.save(publisher);
     }
 
     @Override
     @Transactional
-    public void update(Publisher model, Publisher update) {
-        model.setName(update.getName());
-        model.setTradeName(update.getTradeName());
-        model.setFoundationDate(update.getFoundationDate());
-        model.setAddress(update.getAddress());
+    public void update(Publisher publisher, Publisher publisherUpdate) {
+        publisher.update(publisherUpdate);
     }
 
     @Override
     @Transactional
-    public void delete(Publisher model) {
-        model.setDeleted(true);
+    public void delete(Publisher publisher) {
+        publisher.delete();
     }
 
     @Override

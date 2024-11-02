@@ -7,21 +7,22 @@ import br.com.bibliotech.presentation.responses.AuthorResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorConverter implements GenericConverter<Author, AuthorDTO, AuthorResponse> {
-    @Override
-    public Author fromDto(AuthorDTO dto) {
-        return new Author(dto.fullName(), dto.stageName(), dto.birthdate());
+public class AuthorConverter {
+
+    //TODO Matar interface Converter
+
+    public Author fromDto(AuthorDTO authorDTO) {
+        return new Author(authorDTO.fullName(), authorDTO.stageName(), authorDTO.birthdate());
     }
 
-    @Override
-    public AuthorResponse fromModel(Author model) {
-        return new AuthorResponse(model.getFullName(), model.getStageName(), model.getBirthdate());
+
+    public AuthorResponse fromModel(Author author) {
+        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate());
     }
 
-    @Override
-    public List<AuthorResponse> fromModelList(List<Author> models) {
+    public List<AuthorResponse> fromModelList(List<Author> authors) {
         List<AuthorResponse> authorResponses = new ArrayList<>();
-        models.forEach(model -> {
+        authors.forEach(model -> {
             AuthorResponse authorResponse = fromModel(model);
             authorResponses.add(authorResponse);
         });

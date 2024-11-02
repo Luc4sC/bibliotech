@@ -2,19 +2,13 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Table(name = "books")
 @Entity(name = "Book")
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Getter
 public class Book {
 
     @Id
@@ -22,46 +16,66 @@ public class Book {
     private Long id;
 
     @Column(nullable = false)
-    @Setter
+    private String isbn;
+
+    @Column(nullable = false)
     private String title;
 
-    @Setter
     private String subtitle;
 
-    @Setter
     private String synopsis;
 
     @Column(nullable = false)
-    @Setter
     private int pages;
 
     @Column(nullable = false)
-    @Setter
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate publishDate;
 
     @Column(nullable = false)
-    @Setter
+    private int quantity;
+
+    @Column(nullable = false)
     private boolean deleted;
 
-    @Setter
     @ManyToOne
     private Author author;
 
-    @Setter
     @ManyToOne
     private Category category;
 
-    @Setter
     @ManyToOne
     private Genre genre;
 
-    @Setter
     @ManyToOne
     private Publisher publisher;
 
-    @OneToMany(mappedBy = "book")
-    private List<Copy> copies;
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public boolean isAvailable() {
+        return quantity > 0;
+    }
+
+    public void update(Book book) {
+        this.isbn = book.isbn;
+        this.title = book.title;
+        this.subtitle = book.subtitle;
+        this.synopsis = book.synopsis;
+        this.pages = book.pages;
+        this.publishDate = book.publishDate;
+        this.quantity = book.quantity;
+        this.author = book.author;
+        this.category = book.category;
+        this.genre = book.genre;
+        this.publisher = book.publisher;
+    }
+
+    public void delete() {
+        deleted = true;
+        quantity = 0;
+    }
 
     @Override
     public String toString() {

@@ -22,22 +22,20 @@ class AuthorsImpl implements Authors {
 
     @Override
     @Transactional
-    public void save(Author model) {
-        authorRepository.save(model);
+    public void save(Author author) {
+        authorRepository.save(author);
     }
 
     @Override
     @Transactional
-    public void update(Author model, Author update) {
-        model.setFullName(update.getFullName());
-        model.setStageName(update.getStageName());
-        model.setBirthdate(update.getBirthdate());
+    public void update(Author author, Author update) {
+        author.update(update);
     }
 
     @Override
     @Transactional
-    public void delete(Author model) {
-        model.setDeleted(true);
+    public void delete(Author author) {
+        author.delete();
     }
 
     @Override

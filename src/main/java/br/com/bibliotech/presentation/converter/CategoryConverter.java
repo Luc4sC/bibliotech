@@ -7,24 +7,21 @@ import br.com.bibliotech.presentation.responses.CategoryResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryConverter implements GenericConverter<Category, CategoryDTO, CategoryResponse> {
+public class CategoryConverter {
 
 
-    @Override
-    public Category fromDto(CategoryDTO dto) {
-        return new Category(dto.name());
+    public Category fromDto(CategoryDTO categoryDTO) {
+        return new Category(categoryDTO.name());
     }
 
-    @Override
-    public CategoryResponse fromModel(Category model) {
-        return new CategoryResponse(model.getName());
+    public CategoryResponse fromModel(Category category) {
+        return new CategoryResponse(category.getName());
     }
 
-    @Override
-    public List<CategoryResponse> fromModelList(List<Category> models) {
+    public List<CategoryResponse> fromModelList(List<Category> categories) {
         List<CategoryResponse> categoryResponses = new ArrayList<>();
 
-        models.forEach(model -> {
+        categories.forEach(model -> {
             CategoryResponse categoryResponse = fromModel(model);
             categoryResponses.add(categoryResponse);
         });

@@ -24,13 +24,17 @@ public class PublisherService {
         log.info("Publisher created: " + publisher);
     }
 
-    public void update(Publisher publisher, Publisher update) {
+    public void update(Long id, Publisher update) {
+        Publisher publisher = publishers.findById(id);
         publishers.update(publisher, update);
+
         log.info("Publisher updated: " + publisher);
     }
 
-    public void delete(Publisher publisher) {
+    public void delete(Long id) {
+        Publisher publisher = publishers.findById(id);
         publishers.delete(publisher);
+
         log.info("Publisher deleted: " + publisher);
     }
 

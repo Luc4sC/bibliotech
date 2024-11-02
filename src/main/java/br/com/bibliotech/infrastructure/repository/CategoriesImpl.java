@@ -20,18 +20,18 @@ class CategoriesImpl implements Categories {
     }
 
     @Override
-    public void save(Category model) {
-        categoryRepository.save(model);
+    public void save(Category category) {
+        categoryRepository.save(category);
     }
 
     @Override
-    public void update(Category model, Category update) {
-        model.setName(update.getName());
+    public void update(Category category, Category categoryUpdate) {
+        category.update(categoryUpdate);
     }
 
     @Override
-    public void delete(Category model) {
-        model.setDeleted(true);
+    public void delete(Category category) {
+        category.delete();
     }
 
     @Override

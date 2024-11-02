@@ -28,38 +28,33 @@ public class PublisherController {
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> save(@RequestBody @Valid PublisherDTO publisherDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody @Valid PublisherDTO publisherDTO) {
         Publisher publisher = publisherConverter.fromDto(publisherDTO);
         publisherService.save(publisher);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(publisherConverter.fromModel(publisher));
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> update(@RequestBody @Valid PublisherDTO publisherDTO, @PathVariable Long id) {
-        Publisher publisher = publisherService.findById(id);
-        publisherService.update(publisher, publisherConverter.fromDto(publisherDTO));
-
-        return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModel(publisher));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Valid PublisherDTO publisherDTO, @PathVariable Long id) {
+        publisherService.update(id, publisherConverter.fromDto(publisherDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> delete(@PathVariable Long id){
-        Publisher publisher = publisherService.findById(id);
-        publisherService.delete(publisher);
-
-        return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModel(publisher));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        publisherService.delete(id);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> findById(@PathVariable Long id){
+    public ResponseEntity<PublisherResponse> findById(@PathVariable Long id) {
         Publisher publisher = publisherService.findById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModel(publisher));
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<PublisherResponse>> findAll(){
+    public ResponseEntity<List<PublisherResponse>> findAll() {
         List<Publisher> publishers = publisherService.findAll();
 
         return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModelList(publishers));

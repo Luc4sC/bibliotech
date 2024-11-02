@@ -2,29 +2,27 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.NoArgsConstructor;
 
 @Embeddable
-@NoArgsConstructor
 public class Address {
 
     @Column(nullable = false)
-    private String street;
+    private final String street;
 
     @Column(nullable = false)
-    private int number;
+    private final int number;
 
     @Column(nullable = false)
-    private String neighborhood;
+    private final String neighborhood;
 
     @Column(nullable = false)
-    private String city;
+    private final String city;
 
     @Column(nullable = false)
-    private String state;
+    private final String state;
 
     @Column(nullable = false)
-    private String cep;
+    private final String cep;
 
     public Address (String street, int number, String neighborhood, String city, String state, String cep){
         this.street = street;
@@ -33,6 +31,30 @@ public class Address {
         this.city = city;
         this.state = state;
         this.cep = cep;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCep() {
+        return cep;
     }
 
     @Override

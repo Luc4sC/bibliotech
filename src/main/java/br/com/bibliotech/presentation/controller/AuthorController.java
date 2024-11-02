@@ -27,27 +27,22 @@ public class AuthorController {
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorResponse> save(@RequestBody @Valid AuthorDTO authorDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody @Valid AuthorDTO authorDTO) {
         Author author = authorConverter.fromDto(authorDTO);
         authorService.save(author);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(authorConverter.fromModel(author));
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorResponse> update(@RequestBody @Valid AuthorDTO authorDTO, @PathVariable Long id) {
-        Author author = authorService.findById(id);
-        authorService.update(author, authorConverter.fromDto(authorDTO));
-
-        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModel(author));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Valid AuthorDTO authorDTO, @PathVariable Long id) {
+        authorService.update(id, authorConverter.fromDto(authorDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorResponse> delete(@PathVariable Long id){
-        Author author = authorService.findById(id);
-        authorService.delete(author);
-
-        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModel(author));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        authorService.delete(id);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")

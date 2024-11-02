@@ -2,17 +2,12 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Table(name = "genres")
 @Entity(name = "Genre")
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Getter
 public class Genre {
 
     @Id
@@ -20,11 +15,9 @@ public class Genre {
     private Long id;
 
     @Column(nullable = false)
-    @Setter
     private String name;
 
     @Column(nullable = false)
-    @Setter
     private boolean deleted;
 
     @OneToMany(mappedBy = "genre")
@@ -33,6 +26,22 @@ public class Genre {
     public Genre(String name){
         this.name = name;
         this.deleted = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void update(Genre genre) {
+        this.name = genre.name;
+    }
+
+    public void delete() {
+        this.deleted = true;
     }
 
     @Override

@@ -7,25 +7,24 @@ import br.com.bibliotech.presentation.responses.GenreResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreConverter implements GenericConverter<Genre, GenreDTO, GenreResponse> {
-    @Override
-    public Genre fromDto(GenreDTO dto) {
-        return new Genre(dto.name());
+public class GenreConverter {
+
+    public Genre fromDto(GenreDTO genreDTO) {
+        return new Genre(genreDTO.name());
     }
 
-    @Override
-    public GenreResponse fromModel(Genre model) {
-        return new GenreResponse(model.getName());
+    public GenreResponse fromModel(Genre genre) {
+        return new GenreResponse(genre.getName());
     }
 
-    @Override
-    public List<GenreResponse> fromModelList(List<Genre> models) {
+    public List<GenreResponse> fromModelList(List<Genre> genres) {
         List<GenreResponse> genreResponses = new ArrayList<>();
-        models.forEach(model -> {
+        genres.forEach(model -> {
             GenreResponse genreResponse = fromModel(model);
             genreResponses.add(genreResponse);
         });
 
         return genreResponses;
     }
+
 }

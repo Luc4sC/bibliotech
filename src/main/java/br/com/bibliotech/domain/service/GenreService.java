@@ -24,13 +24,17 @@ public class GenreService {
         log.info("Genre created: " + genre);
     }
 
-    public void update(Genre genre, Genre update) {
+    public void update(Long id, Genre update) {
+        Genre genre = genres.findById(id);
         genres.update(genre, update);
+
         log.info("Genre updated: " + genre);
     }
 
-    public void delete(Genre genre) {
+    public void delete(Long id) {
+        Genre genre = genres.findById(id);
         genres.delete(genre);
+
         log.info("Genre deleted: " + genre);
     }
 

@@ -7,7 +7,7 @@ import br.com.bibliotech.presentation.responses.PublisherResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublisherConverter implements GenericConverter<Publisher, PublisherDTO, PublisherResponse> {
+public class PublisherConverter {
 
     private final AddressConverter addressConverter;
 
@@ -15,21 +15,19 @@ public class PublisherConverter implements GenericConverter<Publisher, Publisher
         this.addressConverter = new AddressConverter();
     }
 
-    @Override
-    public Publisher fromDto(PublisherDTO dto) {
-        return new Publisher(dto.tradeName(), dto.name(), dto.foundationDate(), addressConverter.fromDto(dto.address()));
+    public Publisher fromDto(PublisherDTO publisherDTO) {
+        return new Publisher(publisherDTO.tradeName(), publisherDTO.name(), publisherDTO.foundationDate(),
+                addressConverter.fromDto(publisherDTO.address()));
     }
 
-    @Override
-    public PublisherResponse fromModel(Publisher model) {
-        return new PublisherResponse(model.getName(), model.getTradeName(), model.getFoundationDate(),
-                addressConverter.fromModel(model.getAddress()));
+    public PublisherResponse fromModel(Publisher publisher) {
+        return new PublisherResponse(publisher.getName(), publisher.getTradeName(), publisher.getFoundationDate(),
+                addressConverter.fromModel(publisher.getAddress()));
     }
 
-    @Override
-    public List<PublisherResponse> fromModelList(List<Publisher> models) {
+    public List<PublisherResponse> fromModelList(List<Publisher> publishers) {
         List<PublisherResponse> publisherResponses = new ArrayList<>();
-        models.forEach(model -> {
+        publishers.forEach(model -> {
             PublisherResponse publisherResponse = fromModel(model);
             publisherResponses.add(publisherResponse);
         });

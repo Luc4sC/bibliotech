@@ -4,31 +4,16 @@ import br.com.bibliotech.domain.model.Address;
 import br.com.bibliotech.presentation.dto.AddressDTO;
 import br.com.bibliotech.presentation.responses.AddressResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class AddressConverter implements GenericConverter<Address, AddressDTO, AddressResponse> {
+public class AddressConverter {
 
 
-    @Override
-    public Address fromDto(AddressDTO dto) {
-        return new Address(dto.street(), dto.number(), dto.neighborhood(), dto.city(), dto.state(), dto.cep());
+    public Address fromDto(AddressDTO addressDTO) {
+        return new Address(addressDTO.street(), addressDTO.number(), addressDTO.neighborhood(),
+                addressDTO.city(), addressDTO.state(), addressDTO.cep());
     }
 
-    @Override
-    public AddressResponse fromModel(Address model) {
-        return new AddressResponse(model.toString());
-    }
-
-    @Override
-    public List<AddressResponse> fromModelList(List<Address> models) {
-        List<AddressResponse> addressResponses = new ArrayList<>();
-        models.forEach(model -> {
-            AddressResponse addressResponse = fromModel(model);
-            addressResponses.add(addressResponse);
-        });
-
-        return addressResponses;
+    public AddressResponse fromModel(Address address) {
+        return new AddressResponse(address.getStreet(), address.getNumber(), address.getNeighborhood(), address.getCity(), address.getState(), address.getCep());
     }
 
 }

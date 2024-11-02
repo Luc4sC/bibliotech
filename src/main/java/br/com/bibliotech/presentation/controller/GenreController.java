@@ -28,27 +28,22 @@ public class GenreController {
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> save(@RequestBody @Valid GenreDTO genreDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody @Valid GenreDTO genreDTO) {
         Genre genre = genreConverter.fromDto(genreDTO);
         genreService.save(genre);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(genreConverter.fromModel(genre));
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id) {
-        Genre genre = genreService.findById(id);
-        genreService.update(genre, genreConverter.fromDto(genreDTO));
-
-        return ResponseEntity.status(HttpStatus.OK).body(genreConverter.fromModel(genre));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id) {
+        genreService.update(id, genreConverter.fromDto(genreDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> delete(@PathVariable Long id){
-        Genre genre = genreService.findById(id);
-        genreService.delete(genre);
-
-        return ResponseEntity.status(HttpStatus.OK).body(genreConverter.fromModel(genre));
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        genreService.delete(id);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")

@@ -24,12 +24,15 @@ public class CategoryService {
         log.info("Category created: " + category);
     }
 
-    public void update(Category category, Category update) {
+    public void update(Long id, Category update) {
+        Category category = categories.findById(id);
         categories.update(category, update);
+
         log.info("Category updated: " + category);
     }
 
-    public void delete(Category category) {
+    public void delete(Long id) {
+        Category category = categories.findById(id);
         categories.delete(category);
     }
 
