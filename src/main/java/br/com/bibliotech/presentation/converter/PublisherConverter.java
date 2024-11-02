@@ -2,6 +2,7 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
+import br.com.bibliotech.presentation.responses.AddressResponse;
 import br.com.bibliotech.presentation.responses.PublisherResponse;
 
 import java.util.ArrayList;
@@ -21,8 +22,11 @@ public class PublisherConverter {
     }
 
     public PublisherResponse fromModel(Publisher publisher) {
+        AddressResponse addressResponse = publisher.getAddress() != null ?
+                addressConverter.fromModel(publisher.getAddress()) : null;
+
         return new PublisherResponse(publisher.getName(), publisher.getTradeName(), publisher.getFoundationDate(),
-                addressConverter.fromModel(publisher.getAddress()));
+                addressResponse, publisher.isDeleted());
     }
 
     public List<PublisherResponse> fromModelList(List<Publisher> publishers) {

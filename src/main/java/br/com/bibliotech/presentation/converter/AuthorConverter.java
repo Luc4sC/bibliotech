@@ -9,15 +9,13 @@ import java.util.List;
 
 public class AuthorConverter {
 
-    //TODO Matar interface Converter
-
     public Author fromDto(AuthorDTO authorDTO) {
         return new Author(authorDTO.fullName(), authorDTO.stageName(), authorDTO.birthdate());
     }
 
 
     public AuthorResponse fromModel(Author author) {
-        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate());
+        return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate(), author.isDeleted());
     }
 
     public List<AuthorResponse> fromModelList(List<Author> authors) {

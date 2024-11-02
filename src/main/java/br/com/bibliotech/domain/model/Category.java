@@ -1,13 +1,12 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "categories")
 @Entity(name = "Category")
-@EqualsAndHashCode(of = "id")
 public class Category {
 
     @Id
@@ -50,6 +49,18 @@ public class Category {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Category category = (Category) object;
+        return Objects.equals(id, category.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

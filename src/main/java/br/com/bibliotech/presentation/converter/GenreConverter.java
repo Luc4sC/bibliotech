@@ -14,7 +14,7 @@ public class GenreConverter {
     }
 
     public GenreResponse fromModel(Genre genre) {
-        return new GenreResponse(genre.getName());
+        return new GenreResponse(genre.getName(), genre.isDeleted());
     }
 
     public List<GenreResponse> fromModelList(List<Genre> genres) {

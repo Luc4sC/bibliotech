@@ -1,15 +1,14 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "publishers")
 @Entity(name = "Publisher")
-@EqualsAndHashCode(of = "id")
 public class Publisher {
 
     @Id
@@ -59,6 +58,10 @@ public class Publisher {
         return address;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     public void update(Publisher publisher) {
         this.tradeName = publisher.tradeName;
         this.name = publisher.name;
@@ -76,6 +79,18 @@ public class Publisher {
                 "id=" + id +
                 ", tradeName='" + tradeName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Publisher publisher = (Publisher) object;
+        return Objects.equals(id, publisher.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

@@ -2,5 +2,5 @@ package br.com.bibliotech.presentation.responses;
 
 import java.time.LocalDate;
 
-public record AuthorResponse(String fullName, String stageName, LocalDate birthdate) {
+public record AuthorResponse(String fullName, String stageName, LocalDate birthdate, boolean isDeleted) {
 }

@@ -1,13 +1,12 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
+import java.util.Objects;
 
 @Table(name = "genres")
 @Entity(name = "Genre")
-@EqualsAndHashCode(of = "id")
 public class Genre {
 
     @Id
@@ -50,6 +49,18 @@ public class Genre {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Genre genre = (Genre) object;
+        return Objects.equals(id, genre.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

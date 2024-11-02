@@ -18,6 +18,5 @@ public record PublisherDTO(@NotEmpty(message = "Publisher's name must be specifi
                            @NotNull(message = "Publisher's foundation date must be specified")
                            @PastOrPresent(message = "Publisher's foundation date must be older")
                            LocalDate foundationDate,
-                           @NotNull(message = "Publisher's address must be specified")
                            AddressDTO address) {
 }

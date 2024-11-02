@@ -15,7 +15,7 @@ public class CategoryConverter {
     }
 
     public CategoryResponse fromModel(Category category) {
-        return new CategoryResponse(category.getName());
+        return new CategoryResponse(category.getName(), category.isDeleted());
     }
 
     public List<CategoryResponse> fromModelList(List<Category> categories) {

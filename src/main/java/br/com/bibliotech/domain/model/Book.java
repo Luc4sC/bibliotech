@@ -1,14 +1,13 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Table(name = "books")
 @Entity(name = "Book")
-@EqualsAndHashCode(of = "id")
 public class Book {
 
     @Id
@@ -84,6 +83,18 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Book book = (Book) object;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

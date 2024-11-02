@@ -1,4 +1,4 @@
 package br.com.bibliotech.presentation.responses;
 
-public record GenreResponse(String name) {
+public record GenreResponse(String name, boolean isDeleted) {
 }
