@@ -2,6 +2,7 @@ package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.domain.repository.Genres;
+import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ class GenresImpl implements Genres {
     @Override
     @Transactional
     public void save(Genre genre) {
+        if (genreRepository.existsByName(genre.getName()))
+            throw new ConflictException("Genre with name: " + genre.getName() + " already exists!");
+
         genreRepository.save(genre);
     }
 
