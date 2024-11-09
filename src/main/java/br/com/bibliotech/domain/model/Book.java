@@ -14,7 +14,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, updatable = false)
     private String isbn;
 
     @Column(nullable = false)
@@ -58,7 +58,6 @@ public class Book {
     }
 
     public void update(Book book) {
-        this.isbn = book.isbn;
         this.title = book.title;
         this.subtitle = book.subtitle;
         this.synopsis = book.synopsis;

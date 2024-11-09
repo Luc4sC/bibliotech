@@ -25,7 +25,7 @@ public class PublisherConverter {
         AddressResponse addressResponse = publisher.getAddress() != null ?
                 addressConverter.fromModel(publisher.getAddress()) : null;
 
-        return new PublisherResponse(publisher.getName(), publisher.getTradeName(), publisher.getFoundationDate(),
+        return new PublisherResponse(publisher.getLegalName(), publisher.getTradeName(), publisher.getFoundationDate(),
                 addressResponse, publisher.isDeleted());
     }
 

@@ -15,11 +15,11 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String tradeName;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String legalName;
 
     @Column(nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -34,9 +34,9 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
-    public Publisher(String tradeName, String name, LocalDate foundationDate, Address address){
+    public Publisher(String tradeName, String legalName, LocalDate foundationDate, Address address){
         this.tradeName = tradeName;
-        this.name = name;
+        this.legalName = legalName;
         this.foundationDate = foundationDate;
         this.address = address;
         this.deleted = false;
@@ -46,8 +46,8 @@ public class Publisher {
         return tradeName;
     }
 
-    public String getName() {
-        return name;
+    public String getLegalName() {
+        return legalName;
     }
 
     public LocalDate getFoundationDate() {
@@ -64,7 +64,7 @@ public class Publisher {
 
     public void update(Publisher publisher) {
         this.tradeName = publisher.tradeName;
-        this.name = publisher.name;
+        this.legalName = publisher.legalName;
         this.foundationDate = publisher.foundationDate;
         this.address = publisher.address;
     }

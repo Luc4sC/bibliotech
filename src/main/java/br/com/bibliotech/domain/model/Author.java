@@ -18,7 +18,7 @@ public class Author {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String stageName;
 
     @Column(nullable = false)
