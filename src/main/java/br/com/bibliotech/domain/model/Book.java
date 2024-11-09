@@ -1,11 +1,13 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@NoArgsConstructor
 @Table(name = "books")
 @Entity(name = "Book")
 public class Book {

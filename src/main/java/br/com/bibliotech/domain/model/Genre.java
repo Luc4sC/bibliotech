@@ -1,10 +1,12 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
 @Table(name = "genres")
 @Entity(name = "Genre")
 public class Genre {
