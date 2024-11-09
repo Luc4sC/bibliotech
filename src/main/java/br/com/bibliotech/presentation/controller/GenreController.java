@@ -8,7 +8,6 @@ import br.com.bibliotech.presentation.responses.GenreResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 public class GenreController {
 
     private final GenreService genreService;
-
     private final GenreConverter genreConverter;
 
     @Autowired
@@ -47,24 +45,24 @@ public class GenreController {
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> findById(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.OK)
+    public GenreResponse findById(@PathVariable Long id){
         Genre genre = genreService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(genreConverter.fromModel(genre));
+        return genreConverter.fromModel(genre);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<GenreResponse>> findAll(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<GenreResponse> findAll(){
         List<Genre> genres = genreService.findAll();
-
-        return ResponseEntity.status(HttpStatus.OK).body(genreConverter.fromModelList(genres));
+        return genreConverter.fromModelList(genres);
     }
 
     @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
-    public ResponseEntity<GenreResponse> findById(@RequestParam String name) {
+    @ResponseStatus(HttpStatus.OK)
+    public GenreResponse findById(@RequestParam String name) {
         Genre genre = genreService.findByName(name);
-
-        return ResponseEntity.status(HttpStatus.OK).body(genreConverter.fromModel(genre));
+        return genreConverter.fromModel(genre);
     }
 
 }

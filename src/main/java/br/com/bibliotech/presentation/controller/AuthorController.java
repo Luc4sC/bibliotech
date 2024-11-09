@@ -8,7 +8,6 @@ import br.com.bibliotech.presentation.responses.AuthorResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,24 +45,24 @@ public class AuthorController {
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorResponse> findById(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.OK)
+    public AuthorResponse findById(@PathVariable Long id){
         Author author = authorService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModel(author));
+        return authorConverter.fromModel(author);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<AuthorResponse>> findAll(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<AuthorResponse> findAll(){
         List<Author> authors = authorService.findAll();
-
-        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModelList(authors));
+        return authorConverter.fromModelList(authors);
     }
 
     @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
-    public ResponseEntity<AuthorResponse> findByStageName(@RequestParam String stageName) {
+    @ResponseStatus(HttpStatus.OK)
+    public AuthorResponse findByStageName(@RequestParam String stageName) {
         Author author = authorService.findByStageName(stageName);
-
-        return ResponseEntity.status(HttpStatus.OK).body(authorConverter.fromModel(author));
+        return authorConverter.fromModel(author);
     }
 
 }

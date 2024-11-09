@@ -8,7 +8,6 @@ import br.com.bibliotech.presentation.responses.CategoryResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-
     private final CategoryConverter categoryConverter;
 
     @Autowired
@@ -47,24 +45,24 @@ public class CategoryController {
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryResponse> findById(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryResponse findById(@PathVariable Long id){
         Category category = categoryService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(categoryConverter.fromModel(category));
+        return categoryConverter.fromModel(category);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<CategoryResponse>> findAll(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryResponse> findAll(){
         List<Category> categories = categoryService.findAll();
-
-        return ResponseEntity.status(HttpStatus.OK).body(categoryConverter.fromModelList(categories));
+        return categoryConverter.fromModelList(categories);
     }
 
     @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
-    public ResponseEntity<CategoryResponse> findById(@RequestParam String name) {
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryResponse findById(@RequestParam String name) {
         Category category = categoryService.findByName(name);
-
-        return ResponseEntity.status(HttpStatus.OK).body(categoryConverter.fromModel(category));
+        return categoryConverter.fromModel(category);
     }
 
 }

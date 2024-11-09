@@ -18,7 +18,6 @@ import java.util.List;
 public class PublisherController {
 
     private final PublisherService publisherService;
-
     private final PublisherConverter publisherConverter;
 
     @Autowired
