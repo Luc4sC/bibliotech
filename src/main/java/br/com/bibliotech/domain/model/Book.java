@@ -51,9 +51,64 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+    public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
+                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
+
+        this.isbn = isbn;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.synopsis = synopsis;
+        this.pages = pages;
+        this.publishDate = publishDate;
+        this.quantity = quantity;
+        this.author = author;
+        this.category = category;
+        this.genre = genre;
+        this.publisher = publisher;
+    }
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public LocalDate getPublishDate() {
+        return publishDate;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
     }
 
     public boolean isDeleted() {
