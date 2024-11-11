@@ -2,6 +2,7 @@ package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.repository.Books;
+import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ class BooksImpl implements Books {
     @Override
     @Transactional
     public void save(Book book) {
+        if  (bookRepository.existsByIsbn(book.getIsbn()))
+            throw new ConflictException("Book with isbn: " + book.getIsbn() + " already exists!");
+
         bookRepository.save(book);
     }
 

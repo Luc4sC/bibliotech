@@ -8,4 +8,5 @@ import java.util.Optional;
 interface AuthorRepository extends JpaRepository<Author, Long> {
 
     Optional<Author> findByStageName(String stageName);
+    boolean existsByStageName(String stageName);
 }

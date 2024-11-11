@@ -26,7 +26,7 @@ class GenresImpl implements Genres {
     @Transactional
     public void save(Genre genre) {
         if (genreRepository.existsByName(genre.getName()))
-            throw new ConflictException("Genre with name: " + genre.getName() + " already exists!");
+            throw new ConflictException("Genre named: " + genre.getName() + " already exist!");
 
         genreRepository.save(genre);
     }

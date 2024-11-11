@@ -51,6 +51,11 @@ public class Book {
     @ManyToOne
     private Publisher publisher;
 
+
+    public String getIsbn() {
+        return isbn;
+    }
+
     public boolean isDeleted() {
         return deleted;
     }

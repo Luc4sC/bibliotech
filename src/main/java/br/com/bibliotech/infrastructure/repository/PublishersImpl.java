@@ -2,6 +2,7 @@ package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.domain.repository.Publishers;
+import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,16 @@ class PublishersImpl implements Publishers {
     @Override
     @Transactional
     public void save(Publisher publisher) {
+        verify(publisher);
         publisherRepository.save(publisher);
+    }
+
+    private void verify(Publisher publisher) {
+        if (publisherRepository.existsByLegalName(publisher.getLegalName()))
+            throw new ConflictException("Publisher with legal name: " + publisher.getLegalName() + " already exist!");
+
+        if (publisherRepository.existsByTradeName(publisher.getTradeName()))
+            throw new ConflictException("Publisher with trade name: " + publisher.getTradeName() + " already exist!");
     }
 
     @Override
@@ -60,4 +70,5 @@ class PublishersImpl implements Publishers {
 
         return publisherOptional.get();
     }
+
 }

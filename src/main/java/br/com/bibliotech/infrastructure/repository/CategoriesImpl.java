@@ -2,6 +2,7 @@ package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.domain.repository.Categories;
+import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,9 @@ class CategoriesImpl implements Categories {
 
     @Override
     public void save(Category category) {
+        if (categoryRepository.existsByName(category.getName()))
+            throw new ConflictException("Category named: " + category.getName() + " already exist!");
+
         categoryRepository.save(category);
     }
 

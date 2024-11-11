@@ -2,6 +2,7 @@ package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.Author;
 import br.com.bibliotech.domain.repository.Authors;
+import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ class AuthorsImpl implements Authors {
     @Override
     @Transactional
     public void save(Author author) {
+        if (authorRepository.existsByStageName(author.getStageName()))
+            throw new ConflictException("Author with stage name: " + author.getStageName() + " already exists!");
+
         authorRepository.save(author);
     }
 
