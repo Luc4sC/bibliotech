@@ -24,12 +24,14 @@ public class BookService {
         log.info("Book created: " + book);
     }
 
-    public void update(Book book, Book update) {
-        books.update(book, update);
+    public void update(Long id, Book bookUpdate) {
+        Book book = books.findById(id);
+        books.update(book, bookUpdate);
         log.info("Book updated: " + book);
     }
 
-    public void delete(Book book) {
+    public void delete(Long id) {
+        Book book = books.findById(id);
         books.delete(book);
         log.info("Book created: " + book);
     }
