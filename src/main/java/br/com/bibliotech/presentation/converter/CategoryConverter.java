@@ -20,11 +20,7 @@ public class CategoryConverter {
 
     public List<CategoryResponse> fromModelList(List<Category> categories) {
         List<CategoryResponse> categoryResponses = new ArrayList<>();
-
-        categories.forEach(model -> {
-            CategoryResponse categoryResponse = fromModel(model);
-            categoryResponses.add(categoryResponse);
-        });
+        categories.forEach(category -> categoryResponses.add(fromModel(category)));
 
         return categoryResponses;
     }

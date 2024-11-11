@@ -31,10 +31,7 @@ public class PublisherConverter {
 
     public List<PublisherResponse> fromModelList(List<Publisher> publishers) {
         List<PublisherResponse> publisherResponses = new ArrayList<>();
-        publishers.forEach(model -> {
-            PublisherResponse publisherResponse = fromModel(model);
-            publisherResponses.add(publisherResponse);
-        });
+        publishers.forEach(publisher -> publisherResponses.add(fromModel(publisher)));
 
         return publisherResponses;
     }

@@ -20,10 +20,7 @@ public class AuthorConverter {
 
     public List<AuthorResponse> fromModelList(List<Author> authors) {
         List<AuthorResponse> authorResponses = new ArrayList<>();
-        authors.forEach(model -> {
-            AuthorResponse authorResponse = fromModel(model);
-            authorResponses.add(authorResponse);
-        });
+        authors.forEach(author -> authorResponses.add(fromModel(author)));
 
         return authorResponses;
     }

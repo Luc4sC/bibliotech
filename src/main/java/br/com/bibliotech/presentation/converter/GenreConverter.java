@@ -19,10 +19,7 @@ public class GenreConverter {
 
     public List<GenreResponse> fromModelList(List<Genre> genres) {
         List<GenreResponse> genreResponses = new ArrayList<>();
-        genres.forEach(model -> {
-            GenreResponse genreResponse = fromModel(model);
-            genreResponses.add(genreResponse);
-        });
+        genres.forEach(genre -> genreResponses.add(fromModel(genre)));
 
         return genreResponses;
     }
