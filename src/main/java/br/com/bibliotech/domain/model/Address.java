@@ -2,27 +2,29 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@NoArgsConstructor
 public class Address {
 
     @Column(nullable = false)
-    private final String street;
+    private String street;
 
     @Column(nullable = false)
-    private final int number;
+    private int number;
 
     @Column(nullable = false)
-    private final String neighborhood;
+    private String neighborhood;
 
     @Column(nullable = false)
-    private final String city;
+    private String city;
 
     @Column(nullable = false)
-    private final String state;
+    private String state;
 
     @Column(nullable = false)
-    private final String cep;
+    private String cep;
 
     public Address (String street, int number, String neighborhood, String city, String state, String cep){
         this.street = street;

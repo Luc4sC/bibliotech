@@ -4,6 +4,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import br.com.bibliotech.presentation.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,14 +17,16 @@ public class GlobalHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    private ErrorResponse handle(NotFoundException exception) {
-        return new ErrorResponse(exception.getMessage(), HttpStatus.NOT_FOUND.value(), Instant.now());
+    private ResponseEntity<ErrorResponse> handle(NotFoundException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), HttpStatus.NOT_FOUND.value(), Instant.now());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     @ExceptionHandler(ConflictException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    private ErrorResponse handle(ConflictException exception) {
-        return new ErrorResponse(exception.getMessage(), HttpStatus.CONFLICT.value(), Instant.now());
+    private ResponseEntity<ErrorResponse> handle(ConflictException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), HttpStatus.CONFLICT.value(), Instant.now());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
