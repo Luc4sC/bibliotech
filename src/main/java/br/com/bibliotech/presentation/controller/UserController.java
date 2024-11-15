@@ -59,7 +59,7 @@ public class UserController {
         return userConverter.frommodelList(users);
     }
 
-    @GetMapping(produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/source",produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse findByEmail(@RequestParam String email) {
         User user = userService.findByEmail(email);

@@ -4,7 +4,9 @@ import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.domain.repository.Categories;
 import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,19 +23,29 @@ class CategoriesImpl implements Categories {
     }
 
     @Override
+    @Transactional
     public void save(Category category) {
-        if (categoryRepository.existsByName(category.getName()))
+        try {
+            categoryRepository.save(category);
+        }
+        catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Category named: " + category.getName() + " already exist!");
-
-        categoryRepository.save(category);
+        }
     }
 
     @Override
+    @Transactional
     public void update(Category category, Category categoryUpdate) {
-        category.update(categoryUpdate);
+        try {
+            category.update(categoryUpdate);
+        }
+        catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Category named: " + category.getName() + " already exist!");
+        }
     }
 
     @Override
+    @Transactional
     public void delete(Category category) {
         category.delete();
     }
