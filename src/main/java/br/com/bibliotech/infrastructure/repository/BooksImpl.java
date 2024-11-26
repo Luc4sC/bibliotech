@@ -6,6 +6,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,16 +25,21 @@ class BooksImpl implements Books {
     @Override
     @Transactional
     public void save(Book book) {
-        if  (bookRepository.existsByIsbn(book.getIsbn()))
-            throw new ConflictException("Book with isbn: " + book.getIsbn() + " already exists!");
-
-        bookRepository.save(book);
+        try {
+            bookRepository.save(book);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Book with ISBN: " + book.getIsbn() + " already exist!");
+        }
     }
 
     @Override
     @Transactional
     public void update(Book book, Book bookUpdate) {
-        book.update(book);
+        try {
+            book.update(bookUpdate);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Book with ISBN: " + book.getIsbn() + " already exist!");
+        }
     }
 
     @Override

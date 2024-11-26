@@ -6,6 +6,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,22 +25,21 @@ class PublishersImpl implements Publishers {
     @Override
     @Transactional
     public void save(Publisher publisher) {
-        verify(publisher);
-        publisherRepository.save(publisher);
-    }
-
-    private void verify(Publisher publisher) {
-        if (publisherRepository.existsByLegalName(publisher.getLegalName()))
-            throw new ConflictException("Publisher with legal name: " + publisher.getLegalName() + " already exist!");
-
-        if (publisherRepository.existsByTradeName(publisher.getTradeName()))
-            throw new ConflictException("Publisher with trade name: " + publisher.getTradeName() + " already exist!");
+        try {
+            publisherRepository.save(publisher);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Publisher with legal or trade name already exist!");
+        }
     }
 
     @Override
     @Transactional
     public void update(Publisher publisher, Publisher publisherUpdate) {
-        publisher.update(publisherUpdate);
+        try {
+            publisher.update(publisherUpdate);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Publisher with legal or trade name already exist!");
+        }
     }
 
     @Override

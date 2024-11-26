@@ -6,6 +6,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,16 +25,21 @@ class AuthorsImpl implements Authors {
     @Override
     @Transactional
     public void save(Author author) {
-        if (authorRepository.existsByStageName(author.getStageName()))
+        try {
+            authorRepository.save(author);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Author with stage name: " + author.getStageName() + " already exists!");
-
-        authorRepository.save(author);
+        }
     }
 
     @Override
     @Transactional
-    public void update(Author author, Author update) {
-        author.update(update);
+    public void update(Author author, Author authorUpdate) {
+        try {
+            author.update(authorUpdate);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Author with stage name: " + author.getStageName() + " already exists!");
+        }
     }
 
     @Override

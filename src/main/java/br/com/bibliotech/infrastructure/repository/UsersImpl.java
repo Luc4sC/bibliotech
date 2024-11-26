@@ -6,6 +6,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,16 +25,21 @@ class UsersImpl implements Users {
     @Override
     @Transactional
     public void save(User user) {
-        if (userRepository.existsByEmail(user.getEmail()))
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("User with email: " + user.getEmail() + " already exist!");
-
-        userRepository.save(user);
+        }
     }
 
     @Override
     @Transactional
     public void update(User user, User userUpdate) {
-        user.update(userUpdate);
+        try {
+            user.update(userUpdate);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("User with email: " + user.getEmail() + " already exist!");
+        }
     }
 
     @Override

@@ -8,6 +8,4 @@ import java.util.Optional;
 interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
     Optional<Publisher> findByTradeName(String tradeName);
-    boolean existsByTradeName(String tradeName);
-    boolean existsByLegalName(String legalName);
 }

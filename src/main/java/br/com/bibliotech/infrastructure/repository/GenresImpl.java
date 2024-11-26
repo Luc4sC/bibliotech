@@ -6,6 +6,7 @@ import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,16 +26,21 @@ class GenresImpl implements Genres {
     @Override
     @Transactional
     public void save(Genre genre) {
-        if (genreRepository.existsByName(genre.getName()))
+        try {
+            genreRepository.save(genre);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Genre named: " + genre.getName() + " already exist!");
-
-        genreRepository.save(genre);
+        }
     }
 
     @Override
     @Transactional
     public void update(Genre genre, Genre genreUpdate) {
-        genre.update(genreUpdate);
+        try {
+            genre.update(genreUpdate);
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new ConflictException("Genre named: " + genre.getName() + " already exist!");
+        }
     }
 
     @Override
