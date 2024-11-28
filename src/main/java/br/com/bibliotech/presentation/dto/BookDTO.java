@@ -8,7 +8,7 @@ public record BookDTO(@NotEmpty(message = "Book's isbn must be specified")
                       @Size(min = 10, max = 13, message = "Book's isbn must have at least 10 characters and a max of 10")
                       String isbn,
                       @NotEmpty(message = "Book's title must be specified") String title,
-                      String subtitle,
+                      @NotNull(message = "Book's subtitle must be specified") String subtitle,
                       @NotEmpty(message = "Book's synopsis must be specified") String synopsis,
                       @Positive(message = "The number of pages must be greater than zero") int pages,
                       @PastOrPresent(message = "Book's publish date must be today or older") LocalDate publishDate,

@@ -1,6 +1,6 @@
 package br.com.bibliotech.presentation.converter;
 
-import br.com.bibliotech.domain.model.*;
+import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.presentation.dto.BookDTO;
 import br.com.bibliotech.presentation.responses.*;
 
@@ -21,9 +21,9 @@ public class BookConverter {
         this.publisherConverter = new PublisherConverter();
     }
 
-    public Book fromDTO(BookDTO bookDTO, Author author, Category category, Genre genre, Publisher publisher) {
+    public Book fromDTO(BookDTO bookDTO) {
         return new Book(bookDTO.isbn(), bookDTO.title(), bookDTO.subtitle(), bookDTO.synopsis(), bookDTO.pages(),
-                bookDTO.publishDate(), bookDTO.quantity(), author, category, genre, publisher);
+                bookDTO.publishDate(), bookDTO.quantity());
     }
 
     public BookResponse fromModel(Book book) {

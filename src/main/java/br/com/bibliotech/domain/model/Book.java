@@ -16,7 +16,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, updatable = false)
+    @Column(nullable = false, unique = true)
     private String isbn;
 
     @Column(nullable = false)
@@ -52,7 +52,7 @@ public class Book {
     private Publisher publisher;
 
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
-                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
+                int quantity) {
 
         this.isbn = isbn;
         this.title = title;
@@ -61,10 +61,6 @@ public class Book {
         this.pages = pages;
         this.publishDate = publishDate;
         this.quantity = quantity;
-        this.author = author;
-        this.category = category;
-        this.genre = genre;
-        this.publisher = publisher;
     }
 
     public String getIsbn() {
@@ -119,7 +115,24 @@ public class Book {
         return quantity > 0;
     }
 
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
     public void update(Book book) {
+        this.isbn = book.isbn;
         this.title = book.title;
         this.subtitle = book.subtitle;
         this.synopsis = book.synopsis;

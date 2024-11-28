@@ -1,7 +1,7 @@
 package br.com.bibliotech.presentation.controller;
 
-import br.com.bibliotech.domain.model.*;
-import br.com.bibliotech.domain.service.*;
+import br.com.bibliotech.domain.model.Book;
+import br.com.bibliotech.domain.service.BookService;
 import br.com.bibliotech.presentation.converter.BookConverter;
 import br.com.bibliotech.presentation.dto.BookDTO;
 import br.com.bibliotech.presentation.responses.BookResponse;
@@ -18,46 +18,27 @@ public class BookController {
 
     private final BookService bookService;
     private final BookConverter bookConverter;
-    private final AuthorService authorService;
-    private final CategoryService categoryService;
-    private final GenreService genreService;
-    private final PublisherService publisherService;
 
     @Autowired
-    public BookController(BookService bookService, AuthorService authorService, CategoryService categoryService,
-                          GenreService genreService, PublisherService publisherService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
         this.bookConverter = new BookConverter();
-        this.authorService = authorService;
-        this.categoryService = categoryService;
-        this.genreService = genreService;
-        this.publisherService = publisherService;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid BookDTO bookDTO) {
-        Author author = authorService.findById(bookDTO.authorId());
-        Category category = categoryService.findById(bookDTO.categoryId());
-        Genre genre = genreService.findById(bookDTO.genreId());
-        Publisher publisher = publisherService.findById(bookDTO.publisherId());
-        Book book = bookConverter.fromDTO(bookDTO, author, category,
-                genre, publisher);
+        Book book = bookConverter.fromDTO(bookDTO);
 
-        bookService.save(book);
+        bookService.save(book, bookDTO.authorId(), bookDTO.categoryId(), bookDTO.genreId(), bookDTO.publisherId());
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) {
-        Author author = authorService.findById(bookDTO.authorId());
-        Category category = categoryService.findById(bookDTO.categoryId());
-        Genre genre = genreService.findById(bookDTO.genreId());
-        Publisher publisher = publisherService.findById(bookDTO.publisherId());
-        Book book = bookConverter.fromDTO(bookDTO, author, category,
-                genre, publisher);
+        Book book = bookConverter.fromDTO(bookDTO);
 
-        bookService.update(id, book);
+        bookService.update(id, book, bookDTO.authorId(), bookDTO.categoryId(), bookDTO.genreId(), bookDTO.publisherId());
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
