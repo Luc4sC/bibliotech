@@ -47,6 +47,7 @@ class UsersImpl implements Users {
     @Transactional
     public void delete(User user) {
         user.delete();
+        userRepository.flush();
     }
 
     @Override

@@ -49,6 +49,7 @@ class CategoriesImpl implements Categories {
     @Transactional
     public void delete(Category category) {
         category.delete();
+        categoryRepository.flush();
     }
 
     @Override

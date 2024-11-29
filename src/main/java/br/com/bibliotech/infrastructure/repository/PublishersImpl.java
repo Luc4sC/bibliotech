@@ -47,6 +47,7 @@ class PublishersImpl implements Publishers {
     @Transactional
     public void delete(Publisher publisher) {
         publisher.delete();
+        publisherRepository.flush();
     }
 
     @Override

@@ -48,6 +48,7 @@ class GenresImpl implements Genres {
     @Transactional
     public void delete(Genre genre) {
         genre.delete();
+        genreRepository.flush();
     }
 
     @Override

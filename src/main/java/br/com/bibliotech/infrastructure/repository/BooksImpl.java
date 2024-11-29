@@ -47,6 +47,7 @@ class BooksImpl implements Books {
     @Transactional
     public void delete(Book book) {
         book.delete();
+        bookRepository.flush();
     }
 
     @Override

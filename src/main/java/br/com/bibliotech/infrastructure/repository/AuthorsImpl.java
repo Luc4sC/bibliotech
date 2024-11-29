@@ -48,6 +48,7 @@ class AuthorsImpl implements Authors {
     @Transactional
     public void delete(Author author) {
         author.delete();
+        authorRepository.flush();
     }
 
     @Override
