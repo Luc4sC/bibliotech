@@ -29,10 +29,10 @@ public class BookService {
     }
 
     public void save(Book book, Long authorId, Long categoryId, Long genreId, Long publisherId) {
-        book.setAuthor(authorService.findById(authorId));
-        book.setCategory(categoryService.findById(categoryId));
-        book.setGenre(genreService.findById(genreId));
-        book.setPublisher(publisherService.findById(publisherId));
+        authorService.findById(authorId).addBook(book);
+        categoryService.findById(categoryId).addBook(book);
+        genreService.findById(genreId).addBook(book);
+        publisherService.findById(publisherId).addBook(book);
 
         books.save(book);
         log.info("Book created: " + book);
@@ -40,6 +40,12 @@ public class BookService {
 
     public void update(Long bookId, Book bookUpdate, Long authorId, Long categoryId, Long genreId, Long publisherId) {
         Book book = books.findById(bookId);
+
+        authorService.findById(authorId).addBook(bookUpdate);
+        categoryService.findById(categoryId).addBook(bookUpdate);
+        genreService.findById(genreId).addBook(bookUpdate);
+        publisherService.findById(publisherId).addBook(bookUpdate);
+
         books.update(book, bookUpdate);
         log.info("Book updated: " + book);
     }

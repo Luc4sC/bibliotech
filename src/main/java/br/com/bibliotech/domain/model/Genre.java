@@ -45,6 +45,11 @@ public class Genre {
         this.deleted = true;
     }
 
+    public void addBook(Book book) {
+        book.setGenre(this);
+        this.books.add(book);
+    }
+
     @Override
     public String toString() {
         return "Genre{" +

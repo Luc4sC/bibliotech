@@ -40,15 +40,19 @@ public class Book {
     private boolean deleted;
 
     @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne
+    @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
     @ManyToOne
+    @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
@@ -115,19 +119,19 @@ public class Book {
         return quantity > 0;
     }
 
-    public void setAuthor(Author author) {
+    void setAuthor(Author author) {
         this.author = author;
     }
 
-    public void setCategory(Category category) {
+    void setCategory(Category category) {
         this.category = category;
     }
 
-    public void setGenre(Genre genre) {
+    void setGenre(Genre genre) {
         this.genre = genre;
     }
 
-    public void setPublisher(Publisher publisher) {
+    void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 

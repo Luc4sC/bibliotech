@@ -38,6 +38,7 @@ class GenresImpl implements Genres {
     public void update(Genre genre, Genre genreUpdate) {
         try {
             genre.update(genreUpdate);
+            genreRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Genre named: " + genre.getName() + " already exist!");
         }

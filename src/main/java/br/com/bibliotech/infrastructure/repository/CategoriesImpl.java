@@ -38,6 +38,7 @@ class CategoriesImpl implements Categories {
     public void update(Category category, Category categoryUpdate) {
         try {
             category.update(categoryUpdate);
+            categoryRepository.flush();
         }
         catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Category named: " + category.getName() + " already exist!");

@@ -37,6 +37,7 @@ class UsersImpl implements Users {
     public void update(User user, User userUpdate) {
         try {
             user.update(userUpdate);
+            userRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("User with email: " + user.getEmail() + " already exist!");
         }

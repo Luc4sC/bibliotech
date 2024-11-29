@@ -75,6 +75,11 @@ public class Publisher {
         this.deleted = true;
     }
 
+    public void addBook(Book book) {
+        book.setPublisher(this);
+        this.books.add(book);
+    }
+
     @Override
     public String toString() {
         return "Publisher{" +

@@ -45,6 +45,11 @@ public class Category {
         this.deleted = true;
     }
 
+    public void addBook(Book book) {
+        book.setCategory(this);
+        this.books.add(book);
+    }
+
     @Override
     public String toString() {
         return "Category{" +

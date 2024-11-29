@@ -37,6 +37,7 @@ class PublishersImpl implements Publishers {
     public void update(Publisher publisher, Publisher publisherUpdate) {
         try {
             publisher.update(publisherUpdate);
+            publisherRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Publisher with legal or trade name already exist!");
         }

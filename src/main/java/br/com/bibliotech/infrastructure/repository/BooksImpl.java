@@ -37,6 +37,7 @@ class BooksImpl implements Books {
     public void update(Book book, Book bookUpdate) {
         try {
             book.update(bookUpdate);
+            bookRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Book with ISBN: " + book.getIsbn() + " already exist!");
         }
