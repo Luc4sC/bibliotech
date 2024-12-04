@@ -56,7 +56,7 @@ public class Book {
     private Publisher publisher;
 
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
-                int quantity) {
+                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
 
         this.isbn = isbn;
         this.title = title;
@@ -65,6 +65,10 @@ public class Book {
         this.pages = pages;
         this.publishDate = publishDate;
         this.quantity = quantity;
+        this.author = author;
+        this.category = category;
+        this.genre = genre;
+        this.publisher = publisher;
     }
 
     public String getIsbn() {
@@ -117,18 +121,6 @@ public class Book {
 
     public boolean isAvailable() {
         return quantity > 0;
-    }
-
-    void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    void setCategory(Category category) {
-        this.category = category;
-    }
-
-    void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
     void setPublisher(Publisher publisher) {

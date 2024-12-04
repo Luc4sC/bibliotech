@@ -13,38 +13,19 @@ import java.util.List;
 public class BookService {
 
     private final Books books;
-    private final AuthorService authorService;
-    private final CategoryService categoryService;
-    private final GenreService genreService;
-    private final PublisherService publisherService;
 
     @Autowired
-    BookService(Books books, AuthorService authorService, CategoryService categoryService, GenreService genreService,
-                PublisherService publisherService) {
+    BookService(Books books) {
         this.books = books;
-        this.authorService = authorService;
-        this.categoryService = categoryService;
-        this.genreService = genreService;
-        this.publisherService = publisherService;
     }
 
-    public void save(Book book, Long authorId, Long categoryId, Long genreId, Long publisherId) {
-        authorService.findById(authorId).addBook(book);
-        categoryService.findById(categoryId).addBook(book);
-        genreService.findById(genreId).addBook(book);
-        publisherService.findById(publisherId).addBook(book);
-
+    public void save(Book book) {
         books.save(book);
         log.info("Book created: " + book);
     }
 
-    public void update(Long bookId, Book bookUpdate, Long authorId, Long categoryId, Long genreId, Long publisherId) {
+    public void update(Long bookId, Book bookUpdate) {
         Book book = books.findById(bookId);
-
-        authorService.findById(authorId).addBook(bookUpdate);
-        categoryService.findById(categoryId).addBook(bookUpdate);
-        genreService.findById(genreId).addBook(bookUpdate);
-        publisherService.findById(publisherId).addBook(bookUpdate);
 
         books.update(book, bookUpdate);
         log.info("Book updated: " + book);

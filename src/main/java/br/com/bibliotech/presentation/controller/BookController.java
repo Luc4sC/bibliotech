@@ -20,25 +20,23 @@ public class BookController {
     private final BookConverter bookConverter;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookConverter bookConverter) {
         this.bookService = bookService;
-        this.bookConverter = new BookConverter();
+        this.bookConverter = bookConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid BookDTO bookDTO) {
         Book book = bookConverter.fromDTO(bookDTO);
-
-        bookService.save(book, bookDTO.authorId(), bookDTO.categoryId(), bookDTO.genreId(), bookDTO.publisherId());
+        bookService.save(book);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) {
-        Book book = bookConverter.fromDTO(bookDTO);
-
-        bookService.update(id, book, bookDTO.authorId(), bookDTO.categoryId(), bookDTO.genreId(), bookDTO.publisherId());
+        Book bookUpdate = bookConverter.fromDTO(bookDTO);
+        bookService.update(id, bookUpdate);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")
