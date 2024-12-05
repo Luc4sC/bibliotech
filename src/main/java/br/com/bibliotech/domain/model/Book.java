@@ -55,6 +55,9 @@ public class Book {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
+    @OneToMany(mappedBy = "book")
+    private BookRequest bookRequest;
+
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
                 int quantity, Author author, Category category, Genre genre, Publisher publisher) {
 
