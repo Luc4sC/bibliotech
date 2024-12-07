@@ -2,7 +2,7 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Request;
 import br.com.bibliotech.domain.model.User;
-import br.com.bibliotech.domain.service.UserService;
+import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.dto.RequestDTO;
 import br.com.bibliotech.presentation.responses.BookResponse;
 import br.com.bibliotech.presentation.responses.RequestResponse;
@@ -14,15 +14,16 @@ import java.util.List;
 
 public class RequestConverter {
 
-    private final BookConverter bookConverter = new BookConverter();
-    private final UserConverter userConverter = new UserConverter();
+    private final BookConverter bookConverter;
+    private final UserConverter userConverter;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
+    public RequestConverter(UserService userService, AuthorService authorService, CategoryService categoryService,
+                            GenreService genreService, PublisherService publisherService) {
 
-    public Request fromDTO(RequestDTO requestDTO) {
-        User user = userService.findById(requestDTO.userId());
-        return new Request(user);
+        this.bookConverter = new BookConverter(authorService, categoryService, genreService, publisherService);
+        this.userConverter = new UserConverter();
+        this.userService = userService;
     }
 
     public RequestResponse fromModel(Request request) {

@@ -28,9 +28,9 @@ public class Request {
     @OneToOne(mappedBy = "request")
     private Loan loan;
 
-    public Request(User borrower) {
+    public Request(User user) {
         this.status = RequestStatus.PENDING;
-        this.user = borrower;
+        this.user = user;
     }
 
     public User getUser() {

@@ -1,10 +1,12 @@
 package br.com.bibliotech.presentation.controller;
 
+import br.com.bibliotech.application.service.RequestUseCase;
 import br.com.bibliotech.domain.model.Request;
-import br.com.bibliotech.domain.service.RequestService;
+import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.converter.RequestConverter;
 import br.com.bibliotech.presentation.dto.RequestDTO;
 import br.com.bibliotech.presentation.responses.RequestResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +18,25 @@ import java.util.List;
 public class RequestController {
 
     private final RequestService requestService;
+    private final RequestUseCase requestUseCase;
     private final RequestConverter requestConverter;
 
     @Autowired
-    public RequestController(RequestService requestService) {
+    public RequestController(RequestService requestService, RequestUseCase requestUseCase, UserService userService,
+                             AuthorService authorService,
+                             CategoryService categoryService, GenreService genreService,
+                             PublisherService publisherService) {
+
         this.requestService = requestService;
-        this.requestConverter = new RequestConverter();
+        this.requestUseCase = requestUseCase;
+        this.requestConverter = new RequestConverter(userService, authorService, categoryService, genreService,
+                publisherService);
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(RequestDTO requestDTO) {
-        Request request = requestConverter.fromDTO(requestDTO);
-        requestService.save(request);
+    public void request(@RequestBody @Valid RequestDTO requestDTO) {
+        requestUseCase.request(requestDTO.userId(), requestDTO.booksIds());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
