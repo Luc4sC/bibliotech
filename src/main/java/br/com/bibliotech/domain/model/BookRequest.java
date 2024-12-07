@@ -27,6 +27,10 @@ public class BookRequest {
         this.request = request;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
     @Override
     public String toString() {
         return "BookLoan{" +

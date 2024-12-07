@@ -18,7 +18,7 @@ public class Loan {
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalDate finishedDate;
-    @OneToOne(mappedBy = "loan")
+    @OneToOne
     @JoinColumn(name = "request_id", nullable = false, unique = true)
     private Request request;
 

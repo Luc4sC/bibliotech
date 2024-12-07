@@ -3,6 +3,8 @@ package br.com.bibliotech.domain.model;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    private User borrower;
+    private User user;
 
     @OneToMany(mappedBy = "request")
     private List<BookRequest> bookRequests;
@@ -28,7 +30,24 @@ public class Request {
 
     public Request(User borrower) {
         this.status = RequestStatus.PENDING;
-        this.borrower = borrower;
+        this.user = borrower;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<Book> getBooks() {
+        List<Book> books = new ArrayList<>();
+        bookRequests.forEach(bookRequest -> {
+            books.add(bookRequest.getBook());
+        });
+
+        return Collections.unmodifiableList(books);
+    }
+
+    public RequestStatus getStatus() {
+        return status;
     }
 
     public void accept() {

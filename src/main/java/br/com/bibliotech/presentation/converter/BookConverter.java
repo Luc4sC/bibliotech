@@ -14,26 +14,17 @@ import java.util.List;
 
 public class BookConverter {
 
-    private final AuthorConverter authorConverter;
-    private final CategoryConverter categoryConverter;
-    private final GenreConverter genreConverter;
-    private final PublisherConverter publisherConverter;
-    private final AuthorService authorService;
-    private final CategoryService categoryService;
-    private final GenreService genreService;
-    private final PublisherService publisherService;
-
+    private final AuthorConverter authorConverter = new AuthorConverter();
+    private final CategoryConverter categoryConverter = new CategoryConverter();
+    private final GenreConverter genreConverter = new GenreConverter();
+    private final PublisherConverter publisherConverter = new PublisherConverter();
+    private AuthorService authorService;
     @Autowired
-    public BookConverter(AuthorService authorService, GenreService genreService, CategoryService categoryService, PublisherService publisherService) {
-        this.authorService = authorService;
-        this.categoryService = categoryService;
-        this.genreService = genreService;
-        this.publisherService = publisherService;
-        this.authorConverter = new AuthorConverter();
-        this.categoryConverter = new CategoryConverter();
-        this.genreConverter = new GenreConverter();
-        this.publisherConverter = new PublisherConverter();
-    }
+    private CategoryService categoryService;
+    @Autowired
+    private GenreService genreService;
+    @Autowired
+    private PublisherService publisherService;
 
     public Book fromDTO(BookDTO bookDTO) {
         Author author = authorService.findById(bookDTO.authorId());

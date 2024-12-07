@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -34,6 +35,9 @@ public class User {
 
     @Column(nullable = false)
     private boolean deleted;
+
+    @OneToMany(mappedBy = "user")
+    List<Request> requests;
 
     public User(String email, String fullName, LocalDate birthdate, Address address) {
         this.email = email;

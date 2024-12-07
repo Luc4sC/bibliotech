@@ -20,9 +20,9 @@ public class BookController {
     private final BookConverter bookConverter;
 
     @Autowired
-    public BookController(BookService bookService, BookConverter bookConverter) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.bookConverter = bookConverter;
+        this.bookConverter = new BookConverter();
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

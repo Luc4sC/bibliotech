@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -56,7 +57,7 @@ public class Book {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "book")
-    private BookRequest bookRequest;
+    private List<BookRequest> bookRequests;
 
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
                 int quantity, Author author, Category category, Genre genre, Publisher publisher) {
