@@ -26,7 +26,7 @@ public class RequestConverter {
         UserResponse userResponse = userConverter.fromModel(request.getUser());
         List<BookResponse> bookResponses = bookConverter.fromModelList(request.getBooks());
 
-        return new RequestResponse(userResponse, bookResponses, request.getStatus().getName());
+        return new RequestResponse(userResponse, bookResponses, request.getRequestDate(), request.getStatus().getName());
     }
 
     public List<RequestResponse> fromModelList(List<Request> requests) {

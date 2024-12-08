@@ -15,4 +15,9 @@ public enum RequestStatus {
     public String getName() {
         return name;
     }
+
+    boolean isPending() {
+        return PENDING.equals(this);
+    }
+
 }

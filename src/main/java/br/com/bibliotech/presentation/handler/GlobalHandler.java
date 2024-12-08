@@ -1,5 +1,6 @@
 package br.com.bibliotech.presentation.handler;
 
+import br.com.bibliotech.application.exception.BadRequestException;
 import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import br.com.bibliotech.presentation.responses.ErrorResponse;
@@ -27,6 +28,13 @@ public class GlobalHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<ErrorResponse> handle(ConflictException exception) {
         ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), HttpStatus.CONFLICT.value(), Instant.now());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private ResponseEntity<ErrorResponse> handle(BadRequestException exception) {
+        ErrorResponse errorResponse = new ErrorResponse(exception.getMessage(), HttpStatus.CONFLICT.value(), Instant.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
 }
