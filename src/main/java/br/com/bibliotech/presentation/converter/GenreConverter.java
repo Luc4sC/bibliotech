@@ -3,10 +3,12 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.presentation.dto.GenreDTO;
 import br.com.bibliotech.presentation.responses.GenreResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GenreConverter {
 
     public Genre fromDto(GenreDTO genreDTO) {

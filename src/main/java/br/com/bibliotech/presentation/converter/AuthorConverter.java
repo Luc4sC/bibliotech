@@ -3,10 +3,12 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Author;
 import br.com.bibliotech.presentation.dto.AuthorDTO;
 import br.com.bibliotech.presentation.responses.AuthorResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AuthorConverter {
 
     public Author fromDto(AuthorDTO authorDTO) {

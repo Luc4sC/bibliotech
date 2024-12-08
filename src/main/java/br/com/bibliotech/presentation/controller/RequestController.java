@@ -22,15 +22,10 @@ public class RequestController {
     private final RequestConverter requestConverter;
 
     @Autowired
-    public RequestController(RequestService requestService, RequestUseCase requestUseCase, UserService userService,
-                             AuthorService authorService,
-                             CategoryService categoryService, GenreService genreService,
-                             PublisherService publisherService) {
-
+    public RequestController(RequestService requestService, RequestUseCase requestUseCase, RequestConverter requestConverter) {
         this.requestService = requestService;
         this.requestUseCase = requestUseCase;
-        this.requestConverter = new RequestConverter(userService, authorService, categoryService, genreService,
-                publisherService);
+        this.requestConverter = requestConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

@@ -21,9 +21,9 @@ public class PublisherController {
     private final PublisherConverter publisherConverter;
 
     @Autowired
-    PublisherController(PublisherService publisherService) {
+    PublisherController(PublisherService publisherService, PublisherConverter publisherConverter) {
         this.publisherService = publisherService;
-        this.publisherConverter = new PublisherConverter();
+        this.publisherConverter = publisherConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

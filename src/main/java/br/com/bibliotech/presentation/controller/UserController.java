@@ -20,9 +20,9 @@ public class UserController {
     private final UserConverter userConverter;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserConverter userConverter) {
         this.userService = userService;
-        this.userConverter = new UserConverter();
+        this.userConverter = userConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

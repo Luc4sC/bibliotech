@@ -8,10 +8,12 @@ import br.com.bibliotech.domain.service.PublisherService;
 import br.com.bibliotech.presentation.dto.BookDTO;
 import br.com.bibliotech.presentation.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BookConverter {
 
     private final AuthorConverter authorConverter;
@@ -23,12 +25,15 @@ public class BookConverter {
     private final GenreService genreService;
     private final PublisherService publisherService;
 
+    @Autowired
     public BookConverter(AuthorService authorService, CategoryService categoryService, GenreService genreService,
-                         PublisherService publisherService) {
-        this.authorConverter = new AuthorConverter();
-        this.categoryConverter = new CategoryConverter();
-        this.genreConverter = new GenreConverter();
-        this.publisherConverter = new PublisherConverter();
+                         PublisherService publisherService, AuthorConverter authorConverter,
+                         CategoryConverter categoryConverter, GenreConverter genreConverter,
+                         PublisherConverter publisherConverter) {
+        this.authorConverter = authorConverter;
+        this.categoryConverter = categoryConverter;
+        this.genreConverter = genreConverter;
+        this.publisherConverter = publisherConverter;
         this.authorService = authorService;
         this.categoryService = categoryService;
         this.genreService = genreService;

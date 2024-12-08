@@ -1,7 +1,7 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.domain.model.Book;
-import br.com.bibliotech.domain.service.*;
+import br.com.bibliotech.domain.service.BookService;
 import br.com.bibliotech.presentation.converter.BookConverter;
 import br.com.bibliotech.presentation.dto.BookDTO;
 import br.com.bibliotech.presentation.responses.BookResponse;
@@ -20,12 +20,9 @@ public class BookController {
     private final BookConverter bookConverter;
 
     @Autowired
-    public BookController(BookService bookService, AuthorService authorService, CategoryService categoryService,
-                          GenreService genreService,
-                          PublisherService publisherService) {
-
+    public BookController(BookService bookService, BookConverter bookConverter) {
         this.bookService = bookService;
-        this.bookConverter = new BookConverter(authorService, categoryService, genreService, publisherService);
+        this.bookConverter = bookConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

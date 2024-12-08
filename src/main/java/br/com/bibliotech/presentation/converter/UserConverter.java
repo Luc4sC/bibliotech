@@ -5,16 +5,20 @@ import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.presentation.dto.UserDTO;
 import br.com.bibliotech.presentation.responses.AddressResponse;
 import br.com.bibliotech.presentation.responses.UserResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserConverter {
 
     private final AddressConverter addressConverter;
 
-    public UserConverter() {
-        this.addressConverter = new AddressConverter();
+    @Autowired
+    public UserConverter(AddressConverter addressConverter) {
+        this.addressConverter = addressConverter;
     }
 
     public User fromDTO(UserDTO userDTO) {

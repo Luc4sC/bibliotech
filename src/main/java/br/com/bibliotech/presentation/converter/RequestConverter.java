@@ -1,29 +1,25 @@
 package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Request;
-import br.com.bibliotech.domain.model.User;
-import br.com.bibliotech.domain.service.*;
-import br.com.bibliotech.presentation.dto.RequestDTO;
 import br.com.bibliotech.presentation.responses.BookResponse;
 import br.com.bibliotech.presentation.responses.RequestResponse;
 import br.com.bibliotech.presentation.responses.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RequestConverter {
 
     private final BookConverter bookConverter;
     private final UserConverter userConverter;
-    private final UserService userService;
 
-    public RequestConverter(UserService userService, AuthorService authorService, CategoryService categoryService,
-                            GenreService genreService, PublisherService publisherService) {
-
-        this.bookConverter = new BookConverter(authorService, categoryService, genreService, publisherService);
-        this.userConverter = new UserConverter();
-        this.userService = userService;
+    @Autowired
+    public RequestConverter(BookConverter bookConverter, UserConverter userConverter) {
+        this.bookConverter = bookConverter;
+        this.userConverter = userConverter;
     }
 
     public RequestResponse fromModel(Request request) {

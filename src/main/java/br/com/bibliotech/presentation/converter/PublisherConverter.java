@@ -4,16 +4,20 @@ import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
 import br.com.bibliotech.presentation.responses.AddressResponse;
 import br.com.bibliotech.presentation.responses.PublisherResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PublisherConverter {
 
     private final AddressConverter addressConverter;
 
-    public PublisherConverter() {
-        this.addressConverter = new AddressConverter();
+    @Autowired
+    public PublisherConverter(AddressConverter addressConverter) {
+        this.addressConverter = addressConverter;
     }
 
     public Publisher fromDto(PublisherDTO publisherDTO) {
