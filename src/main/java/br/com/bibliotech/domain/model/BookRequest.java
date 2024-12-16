@@ -20,11 +20,11 @@ public class BookRequest {
 
     @ManyToOne
     @JoinColumn(name = "request_id", updatable = false)
-    private Request request;
+    private LoanRequest loanRequest;
 
-    public BookRequest(Book book, Request request) {
+    public BookRequest(Book book, LoanRequest loanRequest) {
         this.book = book;
-        this.request = request;
+        this.loanRequest = loanRequest;
     }
 
     public Book getBook() {
@@ -36,7 +36,7 @@ public class BookRequest {
         return "BookLoan{" +
                 "id=" + id +
                 ", book=" + book +
-                ", request=" + request +
+                ", request=" + loanRequest +
                 '}';
     }
 

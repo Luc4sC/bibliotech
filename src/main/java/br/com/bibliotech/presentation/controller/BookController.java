@@ -32,11 +32,12 @@ public class BookController {
         bookService.save(book);
     }
 
+    //TODO rever questao update (Instanciar com Id)
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) {
-        Book bookUpdate = bookConverter.fromDTO(bookDTO);
-        bookService.update(id, bookUpdate);
+        Book book = bookConverter.fromDTO(id, bookDTO);
+        bookService.update(book);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

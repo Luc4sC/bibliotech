@@ -1,7 +1,7 @@
 package br.com.bibliotech.presentation.controller;
 
 import br.com.bibliotech.application.service.RequestUseCases;
-import br.com.bibliotech.domain.model.Request;
+import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.converter.RequestConverter;
 import br.com.bibliotech.presentation.dto.RequestAcceptedDTO;
@@ -38,15 +38,15 @@ public class RequestController {
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public RequestResponse findById(@PathVariable Long id) {
-        Request request = requestService.findById(id);
-        return requestConverter.fromModel(request);
+        LoanRequest loanRequest = requestService.findById(id);
+        return requestConverter.fromModel(loanRequest);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public List<RequestResponse> findAll() {
-        List<Request> requests = requestService.findAll();
-        return requestConverter.fromModelList(requests);
+        List<LoanRequest> loanRequests = requestService.findAll();
+        return requestConverter.fromModelList(loanRequests);
     }
 
     @PutMapping(path = "/accept", produces = "application/json; charset=utf-8")

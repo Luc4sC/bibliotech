@@ -34,9 +34,8 @@ class BooksImpl implements Books {
 
     @Override
     @Transactional
-    public void update(Book book, Book bookUpdate) {
+    public void update(Book book) {
         try {
-            book.update(bookUpdate);
             bookRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Book with ISBN: " + book.getIsbn() + " already exist!");

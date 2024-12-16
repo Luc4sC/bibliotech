@@ -24,10 +24,8 @@ public class BookService {
         log.info("Book created: " + book);
     }
 
-    public void update(Long bookId, Book bookUpdate) {
-        Book book = books.findById(bookId);
-
-        books.update(book, bookUpdate);
+    public void update(Book book) {
+        books.update(book);
         log.info("Book updated: " + book);
     }
 

@@ -38,6 +38,9 @@ public class Book {
     private int quantity;
 
     @Column(nullable = false)
+    private int availableQuantity;
+
+    @Column(nullable = false)
     private boolean deleted;
 
     @ManyToOne
@@ -73,6 +76,13 @@ public class Book {
         this.category = category;
         this.genre = genre;
         this.publisher = publisher;
+    }
+
+    public Book(Long id, String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
+                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
+
+        this(isbn, title, subtitle, synopsis, pages, publishDate, quantity, author, category, genre, publisher);
+        this.id = id;
     }
 
     public String getIsbn() {
@@ -127,24 +137,6 @@ public class Book {
         return quantity > 0;
     }
 
-    void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public void update(Book book) {
-        this.isbn = book.isbn;
-        this.title = book.title;
-        this.subtitle = book.subtitle;
-        this.synopsis = book.synopsis;
-        this.pages = book.pages;
-        this.publishDate = book.publishDate;
-        this.quantity = book.quantity;
-        this.author = book.author;
-        this.category = book.category;
-        this.genre = book.genre;
-        this.publisher = book.publisher;
-    }
-
     public void delete() {
         deleted = true;
         quantity = 0;
@@ -155,7 +147,6 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
                 '}';
     }
 

@@ -37,7 +37,7 @@ public class User {
     private boolean deleted;
 
     @OneToMany(mappedBy = "user")
-    List<Request> requests;
+    List<LoanRequest> loanRequests;
 
     public User(String email, String fullName, LocalDate birthdate, Address address) {
         this.email = email;

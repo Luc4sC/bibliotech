@@ -27,12 +27,12 @@ public class Loan {
 
     @OneToOne
     @JoinColumn(name = "request_id", nullable = false, unique = true)
-    private Request request;
+    private LoanRequest loanRequest;
 
-    public Loan(LocalDate endDate, Request request) {
+    public Loan(LocalDate endDate, LoanRequest loanRequest) {
         this.startDate = LocalDate.now();
         this.endDate = endDate;
-        this.request = request;
+        this.loanRequest = loanRequest;
     }
 
     public LocalDate getStartDate() {
@@ -47,8 +47,8 @@ public class Loan {
         return finishedDate;
     }
 
-    public Request getRequest() {
-        return request;
+    public LoanRequest getLoanRequest() {
+        return loanRequest;
     }
 
     public boolean isFinished() {

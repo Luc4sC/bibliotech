@@ -1,6 +1,6 @@
 package br.com.bibliotech.infrastructure.repository;
 
-import br.com.bibliotech.domain.model.Request;
+import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.repository.Requests;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
@@ -22,19 +22,19 @@ class RequestsImpl implements Requests {
 
     @Override
     @Transactional
-    public void save(Request request) {
-        requestRepository.save(request);
+    public void save(LoanRequest loanRequest) {
+        requestRepository.save(loanRequest);
     }
 
     @Override
     @Transactional
-    public void update(Request request) {
+    public void update(LoanRequest loanRequest) {
         requestRepository.flush();
     }
 
     @Override
-    public Request findById(Long id) {
-        Optional<Request> optionalRequest = requestRepository.findById(id);
+    public LoanRequest findById(Long id) {
+        Optional<LoanRequest> optionalRequest = requestRepository.findById(id);
         if (optionalRequest.isEmpty()) {
             throw new NotFoundException("Request with id: " + id + " not exist!");
         }
@@ -43,7 +43,7 @@ class RequestsImpl implements Requests {
     }
 
     @Override
-    public List<Request> findAll() {
+    public List<LoanRequest> findAll() {
         return requestRepository.findAll();
     }
 }

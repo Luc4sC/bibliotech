@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "requests")
 @Entity(name = "Request")
-public class Request {
+public class LoanRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class Request {
     @OneToOne(mappedBy = "request")
     private Loan loan;
 
-    public Request(User user) {
+    public LoanRequest(User user) {
         this.requestDate = LocalDate.now();
         this.status = RequestStatus.PENDING;
         this.user = user;
@@ -65,10 +65,16 @@ public class Request {
     }
 
     public void accept() {
+        if (!isPending())
+            throw new RuntimeException();
+
         this.status = RequestStatus.ACCEPTED;
     }
 
     public void reject() {
+        if (!isPending())
+            throw new RuntimeException();
+
         this.status = RequestStatus.REJECTED;
     }
 

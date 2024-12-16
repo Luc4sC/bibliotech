@@ -20,7 +20,7 @@ public class LoanConverter {
     }
 
     public LoanResponse fromModel(Loan loan) {
-        RequestResponse requestResponse = requestConverter.fromModel(loan.getRequest());
+        RequestResponse requestResponse = requestConverter.fromModel(loan.getLoanRequest());
         return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), requestResponse);
     }
 

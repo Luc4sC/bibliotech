@@ -1,7 +1,7 @@
 package br.com.bibliotech.infrastructure.repository;
 
-import br.com.bibliotech.domain.model.Request;
+import br.com.bibliotech.domain.model.LoanRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface RequestRepository extends JpaRepository<Request, Long> {
+interface RequestRepository extends JpaRepository<LoanRequest, Long> {
 }

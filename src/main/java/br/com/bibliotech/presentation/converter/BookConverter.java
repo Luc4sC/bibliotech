@@ -67,4 +67,15 @@ public class BookConverter {
 
         return bookResponses;
     }
+
+    public Book fromDTO(Long id, BookDTO bookDTO) {
+        Author author = authorService.findById(bookDTO.authorId());
+        Category category = categoryService.findById(bookDTO.categoryId());
+        Genre genre = genreService.findById(bookDTO.genreId());
+        Publisher publisher = publisherService.findById(bookDTO.publisherId());
+
+        return new Book(id, bookDTO.isbn(), bookDTO.title(), bookDTO.subtitle(), bookDTO.synopsis(), bookDTO.pages(),
+                bookDTO.publishDate(), bookDTO.quantity(), author, category, genre, publisher);
+    }
+
 }

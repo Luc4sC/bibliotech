@@ -7,7 +7,7 @@ import java.util.List;
 public interface Books {
 
     void save(Book book);
-    void update(Book book, Book bookUpdate);
+    void update(Book book);
     void delete(Book book);
     Book findById(Long id);
     List<Book> findAll();

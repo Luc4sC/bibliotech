@@ -1,10 +1,9 @@
 package br.com.bibliotech.application.service;
 
-import br.com.bibliotech.application.exception.BadRequestException;
 import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.model.BookRequest;
 import br.com.bibliotech.domain.model.Loan;
-import br.com.bibliotech.domain.model.Request;
+import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,48 +33,42 @@ public class RequestUseCases {
     }
 
     public void createRequest(Long userId, List<Long> booksIds) {
-        Request request = new Request(userService.findById(userId));
-        requestService.save(request);
-        createBookRequests(booksIds, request);
+        LoanRequest loanRequest = new LoanRequest(userService.findById(userId));
+        requestService.save(loanRequest);
+        createBookRequests(booksIds, loanRequest);
     }
 
-    private void createBookRequests(List<Long> booksIds, Request request) {
+    private void createBookRequests(List<Long> booksIds, LoanRequest loanRequest) {
         booksIds.forEach(bookId -> {
             Book book = bookService.findById(bookId);
-            bookRequestService.save(new BookRequest(book, request));
+            bookRequestService.save(new BookRequest(book, loanRequest));
         });
     }
 
     public void accept(Long requestId, LocalDate endDate) {
-        Request request = requestService.findById(requestId);
-        acceptRequest(request);
-        createLoan(endDate, request);
+        LoanRequest loanRequest = requestService.findById(requestId);
+        acceptRequest(loanRequest);
+        createLoan(endDate, loanRequest);
     }
 
-    private void acceptRequest(Request request) {
-        if (!request.isPending())
-            throw new BadRequestException("Request with status: " + request.getStatus().getName() + " cannot be accept");
-
-        request.accept();
-        requestService.update(request);
+    private void acceptRequest(LoanRequest loanRequest) {
+        loanRequest.accept();
+        requestService.update(loanRequest);
     }
 
-    private void createLoan(LocalDate endDate, Request request) {
-        Loan loan = new Loan(endDate, request);
+    private void createLoan(LocalDate endDate, LoanRequest loanRequest) {
+        Loan loan = new Loan(endDate, loanRequest);
         loanService.save(loan);
     }
 
     public void reject(Long requestId) {
-        Request request = requestService.findById(requestId);
-        rejectRequest(request);
+        LoanRequest loanRequest = requestService.findById(requestId);
+        rejectRequest(loanRequest);
     }
 
-    private void rejectRequest(Request request) {
-        if (!request.isPending())
-            throw new BadRequestException("Request with status: " + request.getStatus().getName() + " cannot be reject");
-
-        request.reject();
-        requestService.update(request);
+    private void rejectRequest(LoanRequest loanRequest) {
+        loanRequest.reject();
+        requestService.update(loanRequest);
     }
 
 }

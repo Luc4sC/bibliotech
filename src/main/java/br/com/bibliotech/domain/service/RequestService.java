@@ -1,6 +1,6 @@
 package br.com.bibliotech.domain.service;
 
-import br.com.bibliotech.domain.model.Request;
+import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.repository.Requests;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +19,21 @@ public class RequestService {
         this.requests = requests;
     }
 
-    public void save(Request request) {
-        requests.save(request);
-        log.info("Request created: " + request);
+    public void save(LoanRequest loanRequest) {
+        requests.save(loanRequest);
+        log.info("Request created: " + loanRequest);
     }
 
-    public void update(Request request) {
-        requests.update(request);
-        log.info("Request updated: " + request);
+    public void update(LoanRequest loanRequest) {
+        requests.update(loanRequest);
+        log.info("Request updated: " + loanRequest);
     }
 
-    public Request findById(Long id) {
+    public LoanRequest findById(Long id) {
         return requests.findById(id);
     }
 
-    public List<Request> findAll() {
+    public List<LoanRequest> findAll() {
         return requests.findAll();
     }
 
