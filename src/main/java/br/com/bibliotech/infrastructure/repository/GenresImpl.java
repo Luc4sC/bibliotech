@@ -35,9 +35,8 @@ class GenresImpl implements Genres {
 
     @Override
     @Transactional
-    public void update(Genre genre, Genre genreUpdate) {
+    public void update(Genre genre) {
         try {
-            genre.update(genreUpdate);
             genreRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Genre named: " + genre.getName() + " already exist!");

@@ -24,10 +24,8 @@ public class AuthorService {
         log.info("Author created: " + author);
     }
 
-    public void update(Long id, Author update) {
-        Author author = findById(id);
-
-        authors.update(author, update);
+    public void update(Author author) {
+        authors.update(author);
         log.info("Author updated: " + author);
     }
 

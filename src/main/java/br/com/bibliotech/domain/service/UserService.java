@@ -24,9 +24,8 @@ public class UserService {
         log.info("User created: " + user);
     }
 
-    public void update(Long id, User userUpdate) {
-        User user = users.findById(id);
-        users.update(user, userUpdate);
+    public void update(User user) {
+        users.update(user);
         log.info("User updated: " + user);
     }
 

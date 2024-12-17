@@ -7,7 +7,7 @@ import java.util.List;
 public interface Users {
 
     void save(User user);
-    void update(User user, User userUpdate);
+    void update(User user);
     void delete(User user);
     User findById(Long id);
     List<User> findAll();

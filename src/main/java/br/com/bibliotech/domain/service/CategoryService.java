@@ -24,10 +24,8 @@ public class CategoryService {
         log.info("Category created: " + category);
     }
 
-    public void update(Long id, Category update) {
-        Category category = categories.findById(id);
-        categories.update(category, update);
-
+    public void update(Category category) {
+        categories.update(category);
         log.info("Category updated: " + category);
     }
 

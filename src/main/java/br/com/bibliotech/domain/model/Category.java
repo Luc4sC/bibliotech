@@ -29,16 +29,17 @@ public class Category {
         this.deleted = false;
     }
 
+    public Category(Long id, String name) {
+        this(name);
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public boolean isDeleted() {
         return deleted;
-    }
-
-    public void update(Category category) {
-        this.name = category.name;
     }
 
     public void delete() {

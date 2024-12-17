@@ -29,14 +29,14 @@ public class PublisherController {
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid PublisherDTO publisherDTO) {
-        Publisher publisher = publisherConverter.fromDto(publisherDTO);
+        Publisher publisher = publisherConverter.fromDTO(publisherDTO);
         publisherService.save(publisher);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid PublisherDTO publisherDTO, @PathVariable Long id) {
-        publisherService.update(id, publisherConverter.fromDto(publisherDTO));
+        publisherService.update(publisherConverter.fromDTO(id, publisherDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

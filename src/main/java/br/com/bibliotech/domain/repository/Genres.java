@@ -7,7 +7,7 @@ import java.util.List;
 public interface Genres {
 
     void save(Genre genre);
-    void update(Genre genre, Genre update);
+    void update(Genre genre);
     void delete(Genre genre);
     Genre findById(Long id);
     List<Genre> findAll();

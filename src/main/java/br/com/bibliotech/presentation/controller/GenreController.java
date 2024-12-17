@@ -28,14 +28,14 @@ public class GenreController {
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid GenreDTO genreDTO) {
-        Genre genre = genreConverter.fromDto(genreDTO);
+        Genre genre = genreConverter.fromDTO(genreDTO);
         genreService.save(genre);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid GenreDTO genreDTO, @PathVariable Long id) {
-        genreService.update(id, genreConverter.fromDto(genreDTO));
+        genreService.update(genreConverter.fromDTO(id, genreDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

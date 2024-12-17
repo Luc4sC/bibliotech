@@ -35,9 +35,8 @@ class CategoriesImpl implements Categories {
 
     @Override
     @Transactional
-    public void update(Category category, Category categoryUpdate) {
+    public void update(Category category) {
         try {
-            category.update(categoryUpdate);
             categoryRepository.flush();
         }
         catch (DataIntegrityViolationException dataIntegrityViolationException) {

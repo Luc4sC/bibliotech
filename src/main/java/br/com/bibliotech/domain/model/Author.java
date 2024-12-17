@@ -40,6 +40,11 @@ public class Author {
         this.deleted = false;
     }
 
+    public Author(Long id, String fullName, String stageName, LocalDate birthdate) {
+        this(fullName, stageName, birthdate);
+        this.id = id;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -54,12 +59,6 @@ public class Author {
 
     public boolean isDeleted() {
         return deleted;
-    }
-
-    public void update(Author author) {
-        this.fullName = author.fullName;
-        this.stageName = author.stageName;
-        this.birthdate = author.birthdate;
     }
 
     public void delete() {

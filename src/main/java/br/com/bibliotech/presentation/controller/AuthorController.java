@@ -28,14 +28,14 @@ public class AuthorController {
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid AuthorDTO authorDTO) {
-        Author author = authorConverter.fromDto(authorDTO);
+        Author author = authorConverter.fromDTO(authorDTO);
         authorService.save(author);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid AuthorDTO authorDTO, @PathVariable Long id) {
-        authorService.update(id, authorConverter.fromDto(authorDTO));
+        authorService.update(authorConverter.fromDTO(id, authorDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

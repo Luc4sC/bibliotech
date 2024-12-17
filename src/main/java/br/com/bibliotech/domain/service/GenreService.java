@@ -24,10 +24,8 @@ public class GenreService {
         log.info("Genre created: " + genre);
     }
 
-    public void update(Long id, Genre update) {
-        Genre genre = genres.findById(id);
-        genres.update(genre, update);
-
+    public void update(Genre genre) {
+        genres.update(genre);
         log.info("Genre updated: " + genre);
     }
 

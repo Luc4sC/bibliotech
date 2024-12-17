@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class CategoryConverter {
 
-    public Category fromDto(CategoryDTO categoryDTO) {
+    public Category fromDTO(CategoryDTO categoryDTO) {
         return new Category(categoryDTO.name());
     }
 
@@ -24,6 +24,10 @@ public class CategoryConverter {
         categories.forEach(category -> categoryResponses.add(fromModel(category)));
 
         return categoryResponses;
+    }
+
+    public Category fromDTO(Long id, CategoryDTO categoryDTO) {
+        return new Category(id, categoryDTO.name());
     }
 
 }

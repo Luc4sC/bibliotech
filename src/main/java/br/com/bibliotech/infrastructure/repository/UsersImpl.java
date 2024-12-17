@@ -34,9 +34,8 @@ class UsersImpl implements Users {
 
     @Override
     @Transactional
-    public void update(User user, User userUpdate) {
+    public void update(User user) {
         try {
-            user.update(userUpdate);
             userRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("User with email: " + user.getEmail() + " already exist!");

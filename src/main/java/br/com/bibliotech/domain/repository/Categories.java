@@ -7,7 +7,7 @@ import java.util.List;
 public interface Categories {
 
     void save(Category category);
-    void update(Category category, Category update);
+    void update(Category category);
     void delete(Category category);
     Category findById(Long id);
     List<Category> findAll();

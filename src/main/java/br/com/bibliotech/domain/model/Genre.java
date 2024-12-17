@@ -29,16 +29,17 @@ public class Genre {
         this.deleted = false;
     }
 
+    public Genre(Long id, String name) {
+        this(name);
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public boolean isDeleted() {
         return deleted;
-    }
-
-    public void update(Genre genre) {
-        this.name = genre.name;
     }
 
     public void delete() {

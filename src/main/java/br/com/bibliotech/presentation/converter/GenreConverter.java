@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class GenreConverter {
 
-    public Genre fromDto(GenreDTO genreDTO) {
+    public Genre fromDTO(GenreDTO genreDTO) {
         return new Genre(genreDTO.name());
     }
 
@@ -26,4 +26,7 @@ public class GenreConverter {
         return genreResponses;
     }
 
+    public Genre fromDTO(Long id, GenreDTO genreDTO) {
+        return new Genre(id, genreDTO.name());
+    }
 }

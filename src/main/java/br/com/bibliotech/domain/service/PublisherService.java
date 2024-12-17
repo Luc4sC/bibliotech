@@ -24,10 +24,8 @@ public class PublisherService {
         log.info("Publisher created: " + publisher);
     }
 
-    public void update(Long id, Publisher update) {
-        Publisher publisher = publishers.findById(id);
-        publishers.update(publisher, update);
-
+    public void update(Publisher publisher) {
+        publishers.update(publisher);
         log.info("Publisher updated: " + publisher);
     }
 

@@ -20,7 +20,7 @@ public class PublisherConverter {
         this.addressConverter = addressConverter;
     }
 
-    public Publisher fromDto(PublisherDTO publisherDTO) {
+    public Publisher fromDTO(PublisherDTO publisherDTO) {
         return new Publisher(publisherDTO.tradeName(), publisherDTO.name(), publisherDTO.foundationDate(),
                 addressConverter.fromDto(publisherDTO.address()));
     }
@@ -38,5 +38,10 @@ public class PublisherConverter {
         publishers.forEach(publisher -> publisherResponses.add(fromModel(publisher)));
 
         return publisherResponses;
+    }
+
+    public Publisher fromDTO(Long id, PublisherDTO publisherDTO) {
+        return new Publisher(id, publisherDTO.tradeName(), publisherDTO.name(), publisherDTO.foundationDate(),
+                addressConverter.fromDto(publisherDTO.address()));
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class AuthorConverter {
 
-    public Author fromDto(AuthorDTO authorDTO) {
+    public Author fromDTO(AuthorDTO authorDTO) {
         return new Author(authorDTO.fullName(), authorDTO.stageName(), authorDTO.birthdate());
     }
 
@@ -25,5 +25,9 @@ public class AuthorConverter {
         authors.forEach(author -> authorResponses.add(fromModel(author)));
 
         return authorResponses;
+    }
+
+    public Author fromDTO(Long id, AuthorDTO authorDTO) {
+        return new Author(id, authorDTO.fullName(), authorDTO.stageName(), authorDTO.birthdate());
     }
 }

@@ -32,7 +32,6 @@ public class BookController {
         bookService.save(book);
     }
 
-    //TODO rever questao update (Instanciar com Id)
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) {

@@ -44,6 +44,11 @@ public class Publisher {
         this.deleted = false;
     }
 
+    public Publisher(Long id, String tradeName, String legalName, LocalDate foundationDate, Address address) {
+        this(tradeName, legalName, foundationDate, address);
+        this.id = id;
+    }
+
     public String getTradeName() {
         return tradeName;
     }
@@ -62,13 +67,6 @@ public class Publisher {
 
     public boolean isDeleted() {
         return deleted;
-    }
-
-    public void update(Publisher publisher) {
-        this.tradeName = publisher.tradeName;
-        this.legalName = publisher.legalName;
-        this.foundationDate = publisher.foundationDate;
-        this.address = publisher.address;
     }
 
     public void delete() {

@@ -39,4 +39,8 @@ public class UserConverter {
         return userResponses;
     }
 
+    public User fromDTO(Long id, UserDTO userDTO) {
+        Address address = addressConverter.fromDto(userDTO.addressDTO());
+        return new User(id, userDTO.email(), userDTO.fullName(), userDTO.birthdate(), address);
+    }
 }

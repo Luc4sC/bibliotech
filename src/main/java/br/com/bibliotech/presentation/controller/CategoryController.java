@@ -28,14 +28,14 @@ public class CategoryController {
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid CategoryDTO categoryDTO) {
-        Category category = categoryConverter.fromDto(categoryDTO);
+        Category category = categoryConverter.fromDTO(categoryDTO);
         categoryService.save(category);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable Long id) {
-        categoryService.update(id, categoryConverter.fromDto(categoryDTO));
+        categoryService.update(categoryConverter.fromDTO(id, categoryDTO));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

@@ -35,8 +35,8 @@ public class UserController {
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody UserDTO userDTO, @PathVariable Long id) {
-        User userUpdate = userConverter.fromDTO(userDTO);
-        userService.update(id, userUpdate);
+        User user = userConverter.fromDTO(id, userDTO);
+        userService.update(user);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json; charset=utf-8")

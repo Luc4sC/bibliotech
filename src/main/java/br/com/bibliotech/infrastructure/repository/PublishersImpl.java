@@ -34,9 +34,8 @@ class PublishersImpl implements Publishers {
 
     @Override
     @Transactional
-    public void update(Publisher publisher, Publisher publisherUpdate) {
+    public void update(Publisher publisher) {
         try {
-            publisher.update(publisherUpdate);
             publisherRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
             throw new ConflictException("Publisher with legal or trade name already exist!");

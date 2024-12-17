@@ -48,6 +48,11 @@ public class User {
         this.deleted = false;
     }
 
+    public User(Long id, String email, String fullName, LocalDate birthdate, Address address) {
+        this(email, fullName, birthdate, address);
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
