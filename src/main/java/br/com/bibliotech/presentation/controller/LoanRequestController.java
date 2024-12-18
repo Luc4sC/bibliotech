@@ -16,15 +16,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("bibliotech/request")
-public class RequestController {
+public class LoanRequestController {
 
-    private final RequestService requestService;
+    private final LoanRequestService loanRequestService;
     private final RequestUseCases requestUseCases;
     private final RequestConverter requestConverter;
 
     @Autowired
-    public RequestController(RequestService requestService, RequestUseCases requestUseCases, RequestConverter requestConverter) {
-        this.requestService = requestService;
+    public LoanRequestController(LoanRequestService loanRequestService, RequestUseCases requestUseCases, RequestConverter requestConverter) {
+        this.loanRequestService = loanRequestService;
         this.requestUseCases = requestUseCases;
         this.requestConverter = requestConverter;
     }
@@ -38,14 +38,14 @@ public class RequestController {
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public RequestResponse findById(@PathVariable Long id) {
-        LoanRequest loanRequest = requestService.findById(id);
+        LoanRequest loanRequest = loanRequestService.findById(id);
         return requestConverter.fromModel(loanRequest);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public List<RequestResponse> findAll() {
-        List<LoanRequest> loanRequests = requestService.findAll();
+        List<LoanRequest> loanRequests = loanRequestService.findAll();
         return requestConverter.fromModelList(loanRequests);
     }
 

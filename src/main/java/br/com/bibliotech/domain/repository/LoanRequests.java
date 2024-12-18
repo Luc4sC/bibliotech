@@ -4,7 +4,7 @@ import br.com.bibliotech.domain.model.LoanRequest;
 
 import java.util.List;
 
-public interface Requests {
+public interface LoanRequests {
 
     void save(LoanRequest loanRequest);
     void update(LoanRequest loanRequest);

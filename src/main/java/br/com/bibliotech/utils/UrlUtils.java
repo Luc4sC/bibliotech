@@ -1,9 +1,6 @@
 package br.com.bibliotech.utils;
 
-import br.com.bibliotech.domain.model.Author;
-import br.com.bibliotech.domain.model.Category;
-import br.com.bibliotech.domain.model.Genre;
-import br.com.bibliotech.domain.model.Publisher;
+import br.com.bibliotech.domain.model.*;
 
 public class UrlUtils {
 
@@ -23,5 +20,9 @@ public class UrlUtils {
 
     public static String getPublisherUrl(Publisher publisher) {
         return String.format("/%s/author/%s", API_DOMAIN, publisher.getTradeName());
+    }
+
+    public static String getLoanRequestUrl(LoanRequest request) {
+        return String.format("/%s/request/%s", API_DOMAIN, request.getId());
     }
 }

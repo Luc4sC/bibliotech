@@ -2,8 +2,7 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.presentation.responses.LoanResponse;
-import br.com.bibliotech.presentation.responses.RequestResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,16 +11,9 @@ import java.util.List;
 @Component
 public class LoanConverter {
 
-    private final RequestConverter requestConverter;
-
-    @Autowired
-    public LoanConverter(RequestConverter requestConverter) {
-        this.requestConverter = requestConverter;
-    }
-
     public LoanResponse fromModel(Loan loan) {
-        RequestResponse requestResponse = requestConverter.fromModel(loan.getLoanRequest());
-        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), requestResponse);
+        String requestUrl = UrlUtils.getLoanRequestUrl(loan.getLoanRequest());
+        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), requestUrl);
     }
 
     public List<LoanResponse> fromModelList(List<Loan> loans) {

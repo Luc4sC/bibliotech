@@ -1,7 +1,7 @@
 package br.com.bibliotech.domain.service;
 
 import br.com.bibliotech.domain.model.LoanRequest;
-import br.com.bibliotech.domain.repository.Requests;
+import br.com.bibliotech.domain.repository.LoanRequests;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,31 +10,31 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class RequestService {
+public class LoanRequestService {
 
-    private final Requests requests;
+    private final LoanRequests loanRequests;
 
     @Autowired
-    public RequestService(Requests requests) {
-        this.requests = requests;
+    public LoanRequestService(LoanRequests loanRequests) {
+        this.loanRequests = loanRequests;
     }
 
     public void save(LoanRequest loanRequest) {
-        requests.save(loanRequest);
+        loanRequests.save(loanRequest);
         log.info("Request created: " + loanRequest);
     }
 
     public void update(LoanRequest loanRequest) {
-        requests.update(loanRequest);
+        loanRequests.update(loanRequest);
         log.info("Request updated: " + loanRequest);
     }
 
     public LoanRequest findById(Long id) {
-        return requests.findById(id);
+        return loanRequests.findById(id);
     }
 
     public List<LoanRequest> findAll() {
-        return requests.findAll();
+        return loanRequests.findAll();
     }
 
 }

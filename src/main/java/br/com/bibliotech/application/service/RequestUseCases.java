@@ -16,16 +16,16 @@ import java.util.List;
 @Slf4j
 public class RequestUseCases {
 
-    private final RequestService requestService;
+    private final LoanRequestService loanRequestService;
     private final UserService userService;
     private final BookService bookService;
     private final BookRequestService bookRequestService;
     private final LoanService loanService;
 
     @Autowired
-    public RequestUseCases(RequestService requestService, UserService userService, BookService bookService,
+    public RequestUseCases(LoanRequestService loanRequestService, UserService userService, BookService bookService,
                            BookRequestService bookRequestService, LoanService loanService) {
-        this.requestService = requestService;
+        this.loanRequestService = loanRequestService;
         this.userService = userService;
         this.bookService = bookService;
         this.bookRequestService = bookRequestService;
@@ -34,7 +34,7 @@ public class RequestUseCases {
 
     public void createRequest(Long userId, List<Long> booksIds) {
         LoanRequest loanRequest = new LoanRequest(userService.findById(userId));
-        requestService.save(loanRequest);
+        loanRequestService.save(loanRequest);
         createBookRequests(booksIds, loanRequest);
     }
 
@@ -46,14 +46,14 @@ public class RequestUseCases {
     }
 
     public void accept(Long requestId, LocalDate endDate) {
-        LoanRequest loanRequest = requestService.findById(requestId);
+        LoanRequest loanRequest = loanRequestService.findById(requestId);
         acceptRequest(loanRequest);
         createLoan(endDate, loanRequest);
     }
 
     private void acceptRequest(LoanRequest loanRequest) {
         loanRequest.accept();
-        requestService.update(loanRequest);
+        loanRequestService.update(loanRequest);
     }
 
     private void createLoan(LocalDate endDate, LoanRequest loanRequest) {
@@ -62,13 +62,13 @@ public class RequestUseCases {
     }
 
     public void reject(Long requestId) {
-        LoanRequest loanRequest = requestService.findById(requestId);
+        LoanRequest loanRequest = loanRequestService.findById(requestId);
         rejectRequest(loanRequest);
     }
 
     private void rejectRequest(LoanRequest loanRequest) {
         loanRequest.reject();
-        requestService.update(loanRequest);
+        loanRequestService.update(loanRequest);
     }
 
 }

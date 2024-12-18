@@ -1,7 +1,7 @@
 package br.com.bibliotech.infrastructure.repository;
 
 import br.com.bibliotech.domain.model.LoanRequest;
-import br.com.bibliotech.domain.repository.Requests;
+import br.com.bibliotech.domain.repository.LoanRequests;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +11,30 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-class RequestsImpl implements Requests {
+class LoanRequestsImpl implements LoanRequests {
 
-    private final RequestRepository requestRepository;
+    private final LoanRequestRepository loanRequestRepository;
 
     @Autowired
-    RequestsImpl(RequestRepository requestRepository) {
-        this.requestRepository = requestRepository;
+    LoanRequestsImpl(LoanRequestRepository loanRequestRepository) {
+        this.loanRequestRepository = loanRequestRepository;
     }
 
     @Override
     @Transactional
     public void save(LoanRequest loanRequest) {
-        requestRepository.save(loanRequest);
+        loanRequestRepository.save(loanRequest);
     }
 
     @Override
     @Transactional
     public void update(LoanRequest loanRequest) {
-        requestRepository.flush();
+        loanRequestRepository.flush();
     }
 
     @Override
     public LoanRequest findById(Long id) {
-        Optional<LoanRequest> optionalRequest = requestRepository.findById(id);
+        Optional<LoanRequest> optionalRequest = loanRequestRepository.findById(id);
         if (optionalRequest.isEmpty()) {
             throw new NotFoundException("Request with id: " + id + " not exist!");
         }
@@ -44,6 +44,6 @@ class RequestsImpl implements Requests {
 
     @Override
     public List<LoanRequest> findAll() {
-        return requestRepository.findAll();
+        return loanRequestRepository.findAll();
     }
 }

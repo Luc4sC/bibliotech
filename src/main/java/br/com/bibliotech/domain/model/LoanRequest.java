@@ -41,6 +41,10 @@ public class LoanRequest {
         this.user = user;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public LocalDate getRequestDate() {
         return requestDate;
     }
