@@ -59,9 +59,9 @@ public class BookController {
         return bookConverter.fromModelList(books);
     }
 
-    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/{isbn}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public BookResponse findByIsbn(@RequestParam String isbn) {
+    public BookResponse findByIsbn(@PathVariable String isbn) {
         Book book = bookService.findByIsbn(isbn);
         return bookConverter.fromModel(book);
     }

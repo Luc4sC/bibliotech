@@ -46,7 +46,7 @@ public class CategoryController {
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public CategoryResponse findById(@PathVariable Long id){
+    public CategoryResponse findByName(@PathVariable Long id){
         Category category = categoryService.findById(id);
         return categoryConverter.fromModel(category);
     }
@@ -58,9 +58,9 @@ public class CategoryController {
         return categoryConverter.fromModelList(categories);
     }
 
-    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/{name}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public CategoryResponse findById(@RequestParam String name) {
+    public CategoryResponse findByName(@PathVariable String name) {
         Category category = categoryService.findByName(name);
         return categoryConverter.fromModel(category);
     }

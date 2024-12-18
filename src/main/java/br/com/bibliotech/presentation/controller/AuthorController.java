@@ -58,9 +58,9 @@ public class AuthorController {
         return authorConverter.fromModelList(authors);
     }
 
-    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/{stageName}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public AuthorResponse findByStageName(@RequestParam String stageName) {
+    public AuthorResponse findByStageName(@PathVariable String stageName) {
         Author author = authorService.findByStageName(stageName);
         return authorConverter.fromModel(author);
     }

@@ -8,7 +8,6 @@ import br.com.bibliotech.presentation.responses.PublisherResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,23 +45,23 @@ public class PublisherController {
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> findById(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public PublisherResponse findById(@PathVariable Long id) {
         Publisher publisher = publisherService.findById(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModel(publisher));
+        return publisherConverter.fromModel(publisher);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
-    public ResponseEntity<List<PublisherResponse>> findAll() {
+    @ResponseStatus(HttpStatus.OK)
+    public List<PublisherResponse> findAll() {
         List<Publisher> publishers = publisherService.findAll();
-
-        return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModelList(publishers));
+        return publisherConverter.fromModelList(publishers);
     }
 
-    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
-    public ResponseEntity<PublisherResponse> findByStageName(@RequestParam String tradeName) {
+    @GetMapping(path = "/{tradeName}", produces = "application/json; charset=utf-8")
+    @ResponseStatus(HttpStatus.OK)
+    public PublisherResponse findByStageName(@PathVariable String tradeName) {
         Publisher publisher = publisherService.findByTradeName(tradeName);
-
-        return ResponseEntity.status(HttpStatus.OK).body(publisherConverter.fromModel(publisher));
+        return publisherConverter.fromModel(publisher);
     }
 }

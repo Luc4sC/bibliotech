@@ -6,7 +6,8 @@ import br.com.bibliotech.domain.service.CategoryService;
 import br.com.bibliotech.domain.service.GenreService;
 import br.com.bibliotech.domain.service.PublisherService;
 import br.com.bibliotech.presentation.dto.BookDTO;
-import br.com.bibliotech.presentation.responses.*;
+import br.com.bibliotech.presentation.responses.BookResponse;
+import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +17,6 @@ import java.util.List;
 @Component
 public class BookConverter {
 
-    private final AuthorConverter authorConverter;
-    private final CategoryConverter categoryConverter;
-    private final GenreConverter genreConverter;
-    private final PublisherConverter publisherConverter;
     private final AuthorService authorService;
     private final CategoryService categoryService;
     private final GenreService genreService;
@@ -27,13 +24,7 @@ public class BookConverter {
 
     @Autowired
     public BookConverter(AuthorService authorService, CategoryService categoryService, GenreService genreService,
-                         PublisherService publisherService, AuthorConverter authorConverter,
-                         CategoryConverter categoryConverter, GenreConverter genreConverter,
-                         PublisherConverter publisherConverter) {
-        this.authorConverter = authorConverter;
-        this.categoryConverter = categoryConverter;
-        this.genreConverter = genreConverter;
-        this.publisherConverter = publisherConverter;
+                         PublisherService publisherService) {
         this.authorService = authorService;
         this.categoryService = categoryService;
         this.genreService = genreService;
@@ -51,14 +42,14 @@ public class BookConverter {
     }
 
     public BookResponse fromModel(Book book) {
-        AuthorResponse authorResponse = authorConverter.fromModel(book.getAuthor());
-        CategoryResponse categoryResponse = categoryConverter.fromModel(book.getCategory());
-        GenreResponse genreResponse = genreConverter.fromModel(book.getGenre());
-        PublisherResponse publisherResponse = publisherConverter.fromModel(book.getPublisher());
-
+        String authorUrl = UrlUtils.getAuthorUrl(book.getAuthor());
+        String categoryUrl = UrlUtils.getCategoryUrl(book.getCategory());
+        String genreUrl = UrlUtils.getGenreUrl(book.getGenre());
+        String publisherUrl = UrlUtils.getPublisherUrl(book.getPublisher());
+        
         return new BookResponse(book.getIsbn(), book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(),
-                book.getPublishDate(), book.getQuantity(), authorResponse, categoryResponse, genreResponse,
-                publisherResponse);
+                book.getPublishDate(), book.getQuantity(), authorUrl, categoryUrl, genreUrl,
+                publisherUrl);
     }
 
     public List<BookResponse> fromModelList(List<Book> books) {

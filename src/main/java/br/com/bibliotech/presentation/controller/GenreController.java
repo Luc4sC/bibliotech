@@ -46,7 +46,7 @@ public class GenreController {
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public GenreResponse findById(@PathVariable Long id){
+    public GenreResponse findByName(@PathVariable Long id){
         Genre genre = genreService.findById(id);
         return genreConverter.fromModel(genre);
     }
@@ -58,9 +58,9 @@ public class GenreController {
         return genreConverter.fromModelList(genres);
     }
 
-    @GetMapping(path = "/source", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/{name}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public GenreResponse findById(@RequestParam String name) {
+    public GenreResponse findByName(@PathVariable String name) {
         Genre genre = genreService.findByName(name);
         return genreConverter.fromModel(genre);
     }
