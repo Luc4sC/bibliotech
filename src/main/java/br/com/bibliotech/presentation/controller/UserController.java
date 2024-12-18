@@ -4,7 +4,7 @@ import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.domain.service.UserService;
 import br.com.bibliotech.presentation.converter.UserConverter;
 import br.com.bibliotech.presentation.dto.UserDTO;
-import br.com.bibliotech.presentation.responses.UserResponse;
+import br.com.bibliotech.presentation.response.UserResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

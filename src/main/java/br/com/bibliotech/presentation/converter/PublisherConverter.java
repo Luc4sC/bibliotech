@@ -2,7 +2,7 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
-import br.com.bibliotech.presentation.responses.PublisherResponse;
+import br.com.bibliotech.presentation.response.PublisherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class PublisherConverter {
 
     public Publisher fromDTO(PublisherDTO publisherDTO) {
         return new Publisher(publisherDTO.tradeName(), publisherDTO.name(), publisherDTO.foundationDate(),
-                addressConverter.fromDto(publisherDTO.address()));
+                addressConverter.fromDTO(publisherDTO.address()));
     }
 
     public PublisherResponse fromModel(Publisher publisher) {
@@ -41,6 +41,6 @@ public class PublisherConverter {
 
     public Publisher fromDTO(Long id, PublisherDTO publisherDTO) {
         return new Publisher(id, publisherDTO.tradeName(), publisherDTO.name(), publisherDTO.foundationDate(),
-                addressConverter.fromDto(publisherDTO.address()));
+                addressConverter.fromDTO(publisherDTO.address()));
     }
 }

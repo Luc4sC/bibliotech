@@ -4,7 +4,7 @@ import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.domain.service.CategoryService;
 import br.com.bibliotech.presentation.converter.CategoryConverter;
 import br.com.bibliotech.presentation.dto.CategoryDTO;
-import br.com.bibliotech.presentation.responses.CategoryResponse;
+import br.com.bibliotech.presentation.response.CategoryResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.LoanRequest;
-import br.com.bibliotech.presentation.responses.LoanRequestResponse;
+import br.com.bibliotech.presentation.response.LoanRequestResponse;
 import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.stereotype.Component;
 

@@ -3,7 +3,7 @@ package br.com.bibliotech.presentation.controller;
 import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.domain.service.LoanService;
 import br.com.bibliotech.presentation.converter.LoanConverter;
-import br.com.bibliotech.presentation.responses.LoanResponse;
+import br.com.bibliotech.presentation.response.LoanResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

@@ -3,7 +3,7 @@ package br.com.bibliotech.presentation.handler;
 import br.com.bibliotech.application.exception.BadRequestException;
 import br.com.bibliotech.infrastructure.exception.ConflictException;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
-import br.com.bibliotech.presentation.responses.ErrorResponse;
+import br.com.bibliotech.presentation.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -6,7 +6,7 @@ import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.converter.LoanRequestConverter;
 import br.com.bibliotech.presentation.dto.RequestAcceptedDTO;
 import br.com.bibliotech.presentation.dto.RequestDTO;
-import br.com.bibliotech.presentation.responses.LoanRequestResponse;
+import br.com.bibliotech.presentation.response.LoanRequestResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

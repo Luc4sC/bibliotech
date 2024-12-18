@@ -3,7 +3,7 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Address;
 import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.presentation.dto.UserDTO;
-import br.com.bibliotech.presentation.responses.UserResponse;
+import br.com.bibliotech.presentation.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class UserConverter {
     }
 
     public User fromDTO(UserDTO userDTO) {
-        Address address = addressConverter.fromDto(userDTO.addressDTO());
+        Address address = addressConverter.fromDTO(userDTO.addressDTO());
         return new User(userDTO.email(), userDTO.fullName(), userDTO.birthdate(), address);
     }
 
@@ -41,7 +41,7 @@ public class UserConverter {
     }
 
     public User fromDTO(Long id, UserDTO userDTO) {
-        Address address = addressConverter.fromDto(userDTO.addressDTO());
+        Address address = addressConverter.fromDTO(userDTO.addressDTO());
         return new User(id, userDTO.email(), userDTO.fullName(), userDTO.birthdate(), address);
     }
 }

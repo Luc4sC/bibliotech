@@ -2,7 +2,7 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.presentation.dto.GenreDTO;
-import br.com.bibliotech.presentation.responses.GenreResponse;
+import br.com.bibliotech.presentation.response.GenreResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

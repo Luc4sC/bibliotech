@@ -4,7 +4,7 @@ import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.service.BookService;
 import br.com.bibliotech.presentation.converter.BookConverter;
 import br.com.bibliotech.presentation.dto.BookDTO;
-import br.com.bibliotech.presentation.responses.BookResponse;
+import br.com.bibliotech.presentation.response.BookResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -6,7 +6,7 @@ import br.com.bibliotech.domain.service.CategoryService;
 import br.com.bibliotech.domain.service.GenreService;
 import br.com.bibliotech.domain.service.PublisherService;
 import br.com.bibliotech.presentation.dto.BookDTO;
-import br.com.bibliotech.presentation.responses.BookResponse;
+import br.com.bibliotech.presentation.response.BookResponse;
 import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

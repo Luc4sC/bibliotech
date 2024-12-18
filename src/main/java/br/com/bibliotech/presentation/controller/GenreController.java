@@ -4,7 +4,7 @@ import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.domain.service.GenreService;
 import br.com.bibliotech.presentation.converter.GenreConverter;
 import br.com.bibliotech.presentation.dto.GenreDTO;
-import br.com.bibliotech.presentation.responses.GenreResponse;
+import br.com.bibliotech.presentation.response.GenreResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
