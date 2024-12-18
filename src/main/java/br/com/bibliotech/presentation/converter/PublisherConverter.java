@@ -2,13 +2,13 @@ package br.com.bibliotech.presentation.converter;
 
 import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
-import br.com.bibliotech.presentation.responses.AddressResponse;
 import br.com.bibliotech.presentation.responses.PublisherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PublisherConverter {
@@ -26,11 +26,10 @@ public class PublisherConverter {
     }
 
     public PublisherResponse fromModel(Publisher publisher) {
-        AddressResponse addressResponse = publisher.getAddress() != null ?
-                addressConverter.fromModel(publisher.getAddress()) : null;
+        String address = Optional.ofNullable(publisher.getAddress()).map(Object::toString).orElse(null);
 
         return new PublisherResponse(publisher.getLegalName(), publisher.getTradeName(), publisher.getFoundationDate(),
-                addressResponse, publisher.isDeleted());
+                address, publisher.isDeleted());
     }
 
     public List<PublisherResponse> fromModelList(List<Publisher> publishers) {

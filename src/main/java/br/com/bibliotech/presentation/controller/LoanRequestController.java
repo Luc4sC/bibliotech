@@ -3,10 +3,10 @@ package br.com.bibliotech.presentation.controller;
 import br.com.bibliotech.application.service.RequestUseCases;
 import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
-import br.com.bibliotech.presentation.converter.RequestConverter;
+import br.com.bibliotech.presentation.converter.LoanRequestConverter;
 import br.com.bibliotech.presentation.dto.RequestAcceptedDTO;
 import br.com.bibliotech.presentation.dto.RequestDTO;
-import br.com.bibliotech.presentation.responses.RequestResponse;
+import br.com.bibliotech.presentation.responses.LoanRequestResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,13 @@ public class LoanRequestController {
 
     private final LoanRequestService loanRequestService;
     private final RequestUseCases requestUseCases;
-    private final RequestConverter requestConverter;
+    private final LoanRequestConverter loanRequestConverter;
 
     @Autowired
-    public LoanRequestController(LoanRequestService loanRequestService, RequestUseCases requestUseCases, RequestConverter requestConverter) {
+    public LoanRequestController(LoanRequestService loanRequestService, RequestUseCases requestUseCases, LoanRequestConverter loanRequestConverter) {
         this.loanRequestService = loanRequestService;
         this.requestUseCases = requestUseCases;
-        this.requestConverter = requestConverter;
+        this.loanRequestConverter = loanRequestConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
@@ -37,16 +37,16 @@ public class LoanRequestController {
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public RequestResponse findById(@PathVariable Long id) {
+    public LoanRequestResponse findById(@PathVariable Long id) {
         LoanRequest loanRequest = loanRequestService.findById(id);
-        return requestConverter.fromModel(loanRequest);
+        return loanRequestConverter.fromModel(loanRequest);
     }
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<RequestResponse> findAll() {
+    public List<LoanRequestResponse> findAll() {
         List<LoanRequest> loanRequests = loanRequestService.findAll();
-        return requestConverter.fromModelList(loanRequests);
+        return loanRequestConverter.fromModelList(loanRequests);
     }
 
     @PutMapping(path = "/accept", produces = "application/json; charset=utf-8")

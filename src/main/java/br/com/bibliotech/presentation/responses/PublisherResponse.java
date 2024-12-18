@@ -2,6 +2,5 @@ package br.com.bibliotech.presentation.responses;
 
 import java.time.LocalDate;
 
-public record PublisherResponse(String name, String tradeName, LocalDate foundationDate, AddressResponse address,
-                                boolean isDeleted) {
+public record PublisherResponse(String name, String tradeName, LocalDate foundationDate, String address, boolean isDeleted) {
 }

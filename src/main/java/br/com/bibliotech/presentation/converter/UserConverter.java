@@ -3,13 +3,13 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Address;
 import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.presentation.dto.UserDTO;
-import br.com.bibliotech.presentation.responses.AddressResponse;
 import br.com.bibliotech.presentation.responses.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserConverter {
@@ -27,9 +27,10 @@ public class UserConverter {
     }
 
     public UserResponse fromModel(User user) {
-        AddressResponse addressResponse = addressConverter.fromModel(user.getAddress());
-        return new UserResponse(user.getEmail(), user.getFullName(), user.getBirthdate(), addressResponse,
-                user.isBlocked(), user.isDeleted());
+        String address = Optional.ofNullable(user.getAddress()).map(Object::toString).orElse(null);
+
+        return new UserResponse(user.getEmail(), user.getFullName(), user.getBirthdate(), address, user.isBlocked(),
+                user.isDeleted());
     }
 
     public List<UserResponse> frommodelList(List<User> users) {

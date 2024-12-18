@@ -25,4 +25,12 @@ public class UrlUtils {
     public static String getLoanRequestUrl(LoanRequest request) {
         return String.format("/%s/request/%s", API_DOMAIN, request.getId());
     }
+
+    public static String getUserUrl(User user) {
+        return String.format("/%s/user/%s", API_DOMAIN, user.getEmail());
+    }
+
+    public static String getBooksByLoanRequestUrl(LoanRequest loanRequest) {
+        return String.format("/%s/book/%s", API_DOMAIN, loanRequest.getId());
+    }
 }

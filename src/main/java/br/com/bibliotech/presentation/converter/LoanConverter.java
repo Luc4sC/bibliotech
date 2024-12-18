@@ -12,8 +12,8 @@ import java.util.List;
 public class LoanConverter {
 
     public LoanResponse fromModel(Loan loan) {
-        String requestUrl = UrlUtils.getLoanRequestUrl(loan.getLoanRequest());
-        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), requestUrl);
+        String loanRequestUrl = UrlUtils.getLoanRequestUrl(loan.getLoanRequest());
+        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), loanRequestUrl);
     }
 
     public List<LoanResponse> fromModelList(List<Loan> loans) {

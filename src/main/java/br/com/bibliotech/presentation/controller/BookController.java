@@ -66,4 +66,10 @@ public class BookController {
         return bookConverter.fromModel(book);
     }
 
+    @GetMapping(path = "/{loanRequestId}", produces = "application/json; charset=utf-8")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookResponse> findBooksByLoanRequest(@PathVariable Long loanRequestId) {
+        List<Book> books = bookService.findByLoanRequest(loanRequestId);
+        return bookConverter.fromModelList(books);
+    }
 }
