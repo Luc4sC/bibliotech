@@ -7,7 +7,7 @@ import java.util.List;
 public interface Loans {
 
     void save(Loan loan);
-    void update();
+    void update(Loan loan);
     Loan findById(Long id);
     List<Loan> findAll();
 

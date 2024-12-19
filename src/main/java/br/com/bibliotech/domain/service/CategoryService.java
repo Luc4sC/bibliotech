@@ -32,6 +32,8 @@ public class CategoryService {
     public void delete(Long id) {
         Category category = categories.findById(id);
         categories.delete(category);
+
+        log.info("Category deleted: " + category);
     }
 
     public Category findById(Long id) {

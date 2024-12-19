@@ -28,7 +28,7 @@ public class LoanService {
         Loan loan = loans.findById(id);
         loan.finish();
 
-        loans.update();
+        loans.update(loan);
         log.info("Loan finished: " + loan);
     }
 

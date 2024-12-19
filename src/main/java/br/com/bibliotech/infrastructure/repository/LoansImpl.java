@@ -28,7 +28,7 @@ class LoansImpl implements Loans {
 
     @Transactional
     @Override
-    public void update() {
+    public void update(Loan loan) {
         loanRepository.flush();
     }
 
