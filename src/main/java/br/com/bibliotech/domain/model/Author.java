@@ -8,10 +8,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Entity(name = "Author")
 @Table(name = "authors")
 public class Author {
+
+    @Deprecated
+    Author(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +39,6 @@ public class Author {
         this.fullName = fullName;
         this.stageName = stageName;
         this.birthdate = birthdate;
-        this.deleted = false;
     }
 
     public Author(Long id, String fullName, String stageName, LocalDate birthdate) {

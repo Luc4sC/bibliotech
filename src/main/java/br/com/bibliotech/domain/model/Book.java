@@ -7,17 +7,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
-@NoArgsConstructor
 @Table(name = "books")
 @Entity(name = "Book")
 public class Book {
+
+    @Deprecated
+    Book(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String isbn;
 
     @Column(nullable = false)
@@ -25,6 +28,7 @@ public class Book {
 
     private String subtitle;
 
+    @Column(nullable = false)
     private String synopsis;
 
     @Column(nullable = false)
@@ -60,10 +64,10 @@ public class Book {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "book")
-    private List<BookRequest> bookRequests;
+    private List<BookLoanRequest> bookLoanRequests;
 
     public Book(String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
-                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
+                int quantity, int availableQuantity, Author author, Category category, Genre genre, Publisher publisher) {
 
         this.isbn = isbn;
         this.title = title;
@@ -72,6 +76,7 @@ public class Book {
         this.pages = pages;
         this.publishDate = publishDate;
         this.quantity = quantity;
+        this.availableQuantity = availableQuantity;
         this.author = author;
         this.category = category;
         this.genre = genre;
@@ -79,9 +84,10 @@ public class Book {
     }
 
     public Book(Long id, String isbn, String title, String subtitle, String synopsis, int pages, LocalDate publishDate,
-                int quantity, Author author, Category category, Genre genre, Publisher publisher) {
+                int quantity, int availableQuantity, Author author, Category category, Genre genre, Publisher publisher) {
 
-        this(isbn, title, subtitle, synopsis, pages, publishDate, quantity, author, category, genre, publisher);
+        this(isbn, title, subtitle, synopsis, pages, publishDate, quantity, availableQuantity, author, category, genre,
+                publisher);
         this.id = id;
     }
 
@@ -93,8 +99,8 @@ public class Book {
         return title;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public Optional<String> getSubtitle() {
+        return Optional.of(subtitle);
     }
 
     public String getSynopsis() {
@@ -111,6 +117,10 @@ public class Book {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public int getAvailableQuantity() {
+        return availableQuantity;
     }
 
     public Author getAuthor() {
@@ -134,12 +144,13 @@ public class Book {
     }
 
     public boolean isAvailable() {
-        return quantity > 0;
+        return availableQuantity > 0;
     }
 
     public void delete() {
         deleted = true;
         quantity = 0;
+        availableQuantity = 0;
     }
 
     @Override

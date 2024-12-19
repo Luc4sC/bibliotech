@@ -4,6 +4,7 @@ import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.service.BookService;
 import br.com.bibliotech.presentation.converter.BookConverter;
 import br.com.bibliotech.presentation.dto.BookDTO;
+import br.com.bibliotech.presentation.dto.BookUpdateDTO;
 import br.com.bibliotech.presentation.response.BookResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class BookController {
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) {
+    public void update(@PathVariable Long id, @RequestBody @Valid BookUpdateDTO bookDTO) {
         Book book = bookConverter.fromDTO(id, bookDTO);
         bookService.update(book);
     }
@@ -66,9 +67,9 @@ public class BookController {
         return bookConverter.fromModel(book);
     }
 
-    @GetMapping(path = "/{loanRequestId}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "/loanRequest", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookResponse> findBooksByLoanRequest(@PathVariable Long loanRequestId) {
+    public List<BookResponse> findBooksByLoanRequest(@RequestParam Long loanRequestId) {
         List<Book> books = bookService.findByLoanRequest(loanRequestId);
         return bookConverter.fromModelList(books);
     }

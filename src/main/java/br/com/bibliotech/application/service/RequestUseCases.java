@@ -1,7 +1,7 @@
 package br.com.bibliotech.application.service;
 
 import br.com.bibliotech.domain.model.Book;
-import br.com.bibliotech.domain.model.BookRequest;
+import br.com.bibliotech.domain.model.BookLoanRequest;
 import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
@@ -41,7 +41,7 @@ public class RequestUseCases {
     private void createBookRequests(List<Long> booksIds, LoanRequest loanRequest) {
         booksIds.forEach(bookId -> {
             Book book = bookService.findById(bookId);
-            bookRequestService.save(new BookRequest(book, loanRequest));
+            bookRequestService.save(new BookLoanRequest(book, loanRequest));
         });
     }
 

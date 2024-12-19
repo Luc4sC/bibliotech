@@ -48,7 +48,7 @@ public class BookService {
     }
 
     public List<Book> findByLoanRequest(Long loanRequestId) {
-        return books.findAll();
+        return books.findByLoanRequestId(loanRequestId);
     }
 
 }

@@ -38,7 +38,7 @@ class BooksImpl implements Books {
         try {
             bookRepository.flush();
         } catch (DataIntegrityViolationException dataIntegrityViolationException) {
-            throw new ConflictException("Book with ISBN: " + book.getIsbn() + " already exist!");
+            throw new ConflictException("Cannot update isbn");
         }
     }
 
@@ -71,5 +71,10 @@ class BooksImpl implements Books {
             throw new NotFoundException("Book with ISBN: " + isbn + " not found");
 
         return bookOptional.get();
+    }
+
+    @Override
+    public List<Book> findByLoanRequestId(Long loanRequestId) {
+        return bookRepository.findByLoanRequestId(loanRequestId);
     }
 }

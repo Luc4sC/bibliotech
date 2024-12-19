@@ -23,7 +23,7 @@ public class UrlUtils {
     }
 
     public static String getLoanRequestUrl(LoanRequest request) {
-        return String.format("/%s/request/%s", API_DOMAIN, request.getId());
+        return String.format("/%s/loanRequest/%s", API_DOMAIN, request.getId());
     }
 
     public static String getUserUrl(User user) {
@@ -31,6 +31,6 @@ public class UrlUtils {
     }
 
     public static String getBooksByLoanRequestUrl(LoanRequest loanRequest) {
-        return String.format("/%s/book/%s", API_DOMAIN, loanRequest.getId());
+        return String.format("/%s/book/loanRequest?loanRequestId=%s", API_DOMAIN, loanRequest.getId());
     }
 }

@@ -2,11 +2,12 @@ package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.NoArgsConstructor;
 
 @Embeddable
-@NoArgsConstructor
 public class Address {
+
+    @Deprecated
+    Address() {}
 
     @Column(nullable = false)
     private String street;

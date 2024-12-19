@@ -30,7 +30,7 @@ public class LoanRequest {
     private User user;
 
     @OneToMany(mappedBy = "request")
-    private List<BookRequest> bookRequests;
+    private List<BookLoanRequest> bookLoanRequests;
 
     @OneToOne(mappedBy = "request")
     private Loan loan;
@@ -55,7 +55,7 @@ public class LoanRequest {
 
     public List<Book> getBooks() {
         List<Book> books = new ArrayList<>();
-        bookRequests.forEach(bookRequest -> books.add(bookRequest.getBook()));
+        bookLoanRequests.forEach(bookRequest -> books.add(bookRequest.getBook()));
 
         return Collections.unmodifiableList(books);
     }

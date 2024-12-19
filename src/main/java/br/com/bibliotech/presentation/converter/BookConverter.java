@@ -6,6 +6,7 @@ import br.com.bibliotech.domain.service.CategoryService;
 import br.com.bibliotech.domain.service.GenreService;
 import br.com.bibliotech.domain.service.PublisherService;
 import br.com.bibliotech.presentation.dto.BookDTO;
+import br.com.bibliotech.presentation.dto.BookUpdateDTO;
 import br.com.bibliotech.presentation.response.BookResponse;
 import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class BookConverter {
         Publisher publisher = publisherService.findById(bookDTO.publisherId());
 
         return new Book(bookDTO.isbn(), bookDTO.title(), bookDTO.subtitle(), bookDTO.synopsis(), bookDTO.pages(),
-                bookDTO.publishDate(), bookDTO.quantity(), author, category, genre, publisher);
+                bookDTO.publishDate(), bookDTO.quantity(), bookDTO.quantity(), author, category, genre, publisher);
     }
 
     public BookResponse fromModel(Book book) {
@@ -47,9 +48,9 @@ public class BookConverter {
         String genreUrl = UrlUtils.getGenreUrl(book.getGenre());
         String publisherUrl = UrlUtils.getPublisherUrl(book.getPublisher());
         
-        return new BookResponse(book.getIsbn(), book.getTitle(), book.getSubtitle(), book.getSynopsis(), book.getPages(),
-                book.getPublishDate(), book.getQuantity(), authorUrl, categoryUrl, genreUrl,
-                publisherUrl);
+        return new BookResponse(book.getIsbn(), book.getTitle(), book.getSubtitle().orElse(null),
+                book.getSynopsis(), book.getPages(), book.getPublishDate(), book.getQuantity(), authorUrl, categoryUrl,
+                genreUrl, publisherUrl);
     }
 
     public List<BookResponse> fromModelList(List<Book> books) {
@@ -59,14 +60,14 @@ public class BookConverter {
         return bookResponses;
     }
 
-    public Book fromDTO(Long id, BookDTO bookDTO) {
+    public Book fromDTO(Long id, BookUpdateDTO bookDTO) {
         Author author = authorService.findById(bookDTO.authorId());
         Category category = categoryService.findById(bookDTO.categoryId());
         Genre genre = genreService.findById(bookDTO.genreId());
         Publisher publisher = publisherService.findById(bookDTO.publisherId());
 
         return new Book(id, bookDTO.isbn(), bookDTO.title(), bookDTO.subtitle(), bookDTO.synopsis(), bookDTO.pages(),
-                bookDTO.publishDate(), bookDTO.quantity(), author, category, genre, publisher);
+                bookDTO.publishDate(), bookDTO.quantity(), bookDTO.availableQuantity(), author, category, genre, publisher);
     }
 
 }

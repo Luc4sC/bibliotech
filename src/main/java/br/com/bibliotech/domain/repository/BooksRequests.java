@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
-import br.com.bibliotech.domain.model.BookRequest;
+import br.com.bibliotech.domain.model.BookLoanRequest;
 
 public interface BooksRequests {
 
-    void save(BookRequest bookRequest);
+    void save(BookLoanRequest bookLoanRequest);
 }

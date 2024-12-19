@@ -1,6 +1,6 @@
 package br.com.bibliotech.infrastructure.repository;
 
-import br.com.bibliotech.domain.model.BookRequest;
+import br.com.bibliotech.domain.model.BookLoanRequest;
 import br.com.bibliotech.domain.repository.BooksRequests;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ class BooksRequestsImpl implements BooksRequests {
 
     @Transactional
     @Override
-    public void save(BookRequest bookRequest) {
-        bookRequestRepository.save(bookRequest);
+    public void save(BookLoanRequest bookLoanRequest) {
+        bookRequestRepository.save(bookLoanRequest);
     }
 }

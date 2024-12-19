@@ -1,6 +1,6 @@
 package br.com.bibliotech.domain.service;
 
-import br.com.bibliotech.domain.model.BookRequest;
+import br.com.bibliotech.domain.model.BookLoanRequest;
 import br.com.bibliotech.domain.repository.BooksRequests;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,9 @@ public class BookRequestService {
         this.booksRequests = booksRequests;
     }
 
-    public void save(BookRequest bookRequest) {
-        booksRequests.save(bookRequest);
-        log.info("Book Request created: " + bookRequest);
+    public void save(BookLoanRequest bookLoanRequest) {
+        booksRequests.save(bookLoanRequest);
+        log.info("Book Request created: " + bookLoanRequest);
     }
 
 }

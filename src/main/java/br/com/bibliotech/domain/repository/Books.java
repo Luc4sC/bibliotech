@@ -12,5 +12,6 @@ public interface Books {
     Book findById(Long id);
     List<Book> findAll();
     Book findByIsbn(String isbn);
+    List<Book> findByLoanRequestId(Long loanRequestId);
 
 }

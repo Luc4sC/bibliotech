@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import java.util.Objects;
 
 @NoArgsConstructor
-@Table(name = "books_requests")
-@Entity(name = "BookRequest")
-public class BookRequest {
+@Table(name = "books_loan_requests")
+@Entity(name = "BookLoanRequest")
+public class BookLoanRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class BookRequest {
     @JoinColumn(name = "request_id", updatable = false)
     private LoanRequest loanRequest;
 
-    public BookRequest(Book book, LoanRequest loanRequest) {
+    public BookLoanRequest(Book book, LoanRequest loanRequest) {
         this.book = book;
         this.loanRequest = loanRequest;
     }
@@ -44,8 +44,8 @@ public class BookRequest {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        BookRequest bookRequest = (BookRequest) object;
-        return Objects.equals(id, bookRequest.id);
+        BookLoanRequest bookLoanRequest = (BookLoanRequest) object;
+        return Objects.equals(id, bookLoanRequest.id);
     }
 
     @Override
