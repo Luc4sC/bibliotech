@@ -1,5 +1,9 @@
 package br.com.bibliotech.application.service;
 
+import br.com.bibliotech.application.exception.BadRequestException;
+import br.com.bibliotech.domain.exception.CannotBeBorrowedException;
+import br.com.bibliotech.domain.exception.CannotBeAcceptedException;
+import br.com.bibliotech.domain.exception.CannotBeRejectedException;
 import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.model.BookLoanRequest;
 import br.com.bibliotech.domain.model.Loan;
@@ -47,13 +51,29 @@ public class RequestUseCases {
 
     public void accept(Long requestId, LocalDate endDate) {
         LoanRequest loanRequest = loanRequestService.findById(requestId);
+        borrowBooks(loanRequest.getBooks());
         acceptRequest(loanRequest);
         createLoan(endDate, loanRequest);
     }
 
+    private void borrowBooks(List<Book> books) {
+        books.forEach(book -> {
+            try {
+                book.borrow();
+                bookService.update(book);
+            } catch (CannotBeBorrowedException exception) {
+                throw new BadRequestException(exception.getMessage());
+            }
+        });
+    }
+
     private void acceptRequest(LoanRequest loanRequest) {
-        loanRequest.accept();
-        loanRequestService.update(loanRequest);
+        try {
+            loanRequest.accept();
+            loanRequestService.update(loanRequest);
+        } catch (CannotBeAcceptedException cannotBeAcceptedException) {
+            throw new BadRequestException(cannotBeAcceptedException.getMessage());
+        }
     }
 
     private void createLoan(LocalDate endDate, LoanRequest loanRequest) {
@@ -67,8 +87,13 @@ public class RequestUseCases {
     }
 
     private void rejectRequest(LoanRequest loanRequest) {
-        loanRequest.reject();
-        loanRequestService.update(loanRequest);
+        try {
+            loanRequest.reject();
+            loanRequestService.update(loanRequest);
+        } catch (CannotBeRejectedException cannotBeRejectedException) {
+            throw new BadRequestException(cannotBeRejectedException.getMessage());
+        }
+
     }
 
 }

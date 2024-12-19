@@ -1,7 +1,7 @@
 package br.com.bibliotech.domain.model;
 
+import br.com.bibliotech.domain.exception.CannotBeBorrowedException;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -143,7 +143,7 @@ public class Book {
         return deleted;
     }
 
-    public boolean isAvailable() {
+    boolean isNotAvailable() {
         return availableQuantity > 0;
     }
 
@@ -151,6 +151,13 @@ public class Book {
         deleted = true;
         quantity = 0;
         availableQuantity = 0;
+    }
+
+    public void borrow() {
+        if (!isNotAvailable())
+            throw new CannotBeBorrowedException("The is not available to be borrowed");
+
+        this.availableQuantity = this.availableQuantity-1;
     }
 
     @Override

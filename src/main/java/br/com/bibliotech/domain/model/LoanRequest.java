@@ -1,7 +1,7 @@
 package br.com.bibliotech.domain.model;
 
-import br.com.bibliotech.domain.exception.CannotAcceptLoanRequest;
-import br.com.bibliotech.domain.exception.CannotRejectLoanRequest;
+import br.com.bibliotech.domain.exception.CannotBeAcceptedException;
+import br.com.bibliotech.domain.exception.CannotBeRejectedException;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -73,14 +73,14 @@ public class LoanRequest {
 
     public void accept() {
         if (isNotPending())
-            throw new CannotAcceptLoanRequest("Cannot accept a loan request with the following status: " + status.getName());
+            throw new CannotBeAcceptedException("Cannot accept a loan request with the following status: " + status.getName());
 
         this.status = RequestStatus.ACCEPTED;
     }
 
     public void reject() {
         if (isNotPending())
-            throw new CannotRejectLoanRequest("Cannot reject a loan request with the following status: " + status.getName());
+            throw new CannotBeRejectedException("Cannot reject a loan request with the following status: " + status.getName());
 
         this.status = RequestStatus.REJECTED;
     }
