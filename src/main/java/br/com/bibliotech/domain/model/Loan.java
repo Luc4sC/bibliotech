@@ -7,10 +7,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Table(name = "loans")
 @Entity(name = "Loan")
 public class Loan {
+
+    @Deprecated
+    Loan(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +59,14 @@ public class Loan {
 
     public void finish() {
         this.finishedDate = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "id=" + id +
+                ", loanRequest=" + loanRequest +
+                '}';
     }
 
     @Override

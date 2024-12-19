@@ -66,4 +66,16 @@ public class UserController {
         return userConverter.fromModel(user);
     }
 
+    @PatchMapping(path = "/{id}/block", produces = "application/json; charset=utf-8")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void block(@PathVariable Long id) {
+        userService.block(id);
+    }
+
+    @PatchMapping(path = "/{id}/unblock", produces = "application/json; charset=utf-8")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void unblock(@PathVariable Long id) {
+        userService.unblock(id);
+    }
+
 }

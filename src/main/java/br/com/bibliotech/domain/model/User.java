@@ -44,8 +44,6 @@ public class User {
         this.fullName = fullName;
         this.birthdate = birthdate;
         this.address = address;
-        this.blocked = false;
-        this.deleted = false;
     }
 
     public User(Long id, String email, String fullName, LocalDate birthdate, Address address) {
@@ -92,6 +90,9 @@ public class User {
         this.blocked = true;
     }
 
+    public void unblock(){
+        this.blocked = false;
+    }
 
     @Override
     public String toString() {

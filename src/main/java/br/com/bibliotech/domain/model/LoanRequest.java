@@ -1,7 +1,8 @@
 package br.com.bibliotech.domain.model;
 
+import br.com.bibliotech.domain.exception.CannotAcceptLoanRequest;
+import br.com.bibliotech.domain.exception.CannotRejectLoanRequest;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@NoArgsConstructor
 @Table(name = "requests")
 @Entity(name = "Request")
 public class LoanRequest {
+
+    @Deprecated
+    LoanRequest(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,20 +67,20 @@ public class LoanRequest {
         return status;
     }
 
-    public boolean isPending() {
-        return status.isPending();
+    boolean isNotPending() {
+        return !status.isPending();
     }
 
     public void accept() {
-        if (!isPending())
-            throw new RuntimeException();
+        if (isNotPending())
+            throw new CannotAcceptLoanRequest("Cannot accept a loan request with the following status: " + status.getName());
 
         this.status = RequestStatus.ACCEPTED;
     }
 
     public void reject() {
-        if (!isPending())
-            throw new RuntimeException();
+        if (isNotPending())
+            throw new CannotRejectLoanRequest("Cannot reject a loan request with the following status: " + status.getName());
 
         this.status = RequestStatus.REJECTED;
     }

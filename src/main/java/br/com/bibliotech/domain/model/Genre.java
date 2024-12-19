@@ -1,15 +1,16 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Table(name = "genres")
 @Entity(name = "Genre")
 public class Genre {
+
+    @Deprecated
+    Genre(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,6 @@ public class Genre {
 
     public Genre(String name){
         this.name = name;
-        this.deleted = false;
     }
 
     public Genre(Long id, String name) {

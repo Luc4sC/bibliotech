@@ -1,14 +1,15 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@NoArgsConstructor
 @Table(name = "books_loan_requests")
 @Entity(name = "BookLoanRequest")
 public class BookLoanRequest {
+
+    @Deprecated
+    BookLoanRequest(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

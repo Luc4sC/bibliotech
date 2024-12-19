@@ -1,17 +1,18 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Table(name = "publishers")
 @Entity(name = "Publisher")
 public class Publisher {
+
+    @Deprecated
+    Publisher(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,6 @@ public class Publisher {
         this.legalName = legalName;
         this.foundationDate = foundationDate;
         this.address = address;
-        this.deleted = false;
     }
 
     public Publisher(Long id, String tradeName, String legalName, LocalDate foundationDate, Address address) {

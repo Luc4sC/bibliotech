@@ -47,4 +47,18 @@ public class UserService {
         return users.findByEmail(email);
     }
 
+    public void block(Long id) {
+        User user = users.findById(id);
+        user.block();
+        user.update(user);
+        log.info("User blocked: " + user);
+    }
+
+    public void unblock(Long id) {
+        User user = users.findById(id);
+        user.unblock();
+        user.update(user);
+        log.info("User unblocked: " + user);
+    }
+
 }
