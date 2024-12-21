@@ -1,10 +1,11 @@
 package br.com.bibliotech.domain.model;
 
+import br.com.bibliotech.domain.exception.LoanAlreadyFinishedException;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Table(name = "loans")
@@ -53,12 +54,19 @@ public class Loan {
         return loanRequest;
     }
 
-    public boolean isFinished() {
-        return finishedDate != null;
+    public List<Book> getBooks() {
+        return loanRequest.getBooks();
     }
 
     public void finish() {
+        if (isFinished())
+            throw new LoanAlreadyFinishedException("Loan: " + this + " is already finished");
+
         this.finishedDate = LocalDate.now();
+    }
+
+    public boolean isFinished() {
+        return finishedDate != null;
     }
 
     @Override

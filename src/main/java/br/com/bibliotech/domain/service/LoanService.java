@@ -24,12 +24,9 @@ public class LoanService {
         log.info("Loan created: " + loan);
     }
 
-    public void finish(Long id) {
-        Loan loan = loans.findById(id);
-        loan.finish();
-
+    public void update(Loan loan) {
         loans.update(loan);
-        log.info("Loan finished: " + loan);
+        log.info("Loan updated: " + loan);
     }
 
     public Loan findById(Long id) {

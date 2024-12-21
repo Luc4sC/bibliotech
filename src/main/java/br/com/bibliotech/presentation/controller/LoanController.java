@@ -1,5 +1,6 @@
 package br.com.bibliotech.presentation.controller;
 
+import br.com.bibliotech.application.usecase.FinishLoanUseCase;
 import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.domain.service.LoanService;
 import br.com.bibliotech.presentation.converter.LoanConverter;
@@ -18,17 +19,19 @@ public class LoanController {
 
     private final LoanService loanService;
     private final LoanConverter loanConverter;
+    private final FinishLoanUseCase finishLoanUseCase;
 
     @Autowired
-    public LoanController(LoanService loanService, LoanConverter loanConverter) {
+    public LoanController(LoanService loanService, LoanConverter loanConverter, FinishLoanUseCase finishLoanUseCase) {
         this.loanService = loanService;
         this.loanConverter = loanConverter;
+        this.finishLoanUseCase = finishLoanUseCase;
     }
 
     @PutMapping(path = "/{id}/finish", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void finish(@PathVariable Long id) {
-        loanService.finish(id);
+        finishLoanUseCase.finish(id);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")

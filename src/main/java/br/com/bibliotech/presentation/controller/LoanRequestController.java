@@ -1,6 +1,8 @@
 package br.com.bibliotech.presentation.controller;
 
-import br.com.bibliotech.application.service.RequestUseCases;
+import br.com.bibliotech.application.usecase.AcceptRequestUseCase;
+import br.com.bibliotech.application.usecase.RejectRequestUseCase;
+import br.com.bibliotech.application.usecase.CreateLoanRequestUseCase;
 import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.converter.LoanRequestConverter;
@@ -19,20 +21,26 @@ import java.util.List;
 public class LoanRequestController {
 
     private final LoanRequestService loanRequestService;
-    private final RequestUseCases requestUseCases;
+    private final CreateLoanRequestUseCase createLoanRequestUseCase;
+    private final AcceptRequestUseCase acceptRequestUseCase;
+    private final RejectRequestUseCase rejectRequestUseCase;
     private final LoanRequestConverter loanRequestConverter;
 
     @Autowired
-    public LoanRequestController(LoanRequestService loanRequestService, RequestUseCases requestUseCases, LoanRequestConverter loanRequestConverter) {
+    public LoanRequestController(LoanRequestService loanRequestService, CreateLoanRequestUseCase createLoanRequestUseCase,
+                                 RejectRequestUseCase rejectRequestUseCase, AcceptRequestUseCase acceptRequestUseCase,
+                                 LoanRequestConverter loanRequestConverter) {
         this.loanRequestService = loanRequestService;
-        this.requestUseCases = requestUseCases;
+        this.createLoanRequestUseCase = createLoanRequestUseCase;
+        this.acceptRequestUseCase = acceptRequestUseCase;
+        this.rejectRequestUseCase = rejectRequestUseCase;
         this.loanRequestConverter = loanRequestConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
     public void request(@RequestBody @Valid RequestDTO requestDTO) {
-        requestUseCases.createRequest(requestDTO.userId(), requestDTO.booksIds());
+        createLoanRequestUseCase.createRequest(requestDTO.userId(), requestDTO.booksIds());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
@@ -52,13 +60,13 @@ public class LoanRequestController {
     @PutMapping(path = "/accept", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void accept(RequestAcceptedDTO requestAcceptedDTO) {
-        requestUseCases.accept(requestAcceptedDTO.id(), requestAcceptedDTO.endDate());
+        acceptRequestUseCase.accept(requestAcceptedDTO.id(), requestAcceptedDTO.endDate());
     }
 
     @PutMapping(path = "reject/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void reject(@PathVariable Long id) {
-        requestUseCases.reject(id);
+        rejectRequestUseCase.reject(id);
     }
 
 }
