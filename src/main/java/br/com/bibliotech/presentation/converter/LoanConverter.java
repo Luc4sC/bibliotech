@@ -13,7 +13,7 @@ public class LoanConverter {
 
     public LoanResponse fromModel(Loan loan) {
         String loanRequestUrl = UrlUtils.getLoanRequestUrl(loan.getLoanRequest());
-        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), loanRequestUrl);
+        return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), loan.isFinished(), loanRequestUrl);
     }
 
     public List<LoanResponse> fromModelList(List<Loan> loans) {

@@ -49,8 +49,8 @@ public class BookConverter {
         String publisherUrl = UrlUtils.getPublisherUrl(book.getPublisher());
         
         return new BookResponse(book.getIsbn(), book.getTitle(), book.getSubtitle().orElse(null),
-                book.getSynopsis(), book.getPages(), book.getPublishDate(), book.getQuantity(), authorUrl, categoryUrl,
-                genreUrl, publisherUrl);
+                book.getSynopsis(), book.getPages(), book.getPublishDate(), book.getQuantity(), book.getAvailableQuantity(),
+                authorUrl, categoryUrl, genreUrl, publisherUrl);
     }
 
     public List<BookResponse> fromModelList(List<Book> books) {
