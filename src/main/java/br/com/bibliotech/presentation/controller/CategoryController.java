@@ -20,9 +20,9 @@ public class CategoryController {
     private final CategoryConverter categoryConverter;
 
     @Autowired
-    CategoryController(CategoryService categoryService) {
+    CategoryController(CategoryService categoryService, CategoryConverter categoryConverter) {
         this.categoryService = categoryService;
-        this.categoryConverter = new CategoryConverter();
+        this.categoryConverter = categoryConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

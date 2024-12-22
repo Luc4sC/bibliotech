@@ -20,9 +20,9 @@ public class GenreController {
     private final GenreConverter genreConverter;
 
     @Autowired
-    GenreController(GenreService genreService) {
+    GenreController(GenreService genreService, GenreConverter genreConverter) {
         this.genreService = genreService;
-        this.genreConverter = new GenreConverter();
+        this.genreConverter = genreConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")

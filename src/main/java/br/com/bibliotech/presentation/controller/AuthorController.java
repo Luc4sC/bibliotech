@@ -20,9 +20,9 @@ public class AuthorController {
     private final AuthorConverter authorConverter;
 
     @Autowired
-    AuthorController(AuthorService authorService) {
+    AuthorController(AuthorService authorService, AuthorConverter authorConverter) {
         this.authorService = authorService;
-        this.authorConverter = new AuthorConverter();
+        this.authorConverter = authorConverter;
     }
 
     @PostMapping(produces = "application/json; charset=utf-8")
