@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-public record RequestDTO(@NotNull Long userId, @NotNull @NotEmpty List<Long> booksIds) {
+public record LoanRequestDTO(@NotEmpty String userEmail, @NotNull @NotEmpty List<Long> booksIds) {
 }

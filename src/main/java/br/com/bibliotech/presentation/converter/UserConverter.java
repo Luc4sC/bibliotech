@@ -33,7 +33,7 @@ public class UserConverter {
                 user.isDeleted());
     }
 
-    public List<UserResponse> frommodelList(List<User> users) {
+    public List<UserResponse> fromModelList(List<User> users) {
         List<UserResponse> userResponses = new ArrayList<>();
         users.forEach(user -> userResponses.add(fromModel(user)));
 

@@ -27,14 +27,14 @@ public class UserController {
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@Valid @RequestBody UserDTO userDTO) {
+    public void save(@RequestBody @Valid UserDTO userDTO) {
         User user = userConverter.fromDTO(userDTO);
         userService.save(user);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody UserDTO userDTO, @PathVariable Long id) {
+    public void update(@RequestBody @Valid UserDTO userDTO, @PathVariable Long id) {
         User user = userConverter.fromDTO(id, userDTO);
         userService.update(user);
     }
@@ -56,7 +56,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> findAll() {
         List<User> users = userService.findAll();
-        return userConverter.frommodelList(users);
+        return userConverter.fromModelList(users);
     }
 
     @GetMapping(path = "/{email}",produces = "application/json; charset=utf-8")

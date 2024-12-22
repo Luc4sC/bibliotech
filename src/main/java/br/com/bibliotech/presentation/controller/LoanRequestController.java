@@ -7,7 +7,7 @@ import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.service.*;
 import br.com.bibliotech.presentation.converter.LoanRequestConverter;
 import br.com.bibliotech.presentation.dto.RequestAcceptedDTO;
-import br.com.bibliotech.presentation.dto.RequestDTO;
+import br.com.bibliotech.presentation.dto.LoanRequestDTO;
 import br.com.bibliotech.presentation.response.LoanRequestResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,8 @@ public class LoanRequestController {
 
     @PostMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.CREATED)
-    public void request(@RequestBody @Valid RequestDTO requestDTO) {
-        createLoanRequestUseCase.createRequest(requestDTO.userId(), requestDTO.booksIds());
+    public void request(@RequestBody @Valid LoanRequestDTO loanRequestDTO) {
+        createLoanRequestUseCase.createRequest(loanRequestDTO.userEmail(), loanRequestDTO.booksIds());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json; charset=utf-8")
@@ -57,13 +57,13 @@ public class LoanRequestController {
         return loanRequestConverter.fromModelList(loanRequests);
     }
 
-    @PutMapping(path = "/accept", produces = "application/json; charset=utf-8")
+    @PutMapping(path = "/{id}/accept", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void accept(RequestAcceptedDTO requestAcceptedDTO) {
-        acceptRequestUseCase.accept(requestAcceptedDTO.id(), requestAcceptedDTO.endDate());
+    public void accept(@PathVariable Long id, @RequestBody @Valid RequestAcceptedDTO requestAcceptedDTO) {
+        acceptRequestUseCase.accept(id, requestAcceptedDTO.endDate());
     }
 
-    @PutMapping(path = "reject/{id}", produces = "application/json; charset=utf-8")
+    @PutMapping(path = "/{id}/reject", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void reject(@PathVariable Long id) {
         rejectRequestUseCase.reject(id);

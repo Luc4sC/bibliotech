@@ -28,8 +28,8 @@ public class CreateLoanRequestUseCase {
         this.bookRequestService = bookRequestService;
     }
 
-    public void createRequest(Long userId, List<Long> booksIds) {
-        LoanRequest loanRequest = new LoanRequest(userService.findById(userId));
+    public void createRequest(String userEmail, List<Long> booksIds) {
+        LoanRequest loanRequest = new LoanRequest(userService.findByEmail(userEmail));
         loanRequestService.save(loanRequest);
 
         createBookRequests(booksIds, loanRequest);
