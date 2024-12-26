@@ -6,7 +6,10 @@ import br.com.bibliotech.presentation.converter.AuthorConverter;
 import br.com.bibliotech.presentation.dto.AuthorDTO;
 import br.com.bibliotech.presentation.response.AuthorResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,8 +56,9 @@ public class AuthorController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<AuthorResponse> findAll(){
-        List<Author> authors = authorService.findAll();
+    @PageableAsQueryParam
+    public List<AuthorResponse> findAll(Pageable pageable){
+        Page<Author> authors = authorService.findAll(pageable);
         return authorConverter.fromModelList(authors);
     }
 

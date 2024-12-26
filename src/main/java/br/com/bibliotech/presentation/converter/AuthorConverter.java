@@ -3,6 +3,7 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Author;
 import br.com.bibliotech.presentation.dto.AuthorDTO;
 import br.com.bibliotech.presentation.response.AuthorResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class AuthorConverter {
         return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate(), author.isDeleted());
     }
 
-    public List<AuthorResponse> fromModelList(List<Author> authors) {
+    public List<AuthorResponse> fromModelList(Page<Author> authors) {
         List<AuthorResponse> authorResponses = new ArrayList<>();
         authors.forEach(author -> authorResponses.add(fromModel(author)));
 

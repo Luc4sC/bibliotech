@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Table(name = "requests")
+@Table(name = "loan_requests")
 @Entity(name = "Request")
 public class LoanRequest {
 
@@ -32,10 +32,10 @@ public class LoanRequest {
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
-    @OneToMany(mappedBy = "request")
+    @OneToMany(mappedBy = "loanRequest")
     private List<BookLoanRequest> bookLoanRequests;
 
-    @OneToOne(mappedBy = "request")
+    @OneToOne(mappedBy = "loanRequest")
     private Loan loan;
 
     public LoanRequest(User user) {

@@ -1,7 +1,6 @@
 package br.com.bibliotech.domain.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

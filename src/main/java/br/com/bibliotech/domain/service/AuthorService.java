@@ -4,9 +4,9 @@ import br.com.bibliotech.domain.model.Author;
 import br.com.bibliotech.domain.repository.Authors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -40,8 +40,8 @@ public class AuthorService {
         return authors.findById(id);
     }
 
-    public List<Author> findAll() {
-        return authors.findAll();
+    public Page<Author> findAll(Pageable pageable) {
+        return authors.findAll(pageable);
     }
 
     public Author findByStageName(String stageName) {

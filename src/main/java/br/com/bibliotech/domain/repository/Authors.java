@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.Author;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Authors {
 
@@ -10,6 +10,6 @@ public interface Authors {
     void update(Author author);
     void delete(Author author);
     Author findById(Long id);
-    List<Author> findAll();
+    Page<Author> findAll(Pageable pageable);
     Author findByStageName(String stageName);
 }

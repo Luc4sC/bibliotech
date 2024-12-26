@@ -20,7 +20,7 @@ public class BookLoanRequest {
     private Book book;
 
     @ManyToOne
-    @JoinColumn(name = "request_id", updatable = false)
+    @JoinColumn(name = "loan_request_id", updatable = false)
     private LoanRequest loanRequest;
 
     public BookLoanRequest(Book book, LoanRequest loanRequest) {
