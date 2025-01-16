@@ -7,9 +7,10 @@ import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -59,8 +60,8 @@ class BooksImpl implements Books {
     }
 
     @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
+    public Page<Book> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
 
@@ -74,7 +75,7 @@ class BooksImpl implements Books {
     }
 
     @Override
-    public List<Book> findByLoanRequestId(Long loanRequestId) {
-        return bookRepository.findByLoanRequestId(loanRequestId);
+    public Page<Book> findByLoanRequestId(Long loanRequestId, Pageable pageable) {
+        return bookRepository.findByLoanRequestId(loanRequestId, pageable);
     }
 }

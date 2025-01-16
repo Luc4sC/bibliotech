@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.Book;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Books {
 
@@ -10,8 +10,8 @@ public interface Books {
     void update(Book book);
     void delete(Book book);
     Book findById(Long id);
-    List<Book> findAll();
+    Page<Book> findAll(Pageable pageable);
     Book findByIsbn(String isbn);
-    List<Book> findByLoanRequestId(Long loanRequestId);
+    Page<Book> findByLoanRequestId(Long loanRequestId, Pageable pageable);
 
 }

@@ -8,6 +8,8 @@ import br.com.bibliotech.presentation.dto.BookUpdateDTO;
 import br.com.bibliotech.presentation.response.BookResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,9 +57,9 @@ public class BookController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-        public List<BookResponse> findAll(){
-        List<Book> books = bookService.findAll();
-        return bookConverter.fromModelList(books);
+        public List<BookResponse> findAll(Pageable pageable){
+        Page<Book> books = bookService.findAll(pageable);
+        return bookConverter.fromPage(books);
     }
 
     @GetMapping(path = "/{isbn}", produces = "application/json; charset=utf-8")
@@ -69,8 +71,8 @@ public class BookController {
 
     @GetMapping(path = "/loanRequest", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookResponse> findBooksByLoanRequest(@RequestParam Long loanRequestId) {
-        List<Book> books = bookService.findByLoanRequest(loanRequestId);
-        return bookConverter.fromModelList(books);
+    public List<BookResponse> findBooksByLoanRequest(@RequestParam Long loanRequestId, Pageable pageable) {
+        Page<Book> books = bookService.findByLoanRequest(loanRequestId, pageable);
+        return bookConverter.fromPage(books);
     }
 }

@@ -1,12 +1,12 @@
 package br.com.bibliotech.domain.service;
 
-import br.com.bibliotech.domain.model.*;
+import br.com.bibliotech.domain.model.Book;
 import br.com.bibliotech.domain.repository.Books;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -39,16 +39,16 @@ public class BookService {
         return books.findById(id);
     }
 
-    public List<Book> findAll() {
-        return books.findAll();
+    public Page<Book> findAll(Pageable pageable) {
+        return books.findAll(pageable);
     }
 
     public Book findByIsbn(String isbn) {
         return books.findByIsbn(isbn);
     }
 
-    public List<Book> findByLoanRequest(Long loanRequestId) {
-        return books.findByLoanRequestId(loanRequestId);
+    public Page<Book> findByLoanRequest(Long loanRequestId, Pageable pageable) {
+        return books.findByLoanRequestId(loanRequestId, pageable);
     }
 
 }

@@ -10,6 +10,7 @@ import br.com.bibliotech.presentation.dto.BookUpdateDTO;
 import br.com.bibliotech.presentation.response.BookResponse;
 import br.com.bibliotech.utils.UrlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class BookConverter {
                 authorUrl, categoryUrl, genreUrl, publisherUrl);
     }
 
-    public List<BookResponse> fromModelList(List<Book> books) {
+    public List<BookResponse> fromPage(Page<Book> books) {
         List<BookResponse> bookResponses = new ArrayList<>();
         books.forEach(book -> bookResponses.add(fromModel(book)));
 

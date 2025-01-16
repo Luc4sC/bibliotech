@@ -21,7 +21,7 @@ public class AuthorConverter {
         return new AuthorResponse(author.getFullName(), author.getStageName(), author.getBirthdate(), author.isDeleted());
     }
 
-    public List<AuthorResponse> fromModelList(Page<Author> authors) {
+    public List<AuthorResponse> fromPage(Page<Author> authors) {
         List<AuthorResponse> authorResponses = new ArrayList<>();
         authors.forEach(author -> authorResponses.add(fromModel(author)));
 

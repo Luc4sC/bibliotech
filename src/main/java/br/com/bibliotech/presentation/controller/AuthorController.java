@@ -59,7 +59,7 @@ public class AuthorController {
     @PageableAsQueryParam
     public List<AuthorResponse> findAll(Pageable pageable){
         Page<Author> authors = authorService.findAll(pageable);
-        return authorConverter.fromModelList(authors);
+        return authorConverter.fromPage(authors);
     }
 
     @GetMapping(path = "/{stageName}", produces = "application/json; charset=utf-8")
