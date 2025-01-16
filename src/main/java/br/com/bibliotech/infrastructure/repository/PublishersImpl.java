@@ -7,9 +7,10 @@ import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -59,8 +60,8 @@ class PublishersImpl implements Publishers {
     }
 
     @Override
-    public List<Publisher> findAll() {
-        return publisherRepository.findAll();
+    public Page<Publisher> findAll(Pageable pageable) {
+        return publisherRepository.findAll(pageable);
     }
 
     @Override

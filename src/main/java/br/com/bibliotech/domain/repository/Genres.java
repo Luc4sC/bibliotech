@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.Genre;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Genres {
 
@@ -10,6 +10,6 @@ public interface Genres {
     void update(Genre genre);
     void delete(Genre genre);
     Genre findById(Long id);
-    List<Genre> findAll();
+    Page<Genre> findAll(Pageable pageable);
     Genre findByName(String name);
 }

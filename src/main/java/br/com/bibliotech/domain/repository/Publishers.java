@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.Publisher;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Publishers {
 
@@ -10,7 +10,7 @@ public interface Publishers {
     void update(Publisher publisher);
     void delete(Publisher publisher);
     Publisher findById(Long id);
-    List<Publisher> findAll();
+    Page<Publisher> findAll(Pageable pageable);
     Publisher findByTradeName(String tradeName);
 
 }

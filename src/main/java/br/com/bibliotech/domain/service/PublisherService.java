@@ -4,9 +4,9 @@ import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.domain.repository.Publishers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -40,8 +40,8 @@ public class PublisherService {
         return publishers.findById(id);
     }
 
-    public List<Publisher> findAll() {
-        return publishers.findAll();
+    public Page<Publisher> findAll(Pageable pageable) {
+        return publishers.findAll(pageable);
     }
 
     public Publisher findByTradeName(String tradeName) {

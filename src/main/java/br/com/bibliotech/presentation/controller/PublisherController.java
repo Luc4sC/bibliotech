@@ -6,7 +6,10 @@ import br.com.bibliotech.presentation.converter.PublisherConverter;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
 import br.com.bibliotech.presentation.response.PublisherResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +56,10 @@ public class PublisherController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<PublisherResponse> findAll() {
-        List<Publisher> publishers = publisherService.findAll();
-        return publisherConverter.fromModelList(publishers);
+    @PageableAsQueryParam
+    public List<PublisherResponse> findAll(Pageable pageable) {
+        Page<Publisher> publishers = publisherService.findAll(pageable);
+        return publisherConverter.fromPage(publishers);
     }
 
     @GetMapping(path = "/{tradeName}", produces = "application/json; charset=utf-8")

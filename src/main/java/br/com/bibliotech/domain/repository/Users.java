@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.User;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Users {
 
@@ -10,6 +10,6 @@ public interface Users {
     void update(User user);
     void delete(User user);
     User findById(Long id);
-    List<User> findAll();
+    Page<User> findAll(Pageable pageable);
     User findByEmail(String email);
 }

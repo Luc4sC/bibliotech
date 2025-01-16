@@ -3,6 +3,7 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.presentation.response.LoanResponse;
 import br.com.bibliotech.utils.UrlUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class LoanConverter {
         return new LoanResponse(loan.getStartDate(), loan.getEndDate(), loan.getFinishedDate(), loan.isFinished(), loanRequestUrl);
     }
 
-    public List<LoanResponse> fromModelList(List<Loan> loans) {
+    public List<LoanResponse> fromPage(Page<Loan> loans) {
         List<LoanResponse> loanResponses = new ArrayList<>();
         loans.forEach(loan -> loanResponses.add(fromModel(loan)));
 

@@ -6,7 +6,10 @@ import br.com.bibliotech.presentation.converter.CategoryConverter;
 import br.com.bibliotech.presentation.dto.CategoryDTO;
 import br.com.bibliotech.presentation.response.CategoryResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +56,10 @@ public class CategoryController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoryResponse> findAll(){
-        List<Category> categories = categoryService.findAll();
-        return categoryConverter.fromModelList(categories);
+    @PageableAsQueryParam
+    public List<CategoryResponse> findAll(Pageable pageable){
+        Page<Category> categories = categoryService.findAll(pageable);
+        return categoryConverter.fromPage(categories);
     }
 
     @GetMapping(path = "/{name}", produces = "application/json; charset=utf-8")

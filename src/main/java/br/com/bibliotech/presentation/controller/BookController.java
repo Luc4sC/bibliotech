@@ -7,6 +7,7 @@ import br.com.bibliotech.presentation.dto.BookDTO;
 import br.com.bibliotech.presentation.dto.BookUpdateDTO;
 import br.com.bibliotech.presentation.response.BookResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,7 +58,8 @@ public class BookController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-        public List<BookResponse> findAll(Pageable pageable){
+    @PageableAsQueryParam
+    public List<BookResponse> findAll(Pageable pageable){
         Page<Book> books = bookService.findAll(pageable);
         return bookConverter.fromPage(books);
     }
@@ -71,6 +73,7 @@ public class BookController {
 
     @GetMapping(path = "/loanRequest", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
+    @PageableAsQueryParam
     public List<BookResponse> findBooksByLoanRequest(@RequestParam Long loanRequestId, Pageable pageable) {
         Page<Book> books = bookService.findByLoanRequest(loanRequestId, pageable);
         return bookConverter.fromPage(books);

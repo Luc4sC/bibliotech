@@ -5,9 +5,10 @@ import br.com.bibliotech.domain.repository.LoanRequests;
 import br.com.bibliotech.infrastructure.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -43,7 +44,7 @@ class LoanRequestsImpl implements LoanRequests {
     }
 
     @Override
-    public List<LoanRequest> findAll() {
-        return loanRequestRepository.findAll();
+    public Page<LoanRequest> findAll(Pageable pageable) {
+        return loanRequestRepository.findAll(pageable);
     }
 }

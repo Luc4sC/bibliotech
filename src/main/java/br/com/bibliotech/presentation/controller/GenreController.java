@@ -6,7 +6,10 @@ import br.com.bibliotech.presentation.converter.GenreConverter;
 import br.com.bibliotech.presentation.dto.GenreDTO;
 import br.com.bibliotech.presentation.response.GenreResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +56,10 @@ public class GenreController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<GenreResponse> findAll(){
-        List<Genre> genres = genreService.findAll();
-        return genreConverter.fromModelList(genres);
+    @PageableAsQueryParam
+    public List<GenreResponse> findAll(Pageable pageable){
+        Page<Genre> genres = genreService.findAll(pageable);
+        return genreConverter.fromPage(genres);
     }
 
     @GetMapping(path = "/{name}", produces = "application/json; charset=utf-8")

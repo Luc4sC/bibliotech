@@ -3,6 +3,7 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Genre;
 import br.com.bibliotech.presentation.dto.GenreDTO;
 import br.com.bibliotech.presentation.response.GenreResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class GenreConverter {
         return new GenreResponse(genre.getName(), genre.isDeleted());
     }
 
-    public List<GenreResponse> fromModelList(List<Genre> genres) {
+    public List<GenreResponse> fromPage(Page<Genre> genres) {
         List<GenreResponse> genreResponses = new ArrayList<>();
         genres.forEach(genre -> genreResponses.add(fromModel(genre)));
 

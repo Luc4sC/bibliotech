@@ -4,6 +4,7 @@ import br.com.bibliotech.domain.model.Publisher;
 import br.com.bibliotech.presentation.dto.PublisherDTO;
 import br.com.bibliotech.presentation.response.PublisherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PublisherConverter {
                 address, publisher.isDeleted());
     }
 
-    public List<PublisherResponse> fromModelList(List<Publisher> publishers) {
+    public List<PublisherResponse> fromPage(Page<Publisher> publishers) {
         List<PublisherResponse> publisherResponses = new ArrayList<>();
         publishers.forEach(publisher -> publisherResponses.add(fromModel(publisher)));
 

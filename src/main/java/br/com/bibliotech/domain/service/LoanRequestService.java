@@ -4,9 +4,9 @@ import br.com.bibliotech.domain.model.LoanRequest;
 import br.com.bibliotech.domain.repository.LoanRequests;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -33,8 +33,8 @@ public class LoanRequestService {
         return loanRequests.findById(id);
     }
 
-    public List<LoanRequest> findAll() {
-        return loanRequests.findAll();
+    public Page<LoanRequest> findAll(Pageable pageable) {
+        return loanRequests.findAll(pageable);
     }
 
 }

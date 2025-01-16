@@ -10,7 +10,10 @@ import br.com.bibliotech.presentation.dto.RequestAcceptedDTO;
 import br.com.bibliotech.presentation.dto.LoanRequestDTO;
 import br.com.bibliotech.presentation.response.LoanRequestResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,9 +55,10 @@ public class LoanRequestController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<LoanRequestResponse> findAll() {
-        List<LoanRequest> loanRequests = loanRequestService.findAll();
-        return loanRequestConverter.fromModelList(loanRequests);
+    @PageableAsQueryParam
+    public List<LoanRequestResponse> findAll(Pageable pageable) {
+        Page<LoanRequest> loanRequests = loanRequestService.findAll(pageable);
+        return loanRequestConverter.fromPage(loanRequests);
     }
 
     @PutMapping(path = "/{id}/accept", produces = "application/json; charset=utf-8")

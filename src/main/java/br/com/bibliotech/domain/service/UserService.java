@@ -4,9 +4,9 @@ import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.domain.repository.Users;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -39,8 +39,8 @@ public class UserService {
         return users.findById(id);
     }
 
-    public List<User> findAll() {
-        return users.findAll();
+    public Page<User> findAll(Pageable pageable) {
+        return users.findAll(pageable);
     }
 
     public User findByEmail(String email) {

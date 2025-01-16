@@ -3,6 +3,7 @@ package br.com.bibliotech.presentation.converter;
 import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.presentation.dto.CategoryDTO;
 import br.com.bibliotech.presentation.response.CategoryResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class CategoryConverter {
         return new CategoryResponse(category.getName(), category.isDeleted());
     }
 
-    public List<CategoryResponse> fromModelList(List<Category> categories) {
+    public List<CategoryResponse> fromPage(Page<Category> categories) {
         List<CategoryResponse> categoryResponses = new ArrayList<>();
         categories.forEach(category -> categoryResponses.add(fromModel(category)));
 

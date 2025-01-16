@@ -5,7 +5,10 @@ import br.com.bibliotech.domain.model.Loan;
 import br.com.bibliotech.domain.service.LoanService;
 import br.com.bibliotech.presentation.converter.LoanConverter;
 import br.com.bibliotech.presentation.response.LoanResponse;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +46,10 @@ public class LoanController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<LoanResponse> findAll() {
-        List<Loan> loans = loanService.findAll();
-        return loanConverter.fromModelList(loans);
+    @PageableAsQueryParam
+    public List<LoanResponse> findAll(Pageable pageable) {
+        Page<Loan> loans = loanService.findAll(pageable);
+        return loanConverter.fromPage(loans);
     }
 
 }

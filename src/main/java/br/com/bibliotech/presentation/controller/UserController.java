@@ -6,7 +6,10 @@ import br.com.bibliotech.presentation.converter.UserConverter;
 import br.com.bibliotech.presentation.dto.UserDTO;
 import br.com.bibliotech.presentation.response.UserResponse;
 import jakarta.validation.Valid;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,9 +57,10 @@ public class UserController {
 
     @GetMapping(produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> findAll() {
-        List<User> users = userService.findAll();
-        return userConverter.fromModelList(users);
+    @PageableAsQueryParam
+    public List<UserResponse> findAll(Pageable pageable) {
+        Page<User> users = userService.findAll(pageable);
+        return userConverter.fromPage(users);
     }
 
     @GetMapping(path = "/{email}",produces = "application/json; charset=utf-8")

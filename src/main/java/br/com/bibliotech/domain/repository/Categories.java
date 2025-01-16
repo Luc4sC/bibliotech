@@ -1,8 +1,8 @@
 package br.com.bibliotech.domain.repository;
 
 import br.com.bibliotech.domain.model.Category;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface Categories {
 
@@ -10,7 +10,7 @@ public interface Categories {
     void update(Category category);
     void delete(Category category);
     Category findById(Long id);
-    List<Category> findAll();
+    Page<Category> findAll(Pageable pageable);
     Category findByName(String name);
 
 }

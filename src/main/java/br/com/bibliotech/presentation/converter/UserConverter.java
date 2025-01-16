@@ -5,6 +5,7 @@ import br.com.bibliotech.domain.model.User;
 import br.com.bibliotech.presentation.dto.UserDTO;
 import br.com.bibliotech.presentation.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class UserConverter {
                 user.isDeleted());
     }
 
-    public List<UserResponse> fromModelList(List<User> users) {
+    public List<UserResponse> fromPage(Page<User> users) {
         List<UserResponse> userResponses = new ArrayList<>();
         users.forEach(user -> userResponses.add(fromModel(user)));
 

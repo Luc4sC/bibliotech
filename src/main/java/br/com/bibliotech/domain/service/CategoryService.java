@@ -4,9 +4,9 @@ import br.com.bibliotech.domain.model.Category;
 import br.com.bibliotech.domain.repository.Categories;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -40,8 +40,8 @@ public class CategoryService {
         return categories.findById(id);
     }
 
-    public List<Category> findAll() {
-        return categories.findAll();
+    public Page<Category> findAll(Pageable pageable) {
+        return categories.findAll(pageable);
     }
 
     public Category findByName(String name) {
