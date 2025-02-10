@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:9.2.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: bibliotech
+    container_name: bibliotech-db
+    networks:
+      - bibliotech-bridge
+    ports:
+      - 3306:3306
+
+  bibliotech:
+    image: lucasC/bibliotech:0.0.3
+    container_name: bibliotech
+    networks:
+      - bibliotech-bridge
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+
+networks:
+  bibliotech-bridge:
+    driver: bridge
