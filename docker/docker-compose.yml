@@ -9,16 +9,23 @@ services:
       - bibliotech-bridge
     ports:
       - 3306:3306
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 7
 
   bibliotech:
-    image: lucasC/bibliotech:0.0.3
+    image: bibliotech
     container_name: bibliotech
     networks:
       - bibliotech-bridge
     ports:
       - 8080:8080
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
 networks:
   bibliotech-bridge:
