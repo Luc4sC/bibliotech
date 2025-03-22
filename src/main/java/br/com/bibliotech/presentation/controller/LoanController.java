@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping("bibliotech/loan")
+@RequestMapping("/loan")
 public class LoanController {
 
     private final LoanService loanService;

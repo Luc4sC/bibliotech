@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/category")
+@RequestMapping("/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -62,7 +62,7 @@ public class CategoryController {
         return categoryConverter.fromPage(categories);
     }
 
-    @GetMapping(path = "/{name}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "name/{name}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public CategoryResponse findByName(@PathVariable String name) {
         Category category = categoryService.findByName(name);

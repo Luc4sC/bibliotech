@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/author")
+@RequestMapping("/author")
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -62,7 +62,7 @@ public class AuthorController {
         return authorConverter.fromPage(authors);
     }
 
-    @GetMapping(path = "/{stageName}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "stageName/{stageName}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public AuthorResponse findByStageName(@PathVariable String stageName) {
         Author author = authorService.findByStageName(stageName);

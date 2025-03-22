@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/user")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -63,7 +63,7 @@ public class UserController {
         return userConverter.fromPage(users);
     }
 
-    @GetMapping(path = "/{email}",produces = "application/json; charset=utf-8")
+    @GetMapping(path = "email/{email}",produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse findByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);

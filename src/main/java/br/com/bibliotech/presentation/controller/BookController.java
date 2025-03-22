@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/book")
+@RequestMapping("/book")
 public class BookController {
 
     private final BookService bookService;
@@ -64,7 +64,7 @@ public class BookController {
         return bookConverter.fromPage(books);
     }
 
-    @GetMapping(path = "/{isbn}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "isbn/{isbn}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
     public BookResponse findByIsbn(@PathVariable String isbn) {
         Book book = bookService.findByIsbn(isbn);

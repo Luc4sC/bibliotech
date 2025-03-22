@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/genre")
+@RequestMapping("/genre")
 public class GenreController {
 
     private final GenreService genreService;

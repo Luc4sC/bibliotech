@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("bibliotech/publisher")
+@RequestMapping("/publisher")
 public class PublisherController {
 
     private final PublisherService publisherService;
@@ -62,9 +62,9 @@ public class PublisherController {
         return publisherConverter.fromPage(publishers);
     }
 
-    @GetMapping(path = "/{tradeName}", produces = "application/json; charset=utf-8")
+    @GetMapping(path = "tradeName/{tradeName}", produces = "application/json; charset=utf-8")
     @ResponseStatus(HttpStatus.OK)
-    public PublisherResponse findByStageName(@PathVariable String tradeName) {
+    public PublisherResponse findByTradeName(@PathVariable String tradeName) {
         Publisher publisher = publisherService.findByTradeName(tradeName);
         return publisherConverter.fromModel(publisher);
     }
