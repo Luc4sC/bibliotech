@@ -18,6 +18,7 @@ services:
 
   bibliotech:
     image: bibliotech
+    build: .
     container_name: bibliotech
     networks:
       - bibliotech-bridge
